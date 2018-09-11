@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/erp/v1/product/")
 @Transactional(rollbackFor = Exception.class)
 public class ProductController {
-	@PostMapping("ceshi")
+	@PostMapping("ceshi11")
 	public String ceshi (){
 		return "测试";
 	}
