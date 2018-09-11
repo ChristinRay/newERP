@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>商品列表</h2>
+	<div>
+		<ul>
+			<li th:each="product:${products}">
+				<span th:text="${product.id}"></span>
+				<span th:text="${product.product_no}"></span>
+		</ul>
+	</div>
+	<form class="form-horizontal" id="form_table" action="#" th:action="@{/console/batchImport}" enctype="multipart/form-data" method="post">
+		<input class="form-input" type="file" name="filename"></input>
+		<br/>
+		<button type="submit" class="btn">开始导入</button>
+	</form>
+	
+</body>
+</html>
