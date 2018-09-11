@@ -1,0 +1,18 @@
+package ${modelPackage};
+
+${propImportsStr}
+
+/**
+ * ${tableComment}
+ * modle
+ */
+public class ${tableClass} extends BaseModel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+${propFieldDefStr}
+
+	${propMethodDefStr}
+	
+}
