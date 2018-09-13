@@ -198,9 +198,11 @@ public class ModelGeneratorUtil {
 					columnInfo.getColumnsType().add(columnRs.getString(3));		
 					columnInfo.getPropTypes().add(getJavaType(columnRs.getString(3), 1));
 					columnInfo.getPropImports().add("import " + getJavaType(columnRs.getString(3), 0) + ";");
-					String property = getProperty(columnRs.getString(1));
-					columnInfo.getProperties().add(property);
-					columnInfo.getPropertyErs().add("#{"+property+"}");
+					String property = getProperty(columnRs.getString(1));//数据库下划线的方法
+					
+					String propertys = getPropertyTwo(columnRs.getString(1));//驼峰的方法
+					columnInfo.getProperties().add(property);//where后面的条件
+					columnInfo.getPropertyErs().add("#{"+propertys+"}"); //从实体里面拿
 				}
 				HashSet<String> set = new HashSet<>(columnInfo.getPropImports());
 				columnInfo.getPropImports().clear();
@@ -242,6 +244,16 @@ public class ModelGeneratorUtil {
 //		}
 		return column;
 	}
+	
+	private static String getPropertyTwo(String columns) {
+		while(columns.contains("_")) {
+			int a = columns.indexOf("_");
+			columns = columns.substring(0, a+1) + columns.substring(a+1, a+2).toUpperCase() + columns.substring(a+2, columns.length());
+			columns = columns.replaceFirst("_", "");
+		}
+		return columns;
+	}
+	
 	private static String getGetMethod(String property) {
 		property = property.substring(0, 1).toUpperCase() + property.substring(1);
 		return "get"+property+"()";

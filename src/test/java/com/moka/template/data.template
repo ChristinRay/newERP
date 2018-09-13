@@ -18,7 +18,7 @@ public interface ${tableClass}Data {
 	 * @return
 	 */
 	@InsertProvider(type = ${tableClass}Provider.class, method = "insert${tableClass}")
-	@SelectKey(before=false,keyProperty="${primaryKey}",resultType=Long.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
+	@SelectKey(before=false,keyProperty="${primaryKey}",resultType=Integer.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
 	public int insert${tableClass}(${tableClass} entity);
 	/**
 	 * 按条件查询总记录数
@@ -50,7 +50,7 @@ public interface ${tableClass}Data {
 	 * @return
 	 */
 	@SelectProvider(type = ${tableClass}Provider.class, method = "selectOne")
-	public ${tableClass} selectOne(long id);
+	public ${tableClass} selectOne(int id);
 	/**
 	 * 更新实体
 	 * @param entity
@@ -71,12 +71,12 @@ public interface ${tableClass}Data {
 	 * @return
 	 */
 	@DeleteProvider(type = ${tableClass}Provider.class, method = "delete${tableClass}")
-	public int delete${tableClass}(long id);
+	public int delete${tableClass}(int id);
 	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = ${tableClass}Provider.class, method = "deleteByLogic")
-	public int deleteByLogic(long id);
+	public int deleteByLogic(int id);
 }

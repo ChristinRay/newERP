@@ -2,17 +2,21 @@ package ${modelPackage};
 
 ${propImportsStr}
 
+import lombok.Getter;
+import lombok.Setter;
 /**
  * ${tableComment}
  * modle
  */
+@Setter
+@Getter
 public class ${tableClass} extends BaseModel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-${propFieldDefStr}
+	${propFieldDefStr}
 
-	${propMethodDefStr}
+
 	
 }

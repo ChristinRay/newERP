@@ -51,7 +51,7 @@ public class ${tableClass}Provider {
 	 */
 	public String select${tableClass}(${tableClass} entity) {
 		SQL sql = new SQL().SELECT("*").FROM("${table}");
-${propWhereStr}
+		${propWhereStr}
 		return sql.toString();
 	}
 	/**
