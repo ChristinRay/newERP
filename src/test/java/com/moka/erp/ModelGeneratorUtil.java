@@ -77,12 +77,12 @@ public class ModelGeneratorUtil {
 			for(int j=0;j<columnInfoList.get(i).getColumns().size();j++) {
 				if(columnInfoList.get(i).getPropTypes().get(j).equals("String")) {
 					String method = getPropertyByUpper(columnInfoList.get(i).getProperties().get(j));
-					whereSb.append("			if(!Strings.isNullOrEmpty(entity.get"+method
+					whereSb.append("			if(!Strings.isNullOrEmpty(entity.get"+getPropertyTwo(method)
 							+"())) {").append("sql.WHERE(\""+columnInfoList.get(i).getProperties().get(j)
 					+" = "+columnInfoList.get(i).getPropertyErs().get(j)+"\");}").append("\n");
 				}else {
 					String method = getPropertyByUpper(columnInfoList.get(i).getProperties().get(j));
-					whereSb.append("			if(!Objects.isNull(entity.get"+method
+					whereSb.append("			if(!Objects.isNull(entity.get"+getPropertyTwo(method)
 							+"())) {").append("sql.WHERE(\""+columnInfoList.get(i).getProperties().get(j)
 					+" = "+columnInfoList.get(i).getPropertyErs().get(j)+"\");}").append("\n");
 				}
@@ -91,24 +91,23 @@ public class ModelGeneratorUtil {
 						!Objects.equal("updatetime", columnInfoList.get(i).getProperties().get(j))) {
 					if(columnInfoList.get(i).getPropTypes().get(j).equals("String")) {
 						String method = getPropertyByUpper(columnInfoList.get(i).getProperties().get(j));
-						setWhereSb.append("			if(!Strings.isNullOrEmpty(entity.get"+method
+						setWhereSb.append("			if(!Strings.isNullOrEmpty(entity.get"+getPropertyTwo(method)
 								+"())) {").append("sql.SET(\""+columnInfoList.get(i).getProperties().get(j)
 						+" = "+columnInfoList.get(i).getPropertyErs().get(j)+"\");}").append("\n");
 					}else {
 						String method = getPropertyByUpper(columnInfoList.get(i).getProperties().get(j));
-						setWhereSb.append("			if(!Objects.isNull(entity.get"+method
+						setWhereSb.append("			if(!Objects.isNull(entity.get"+getPropertyTwo(method)
 								+"())) {").append("sql.SET(\""+columnInfoList.get(i).getProperties().get(j)
 						+" = "+columnInfoList.get(i).getPropertyErs().get(j)+"\");}").append("\n");
 					}
 					setSb.append("		sql.SET(\""+columnInfoList.get(i).getProperties().get(j)
 							+ " = "+columnInfoList.get(i).getPropertyErs().get(j)+"\");").append("\n");
 				}
-				fieldSb.append("	private " + columnInfoList.get(i).getPropTypes().get(j) + " " + 
-						columnInfoList.get(i).getProperties().get(j) + ";").append("\n");
-				methodSb.append("public "+columnInfoList.get(i).getPropTypes().get(j)+" "+getGetMethod(columnInfoList.get(i).getProperties().get(j))+" {return "+
-						columnInfoList.get(i).getProperties().get(j)+";}").append("\n").append(
-								"public void "+getSetMethod(columnInfoList.get(i).getProperties().get(j), columnInfoList.get(i).getPropTypes().get(j))+" {this."
-										+ columnInfoList.get(i).getProperties().get(j)+ " = "+columnInfoList.get(i).getProperties().get(j)+";}").append("\n");
+				fieldSb.append("	private " + columnInfoList.get(i).getPropTypes().get(j) +"  " + getPropertyTwo(columnInfoList.get(i).getProperties().get(j))  + ";").append("\n"); //实体
+//				methodSb.append("public "+columnInfoList.get(i).getPropTypes().get(j)+" "+getGetMethod(columnInfoList.get(i).getProperties().get(j))+" {return "+
+//						columnInfoList.get(i).getProperties().get(j)+";}").append("\n").append(
+//								"public void "+getSetMethod(columnInfoList.get(i).getProperties().get(j), columnInfoList.get(i).getPropTypes().get(j))+" {this."
+//										+ columnInfoList.get(i).getProperties().get(j)+ " = "+columnInfoList.get(i).getProperties().get(j)+";}").append("\n");
 			}
 			setSb.append("		sql.SET(\"updatetime = now()\");").append("\n");
 			setWhereSb.append("		sql.SET(\"updatetime = now()\");").append("\n");
@@ -202,7 +201,7 @@ public class ModelGeneratorUtil {
 					
 					String propertys = getPropertyTwo(columnRs.getString(1));//驼峰的方法
 					columnInfo.getProperties().add(property);//where后面的条件
-					columnInfo.getPropertyErs().add("#{"+propertys+"}"); //从实体里面拿
+					columnInfo.getPropertyErs().add("#{"+propertys+"}"); //从实体里面拿					
 				}
 				HashSet<String> set = new HashSet<>(columnInfo.getPropImports());
 				columnInfo.getPropImports().clear();

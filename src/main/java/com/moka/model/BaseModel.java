@@ -19,10 +19,9 @@ public class BaseModel implements Serializable {
 	private String orderBy;
 	private Integer limit;
 	private Integer limitLen;
-	private Integer pageIndex;
-	private Integer pageSize;
-	private Integer state;
-	private String unique_flg;
+	private Integer pageIndex;//页码
+	private Integer pageSize;//页数
+	private String state;//状态
 	
 
 
@@ -51,12 +50,8 @@ public class BaseModel implements Serializable {
 		this.pageSize = pageSize;
 		return this;
 	}
-	public BaseModel buildState(Integer state) {
+	public BaseModel buildState(String state) {
 		this.state = state;
-		return this;
-	}
-	public BaseModel buildUnique_flg(String unique_flg) {
-		this.unique_flg = unique_flg;
 		return this;
 	}
 
