@@ -46,7 +46,7 @@ public class ExceptionHandle {
 		if(e instanceof HandlerException) {
 			HandlerException he = (HandlerException) e;
 			logger.error("业务异常{}",e);
-			return Result.create(he.getCode(), he.getMsg());
+			return ResultFul.create(he.getCode(), he.getMsg());
 		}else if (e instanceof MethodArgumentNotValidException ){
 			MethodArgumentNotValidException valid=(MethodArgumentNotValidException) e;
 			BindingResult bindingResult =valid.getBindingResult();

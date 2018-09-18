@@ -3,12 +3,16 @@ package com.moka;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+
+
 @SpringBootApplication
+@MapperScan("com.moka.dao")
 public class NewErpApplication {
 	@Bean
 	public DataSource getDataSource() {
@@ -32,4 +36,5 @@ public class NewErpApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NewErpApplication.class, args);
 	}
+	
 }

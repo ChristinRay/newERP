@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import com.moka.model.ChBrand;
  * 品牌表
  * provider
  */
+@Mapper
 public class ChBrandProvider {
 	
 	/**
