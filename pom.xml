@@ -89,6 +89,14 @@
 		    <version>3.9</version>
 		</dependency> 
 		<!-- poi end -->
+		<!-- shiro -->
+		<dependency>
+    		<groupId>org.apache.shiro</groupId>
+    		<artifactId>shiro-core</artifactId>
+    		<version>1.4.0</version>
+		</dependency>
+		
+		<!-- shiro end -->
 	</dependencies>
 
 	<build>
