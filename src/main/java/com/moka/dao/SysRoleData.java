@@ -9,26 +9,25 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.StatementType;
 
-import com.moka.model.ChBrand;
-
+import com.moka.model.SysRole;
 @Mapper
-public interface ChBrandData {
+public interface SysRoleData {
 	
 	/**
 	 * 插入操作
 	 * @param entity
 	 * @return
 	 */
-	@InsertProvider(type = ChBrandProvider.class, method = "insertChBrand")
+	@InsertProvider(type = SysRoleProvider.class, method = "insertSysRole")
 	@SelectKey(before=false,keyProperty="id",resultType=Integer.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
-	public int insertChBrand(ChBrand entity);
+	public int insertSysRole(SysRole entity);
 	/**
 	 * 按条件查询总记录数
 	 * @param entity
 	 * @return
 	 */
-	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrandByCount")
-	public int selectChBrandByCount(ChBrand entity);
+	@SelectProvider(type = SysRoleProvider.class, method = "selectSysRoleByCount")
+	public int selectSysRoleByCount(SysRole entity);
 	/**
 	 * 按条件分页查询
 	 * @param entity
@@ -37,48 +36,48 @@ public interface ChBrandData {
 	 * @param limitLen
 	 * @return
 	 */
-	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrandByLimt")
-	public List<ChBrand> selectChBrandByLimt(ChBrand entity);
+	@SelectProvider(type = SysRoleProvider.class, method = "selectSysRoleByLimt")
+	public List<SysRole> selectSysRoleByLimt(SysRole entity);
 	/**
 	 * 按条件查询记录
 	 * @param entity
 	 * @return
 	 */
-	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrand")
-	public List<ChBrand> selectChBrand(ChBrand entity);
+	@SelectProvider(type = SysRoleProvider.class, method = "selectSysRole")
+	public List<SysRole> selectSysRole(SysRole entity);
 	/**
 	 * 根据主键id查询实体
 	 * @param id
 	 * @return
 	 */
-	@SelectProvider(type = ChBrandProvider.class, method = "selectOne")
-	public ChBrand selectOne(int id);
+	@SelectProvider(type = SysRoleProvider.class, method = "selectOne")
+	public SysRole selectOne(int id);
 	/**
 	 * 更新实体
 	 * @param entity
 	 * @return
 	 */
-	@UpdateProvider(type = ChBrandProvider.class, method = "updateChBrand")
-	public int updateChBrand(ChBrand entity);
+	@UpdateProvider(type = SysRoleProvider.class, method = "updateSysRole")
+	public int updateSysRole(SysRole entity);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
 	 */
-	@UpdateProvider(type = ChBrandProvider.class, method = "updateChBrandByNullChk")
-	public int updateChBrandByNullChk(ChBrand entity);
+	@UpdateProvider(type = SysRoleProvider.class, method = "updateSysRoleByNullChk")
+	public int updateSysRoleByNullChk(SysRole entity);
 	/**
 	 * 物理删除实体
 	 * @param id
 	 * @return
 	 */
-	@DeleteProvider(type = ChBrandProvider.class, method = "deleteChBrand")
-	public int deleteChBrand(int id);
+	@DeleteProvider(type = SysRoleProvider.class, method = "deleteSysRole")
+	public int deleteSysRole(int id);
 	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
-	@UpdateProvider(type = ChBrandProvider.class, method = "deleteByLogic")
+	@UpdateProvider(type = SysRoleProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(int id);
 }

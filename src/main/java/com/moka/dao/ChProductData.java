@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.model.ChProduct;
-
+@Mapper
 public interface ChProductData {
 	
 	/**

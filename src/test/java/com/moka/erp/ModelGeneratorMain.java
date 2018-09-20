@@ -6,7 +6,7 @@ package com.moka.erp;
 **/
 public class ModelGeneratorMain {
 	public static void main(String[] args) {
-		ModelGeneratorUtil.generateTable("ch_brand");  //table generator
+		ModelGeneratorUtil.generateTable("sys_user_role");  //table generator
 		
 	}
 }
