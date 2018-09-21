@@ -17,7 +17,7 @@ public class ChSupplyProduct extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private Integer  id;
+	private Integer  id;
 	private Integer  supplyId;
 	private Integer  productId;
 	private BigDecimal  productPrice;

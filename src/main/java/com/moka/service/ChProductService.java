@@ -1,7 +1,6 @@
 package com.moka.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +21,10 @@ public class ChProductService {
 	@Transactional
 	public Object add(ChProduct entity){
 		int a= chProductData.insertChProduct(entity);
-		if(a==1) return Result.create("OK", "商品添加成功");
+		if(a==1) {
+			return Result.create(entity);
+		}
+		
 		
 		return Result.create("ERROR", "添加失败");
 	}

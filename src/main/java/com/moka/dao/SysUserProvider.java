@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class SysUserProvider {
 			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
 			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
-
+			
 		return sql.toString();
 	}
 	/**
@@ -58,12 +59,12 @@ public class SysUserProvider {
 	 * @return
 	 */
 	public String selectSysUser(SysUser entity) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_user");
+		SQL sql = new SQL().SELECT("id as id ,user_name as userName,pass_word as passWord,user_enable as userEnable").FROM("sys_user");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
 			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
-
+			System.out.println(sql+"&&&&&&&&&&&&");
 		return sql.toString();
 	}
 	/**
@@ -127,4 +128,33 @@ public class SysUserProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	/**
+	 * 根据userId得到user下的权限
+	 * @param entity
+	 * @return
+	 */
+	public String findPermissionsByUserId(int id) {
+		String  sql = new SQL()
+		{
+			{
+				SELECT("  c.res_url   ");
+				FROM("from sys_user_role a INNER JOIN sys_role_resources b on (a.role_id=b.role_id) INNER JOIN sys_resources c ON(b.resources_id=c.id)");
+				if(!Objects.isNull(id)) {
+					WHERE(" a.user_id = #{id}");
+				}
+			}
+		}.toString();
+		return sql.toString();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

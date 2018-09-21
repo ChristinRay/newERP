@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.moka.model.SysUserRole;
 
 /**
- * 
+ * 用户角色中间表
  * provider
  */
 public class SysUserRoleProvider {

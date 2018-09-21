@@ -1,6 +1,8 @@
 package com.moka.dao;
 
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -44,7 +46,7 @@ public interface SysUserData {
 	 * @return
 	 */
 	@SelectProvider(type = SysUserProvider.class, method = "selectSysUser")
-	public List<SysUser> selectSysUser(SysUser entity);
+	public SysUser selectSysUser(SysUser entity);
 	/**
 	 * 根据主键id查询实体
 	 * @param id
@@ -80,4 +82,34 @@ public interface SysUserData {
 	 */
 	@UpdateProvider(type = SysUserProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(int id);
+	
+	/**
+	 * 根据登录人id获取登录人权限
+	 * @param id
+	 * @return
+	 */
+	@SelectProvider(type = SysUserProvider.class, method = "findPermissionsByUserId")
+	public Set<String> findPermissionsByUserId(int id);
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

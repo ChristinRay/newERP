@@ -25,18 +25,18 @@ public class UserService {
 	 * @return
 	 */
 	public SysUser getUser(SysUser user) {
-		List<SysUser> sysUsers= sysUserData.selectSysUser(user);
-		
-		
-		return sysUsers.get(0);
+		SysUser sysUsers= sysUserData.selectSysUser(user);
+		System.out.println(sysUsers);
+		return sysUsers;
 	}
 	/**
-	 * 根据用户id找到用户对应的权限
+	 * 根据用户id找到用户的角色对应的权限
 	 * @param id
 	 * @return
 	 */
 	public Set<String> findPermissionsByUserId(Integer id) {
-		return null;
+		Set<String> set =sysUserData.findPermissionsByUserId(id);
+		return set;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.SysUser;
+import com.moka.result.Result;
 import com.moka.result.ResultFul;
 
 /**
@@ -24,22 +25,23 @@ import com.moka.result.ResultFul;
 public class LoginController {
 
     @PostMapping("/login")
-    public ResultFul submitLogin(String username, String password, HttpServletRequest request) {
+    public Result<?> submitLogin(String username, String password, HttpServletRequest request) {
+    	SysUser user;
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            SysUser user = (SysUser) subject.getPrincipal();
+            user= (SysUser) subject.getPrincipal();
         } catch (DisabledAccountException e) {
             request.setAttribute("msg", "账户已被禁用");
-            return ResultFul.create("ERROR", "账户已被禁用");
+            return Result.create("ERROR", "账户已被禁用");
         } catch (AuthenticationException e) {
             request.setAttribute("msg", "用户名或密码错误");
-            return ResultFul.create("ERROR", "用户名或密码错误");
+            return Result.create("ERROR", "用户名或密码错误");
         }
 
         // 执行到这里说明用户已登录成功
-        return ResultFul.create("OK", "登录成功");
+        return Result.create(user);
     }
     
     
