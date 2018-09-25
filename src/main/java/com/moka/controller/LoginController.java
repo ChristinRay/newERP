@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.SysUser;
 import com.moka.result.Result;
-import com.moka.result.ResultFul;
-
 /**
 * @author    created by lbq
 * @date	     2018年9月20日 下午4:15:43
