@@ -30,5 +30,4 @@ public class ChBrand extends BaseModel {
 		ParamPreconditions.checkNotEmpty(brandName, CodeEnum.FAIL.getCode(), "品牌名称不能为空", "品牌名称不能为空");
 		ParamPreconditions.checkNotEmpty(brandCode, CodeEnum.FAIL.getCode(), "品牌编码不能为空", "品牌编码不能为空");
 	}
-	
 }

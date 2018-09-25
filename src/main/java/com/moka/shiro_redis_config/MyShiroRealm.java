@@ -19,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moka.model.SysUser;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * @author created by lbq
  * @date 2018年9月19日 下午7:45:29
