@@ -6,25 +6,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.moka.model.ChBrand;
-import com.moka.result.ResultFul;
-import com.moka.service.ChBrandService;
+import com.moka.dao.ChChannelData;
+import com.moka.model.ChChannel;
+import com.moka.result.Result;
 
 /**
 * @author    created by lbq
-* @date	     2018年9月17日 下午4:37:43
+* @date	     2018年9月25日 下午7:13:59
 **/
 @RestController
-@RequestMapping("/api/erp/v1/brand")
-public class ChBrandController {
-	
+@RequestMapping("/api/erp/v1/channel/")
+public class ChChannelController {
 	@Autowired
-	private ChBrandService chBrandService;
-
-	@PostMapping("add")
-	public  ResultFul add (@RequestBody ChBrand entity){
-		entity.check();
-		return chBrandService.add(entity);
-	}
+	private ChChannelData chChannelData;
 	
+	
+	@PostMapping("add")
+	public Result<?> add (@RequestBody ChChannel chChannel){
+		
+		int a= chChannelData.insertChChannel(chChannel);
+		return Result.create(a);
+	}
 }
