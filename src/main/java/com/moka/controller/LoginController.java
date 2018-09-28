@@ -9,10 +9,12 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.SysUser;
+import com.moka.req.UserReq;
 import com.moka.result.Result;
 /**
 * @author    created by lbq
@@ -23,10 +25,10 @@ import com.moka.result.Result;
 public class LoginController {
 
     @PostMapping("/login")
-    public Result<?> submitLogin(String username, String password, HttpServletRequest request) {
+    public Result<?> submitLogin(@RequestBody UserReq req, HttpServletRequest request) {
     	SysUser user;
         try {
-            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             user= (SysUser) subject.getPrincipal();

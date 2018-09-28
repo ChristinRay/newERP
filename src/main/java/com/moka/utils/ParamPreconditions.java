@@ -317,6 +317,9 @@ public class ParamPreconditions {
 		if(str.length() < 1 || str.length() > 15)
 			throw new HandlerException(code, msg);
 	}
+	
+	
+	
 	/**
 	 * 校验字符串只支持中文、字符和数字且符合1-15个字符
 	 * @param str

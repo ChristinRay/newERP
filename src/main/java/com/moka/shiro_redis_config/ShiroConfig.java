@@ -50,7 +50,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/auth/kickout", "anon");
         filterChainDefinitionMap.put("/**", "authc,kickout");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        return shiroFilterFactoryBean;
+        return shiroFilterFactoryBean;	
     }
 
     @Bean
