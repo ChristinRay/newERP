@@ -47,8 +47,8 @@ public class LoginController {
     
 
     @GetMapping( "/login")
-    public String loginPage() {
-        return "login";
+    public Result<?> loginPage() {
+        return Result.create("请登录！");
     }
 
 //    @PostMapping("/index")
@@ -67,8 +67,8 @@ public class LoginController {
 
     //被踢出后跳转的页面
     @GetMapping("/kickout")
-    public String kickOut() {
-        return "kickout";
+    public Result<?> kickOut() {
+        return Result.create("您的账号已在别的地方登录");
     }
     
 }

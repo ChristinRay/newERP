@@ -26,7 +26,6 @@ public class ChCompany extends BaseModel {
 	private String  accountBank;
 	private String  accountNo;
 	private Integer  userId;
-	private String  state;
 	private String  createtime;
 	private String  updatetime;
 

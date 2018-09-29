@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public class ChCompanyProvider {
 	 */
 	public String insertChCompany(ChCompany entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_company");
-		sql.VALUES("company_code,company_name,company_deputy,company_account_name,account_bank,account_no,user_id,state,createtime,updatetime", "#{companyCode},#{companyName},#{companyDeputy},#{companyAccountName},#{accountBank},#{accountNo},#{userId},#{state},now(),now()");
+		sql.VALUES("company_code,company_name,company_deputy,company_account_name,account_bank,account_no,user_id,state,createtime,updatetime", "#{companyCode},#{companyName},#{companyDeputy},#{companyAccountName},#{accountBank},#{accountNo},#{userId},'1',now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -51,7 +52,7 @@ public class ChCompanyProvider {
 	 * @return
 	 */
 	public String selectChCompanyByLimt(ChCompany entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_company");
+		SQL sql = new SQL().SELECT("id, company_code as companyCode,company_name as companyName,company_deputy as companyDeputy,company_account_name as companyAccountName,account_bank as accountBank,account_no as accountNo,user_id as userId,state,createtime,updatetime ").FROM("ch_company");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyCode())) {sql.WHERE("company_code = #{companyCode}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
@@ -72,14 +73,14 @@ public class ChCompanyProvider {
 	 * @return
 	 */
 	public String selectChCompany(ChCompany entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_company");
+		SQL sql = new SQL().SELECT("id, company_code as companyCode,company_name as companyName,company_deputy as companyDeputy,company_account_name as companyAccountName,account_bank as accountBank,account_no as accountNo,user_id as userId,state,createtime,updatetime ").FROM("ch_company");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getCompanyCode())) {sql.WHERE("company_code = #{companyCode}");}
-			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
-			if(!Strings.isNullOrEmpty(entity.getCompanyDeputy())) {sql.WHERE("company_deputy = #{companyDeputy}");}
-			if(!Strings.isNullOrEmpty(entity.getCompanyAccountName())) {sql.WHERE("company_account_name = #{companyAccountName}");}
-			if(!Strings.isNullOrEmpty(entity.getAccountBank())) {sql.WHERE("account_bank = #{accountBank}");}
-			if(!Strings.isNullOrEmpty(entity.getAccountNo())) {sql.WHERE("account_no = #{accountNo}");}
+			if(!Strings.isNullOrEmpty(entity.getCompanyCode())) {sql.WHERE("company_code = #{companyCode} ");}
+			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName} ");}
+			if(!Strings.isNullOrEmpty(entity.getCompanyDeputy())) {sql.WHERE("company_deputy = #{companyDeputy} ");}
+			if(!Strings.isNullOrEmpty(entity.getCompanyAccountName())) {sql.WHERE("company_account_name = #{companyAccountName} ");}
+			if(!Strings.isNullOrEmpty(entity.getAccountBank())) {sql.WHERE("account_bank = #{accountBank} ");}
+			if(!Strings.isNullOrEmpty(entity.getAccountNo())) {sql.WHERE("account_no  = #{accountNo}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -92,9 +93,10 @@ public class ChCompanyProvider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(long id) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_company");
-		sql.WHERE("id="+id);
+	public String selectOne(@Param("id")int id) {
+		SQL sql = new SQL().SELECT("id, company_code as companyCode,company_name as companyName,company_deputy as companyDeputy,company_account_name as companyAccountName,account_bank as accountBank,account_no as accountNo,user_id as userId,state,createtime,updatetime").FROM("ch_company");
+		sql.WHERE("id=#{id}");
+		System.out.println(sql);
 		return sql.toString();
 	}
 	/**
@@ -142,7 +144,7 @@ public class ChCompanyProvider {
 	 * @param id
 	 * @return
 	 */
-	public String deleteChCompany(long id) {
+	public String deleteChCompany(int id) {
 		SQL sql = new SQL().DELETE_FROM("ch_company");
 		sql.WHERE("id = #{id}");
 		return sql.toString();
@@ -152,7 +154,7 @@ public class ChCompanyProvider {
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(long id) {
+	public String deleteByLogic(@Param("id")int id) {
 		SQL sql = new SQL().UPDATE("ch_company");
 		sql.SET("state=2");
 		sql.WHERE("id = #{id}");

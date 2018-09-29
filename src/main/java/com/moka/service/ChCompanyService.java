@@ -15,23 +15,29 @@ import com.moka.model.ChCompany;
 **/
 @Service
 public class ChCompanyService {
-
-	@Autowired
-	private ChCompanyData chCompanyData;
 	
-	@Transactional
-	public int add(ChCompany chCompany){
-		chCompanyData.insertChCompany(chCompany);
+		@Autowired
+		private ChCompanyData chCompanyData;
 		
-		return chCompany.getId();
-	}
-	
-	
-	
-	
-	public Object list(ChCompany chCompany){
-		List<ChCompany> chCompanies= chCompanyData.selectChCompany(chCompany);
+		@Transactional
+		public int add(ChCompany chCompany){
+			chCompanyData.insertChCompany(chCompany);
+			
+			return chCompany.getId();
+		}
 		
-		return chCompanies;
-	}
+		
+		public Object list(ChCompany chCompany){
+			List<ChCompany> chCompanies= chCompanyData.selectChCompany(chCompany);
+			
+			return chCompanies;
+		}
+		
+		
+		public int update(ChCompany chCompany){
+			chCompanyData.updateChCompany(chCompany);
+			
+			return chCompany.getId();
+		}
+		
 }

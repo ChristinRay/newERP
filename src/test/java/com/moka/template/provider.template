@@ -59,7 +59,7 @@ public class ${tableClass}Provider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(long id) {
+	public String selectOne(int id) {
 		SQL sql = new SQL().SELECT("*").FROM("${table}");
 		sql.WHERE("${primaryKey}="+id);
 		return sql.toString();
@@ -91,7 +91,7 @@ public class ${tableClass}Provider {
 	 * @param id
 	 * @return
 	 */
-	public String delete${tableClass}(long id) {
+	public String delete${tableClass}(int id) {
 		SQL sql = new SQL().DELETE_FROM("${table}");
 		sql.WHERE("${primaryKey} = #{${primaryKey}}");
 		return sql.toString();
@@ -101,7 +101,7 @@ public class ${tableClass}Provider {
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(long id) {
+	public String deleteByLogic(int id) {
 		SQL sql = new SQL().UPDATE("${table}");
 		sql.SET("state=2");
 		sql.WHERE("${primaryKey} = #{${primaryKey}}");

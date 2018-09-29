@@ -1,13 +1,16 @@
 package com.moka.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
-import org.apache.ibatis.annotations.Mapper;
+
 import com.moka.model.ChCompany;
 
 @Mapper
@@ -51,7 +54,7 @@ public interface ChCompanyData {
 	 * @return
 	 */
 	@SelectProvider(type = ChCompanyProvider.class, method = "selectOne")
-	public ChCompany selectOne(int id);
+	public ChCompany selectOne(@Param("id")int id);
 	/**
 	 * 更新实体
 	 * @param entity
@@ -79,5 +82,13 @@ public interface ChCompanyData {
 	 * @return
 	 */
 	@UpdateProvider(type = ChCompanyProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id") int id);
 }
+
+
+
+
+
+
+
+
