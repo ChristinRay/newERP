@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public class ChDepotProvider {
 	 */
 	public String insertChDepot(ChDepot entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_depot");
-		sql.VALUES("depot_code,depot_name,depot_address,depot_type,depot_person,depot_phone,pay_type,depot_state,user_id,state,createtime,updatetime", "#{depotCode},#{depotName},#{depotAddress},#{depotType},#{depotPerson},#{depotPhone},#{payType},#{depotState},#{userId},#{state},now(),now()");
+		sql.VALUES("depot_code,depot_name,depot_address,depot_type,depot_person,depot_phone,pay_type,depot_state,user_id,state,createtime,updatetime", "#{depotCode},#{depotName},#{depotAddress},#{depotType},#{depotPerson},#{depotPhone},#{payType},#{depotState},#{userId},'1',now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -41,7 +42,7 @@ public class ChDepotProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-
+			sql.WHERE("state='1'");
 		return sql.toString();
 	}
 	/**
@@ -53,7 +54,9 @@ public class ChDepotProvider {
 	 * @return
 	 */
 	public String selectChDepotByLimt(ChDepot entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_depot");
+		SQL sql = new SQL().SELECT(" id as id,depot_code as depotCode,depot_name as depotName,depot_address as depotAddress, "
+				+ " depot_type as depotType,depot_person as depotPerson,depot_phone as depotPhone,pay_type as payType, "
+				+ " depot_state as depotState,user_id as userId,state as state,createtime as createtime,updatetime as updatetime").FROM("ch_depot");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotCode())) {sql.WHERE("depot_code = #{depotCode}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotName())) {sql.WHERE("depot_name = #{depotName}");}
@@ -67,7 +70,7 @@ public class ChDepotProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-
+			sql.WHERE("state='1'");
 		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
@@ -76,7 +79,9 @@ public class ChDepotProvider {
 	 * @return
 	 */
 	public String selectChDepot(ChDepot entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_depot");
+		SQL sql = new SQL().SELECT(" id as id,depot_code as depotCode,depot_name as depotName,depot_address as depotAddress, "
+				+ " depot_type as depotType,depot_person as depotPerson,depot_phone as depotPhone,pay_type as payType, "
+				+ " depot_state as depotState,user_id as userId,state as state,createtime as createtime,updatetime as updatetime").FROM("ch_depot");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotCode())) {sql.WHERE("depot_code = #{depotCode}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotName())) {sql.WHERE("depot_name = #{depotName}");}
@@ -90,7 +95,7 @@ public class ChDepotProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-
+			sql.WHERE("state='1'");
 		return sql.toString();
 	}
 	/**
@@ -98,9 +103,11 @@ public class ChDepotProvider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(int id) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_depot");
-		sql.WHERE("id="+id);
+	public String selectOne(@Param("id") int id) {
+		SQL sql = new SQL().SELECT(" id as id,depot_code as depotCode,depot_name as depotName,depot_address as depotAddress, "
+				+ " depot_type as depotType,depot_person as depotPerson,depot_phone as depotPhone,pay_type as payType, "
+				+ " depot_state as depotState,user_id as userId,state as state,createtime as createtime,updatetime as updatetime").FROM("ch_depot");
+		sql.WHERE("id=#{id}");
 		return sql.toString();
 	}
 	/**
@@ -121,7 +128,7 @@ public class ChDepotProvider {
 		sql.SET("user_id = #{userId}");
 		sql.SET("state = #{state}");
 		sql.SET("updatetime = now()");
-
+		
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
@@ -132,7 +139,7 @@ public class ChDepotProvider {
 	 */
 	public String updateChDepotByNullChk(ChDepot entity) {
 		SQL sql = new SQL().UPDATE("ch_depot");
-					if(!Strings.isNullOrEmpty(entity.getDepotCode())) {sql.SET("depot_code = #{depotCode}");}
+			if(!Strings.isNullOrEmpty(entity.getDepotCode())) {sql.SET("depot_code = #{depotCode}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotName())) {sql.SET("depot_name = #{depotName}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotAddress())) {sql.SET("depot_address = #{depotAddress}");}
 			if(!Strings.isNullOrEmpty(entity.getDepotType())) {sql.SET("depot_type = #{depotType}");}
@@ -162,7 +169,7 @@ public class ChDepotProvider {
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(int id) {
+	public String deleteByLogic(@Param("id")int id) {
 		SQL sql = new SQL().UPDATE("ch_depot");
 		sql.SET("state=2");
 		sql.WHERE("id = #{id}");

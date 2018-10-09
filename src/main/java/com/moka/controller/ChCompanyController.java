@@ -2,7 +2,6 @@ package com.moka.controller;
 
 import java.util.List;
 
-import org.hibernate.validator.internal.metadata.provider.ProgrammaticMetaDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +57,7 @@ public class ChCompanyController {
 			company.setLimit(page[0]);
 			company.setLimitLen(page[1]);
 			company.setOrderBy("id");
-			List<ChCompany> result = chCompanyData.selectChCompany(company);
+			List<ChCompany> result = chCompanyData.selectChCompanyByLimt(company);
 			return Result.createPage(result,(long)count);
 		}
 		return Result.create("ERROR","参数类型不匹配");

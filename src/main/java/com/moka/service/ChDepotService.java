@@ -16,10 +16,30 @@ public class ChDepotService {
 	private ChDepotData chDepotData;
 	
 	
-	
 	public int  add(ChDepot chDepot){
 		int a= chDepotData.insertChDepot(chDepot);
 		
 		return a;
 	}
+	
+	public int update (ChDepot chDepot){
+		int a= chDepotData.updateChDepot(chDepot);
+		return a;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

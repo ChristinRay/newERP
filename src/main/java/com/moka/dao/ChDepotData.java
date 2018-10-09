@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.moka.model.ChDepot;
 
 @Mapper
@@ -51,7 +53,7 @@ public interface ChDepotData {
 	 * @return
 	 */
 	@SelectProvider(type = ChDepotProvider.class, method = "selectOne")
-	public ChDepot selectOne(int id);
+	public ChDepot selectOne(@Param("id")int id);
 	/**
 	 * 更新实体
 	 * @param entity
@@ -79,5 +81,5 @@ public interface ChDepotData {
 	 * @return
 	 */
 	@UpdateProvider(type = ChDepotProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
 }
