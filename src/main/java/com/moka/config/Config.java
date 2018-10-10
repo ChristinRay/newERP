@@ -1,30 +1,30 @@
-package com.moka.config;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-
-/**
-* @author    created by lbq
-* @date	     2018年9月29日 上午11:20:52
-**/
-@Configuration
-public class Config<T> {
-
-    @Autowired
-    private RedisTemplate<String, T> redisTemplate;
-
-    @Bean
-    public RedisTemplate<String, T> redisTemplateInit() {
-        //设置序列化Key的实例化对象
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        //设置序列化Value的实例化对象
-        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        return redisTemplate;
-    }
-}
-
-
+//package com.moka.config;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+//import org.springframework.data.redis.serializer.StringRedisSerializer;
+//
+///**
+//* @author    created by lbq
+//* @date	     2018年9月29日 上午11:20:52
+//**/
+//@Configuration
+//public class Config<T> {
+//
+//    @Autowired
+//    private RedisTemplate<String, T> redisTemplate;
+//
+//    @Bean
+//    public RedisTemplate<String, T> redisTemplateInit() {
+//        //设置序列化Key的实例化对象
+//        redisTemplate.setKeySerializer(new StringRedisSerializer());
+//        //设置序列化Value的实例化对象
+//        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+//        return redisTemplate;
+//    }
+//}
+//
+//
