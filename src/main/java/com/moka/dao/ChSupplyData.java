@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.StatementType;
-
+import org.apache.ibatis.annotations.Mapper;
 import com.moka.model.ChSupply;
+
 @Mapper
 public interface ChSupplyData {
 	

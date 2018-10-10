@@ -3,6 +3,9 @@ package com.moka.model;
 import java.lang.Integer;
 import java.lang.String;
 
+import com.moka.Enum.CodeEnum;
+import com.moka.utils.ParamPreconditions;
+
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -16,28 +19,30 @@ public class ChSupply extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private Integer  id;
-	private String  supplyCode;
-	private String  brandCode;
-	private String  sypplyName;
-	private String  accreditLevel;
-	private String  accreditStartTime;
 	private String  accreditEndTime;
+	private String  accreditLevel;
+	private String  accreditProduct;
+	private String  accreditStartTime;
+	private String  companyName;
 	private String  cooperationType;
+	private String  createtime;
+	private Integer id;
+	private String  state;
 	private String  supplyAccount;
 	private String  supplyAccountName;
-	private String  accreditProduct;
-	private String  sypplyAddress;
-	private String  sypplyContact;
-	private String  sypplyMobile;
-	private String  sypplyContactPosition;
-	private String  companyName;
-	private Integer  userId;
-	private String  state;
-	private String  createtime;
+	private String  supplyAddress;
+	private String  supplyCertificate;
+	private String  supplyCode;
+	private String  supplyContact;
+	private String  supplyContactPosition;
+	private String  supplyMobile;
+	private String  supplyName;
 	private String  updatetime;
+	private Integer  userId;
 
-
-
+	public void check(){
+		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要参数不能为空", "必要参数不能为空",
+				supplyCode,supplyName,accreditLevel,supplyAccount,supplyAccountName,supplyContact,supplyMobile );
+	}
 	
 }
