@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -18,7 +19,7 @@ public class ChSupplyProvider {
 	 */
 	public String insertChSupply(ChSupply entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_supply");
-		sql.VALUES("accredit_level,accredit_product,accredit_start_time,company_name,cooperation_type,createtime,id,state,supply_account,supply_account_name,supply_address,supply_certificate,supply_code,supply_contact,supply_contact_position,supply_mobile,supply_name,updatetime,user_id", "#{accreditLevel},#{accreditProduct},#{accreditStartTime},#{companyName},#{cooperationType},now(),#{id},#{state},#{supplyAccount},#{supplyAccountName},#{supplyAddress},#{supplyCertificate},#{supplyCode},#{supplyContact},#{supplyContactPosition},#{supplyMobile},#{supplyName},now(),#{userId}");
+		sql.VALUES("accredit_level,accredit_product,accredit_brand,accredit_start_time,accredit_end_time,company_name,cooperation_type,createtime,id,state,supply_account,supply_account_name,supply_address,supply_certificate,supply_code,supply_contact,supply_contact_position,supply_mobile,supply_name,updatetime,user_id", "#{accreditLevel},#{accreditProduct},#{accreditBrand},#{accreditStartTime},#{accreditEndTime},#{companyName},#{cooperationType},now(),#{id},#{state},#{supplyAccount},#{supplyAccountName},#{supplyAddress},#{supplyCertificate},#{supplyCode},#{supplyContact},#{supplyContactPosition},#{supplyMobile},#{supplyName},now(),#{userId}");
 		return sql.toString();
 	}
 	/**
@@ -28,9 +29,10 @@ public class ChSupplyProvider {
 	 */
 	public String selectChSupplyByCount(ChSupply entity) {
 		SQL sql = new SQL().SELECT("count(*)").FROM("ch_supply");
-					if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditProduct())) {sql.WHERE("accredit_product = #{accreditProduct}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.WHERE("cooperation_type = #{cooperationType}");}
@@ -48,7 +50,7 @@ public class ChSupplyProvider {
 			if(!Strings.isNullOrEmpty(entity.getSupplyName())) {sql.WHERE("supply_name = #{supplyName}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+			sql.WHERE("state <> '2'");
 		return sql.toString();
 	}
 	/**
@@ -60,10 +62,16 @@ public class ChSupplyProvider {
 	 * @return
 	 */
 	public String selectChSupplyByLimt(ChSupply entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_supply");
-					if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+		SQL sql = new SQL().SELECT("id, accredit_end_time as accreditEndTime,accredit_level as accreditLevel,accredit_product as accreditProduct,"
+				+ " accredit_brand as accreditBrand,accredit_start_time as accreditStartTime,company_name as companyName,cooperation_type as cooperationType, "
+				+ " supply_account as supplyAccount,supply_account_name as supplyAccountName,supply_address as supplyAddress, "
+				+ " supply_certificate as supplyCertificate,supply_code as supplyCode,supply_contact as supplyContact, "
+				+ " supply_contact_position as supplyContactPosition,supply_mobile as supplyMobile,supply_name as supplyName,"
+				+ " user_id as userId").FROM("ch_supply");
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditProduct())) {sql.WHERE("accredit_product = #{accreditProduct}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.WHERE("cooperation_type = #{cooperationType}");}
@@ -81,7 +89,7 @@ public class ChSupplyProvider {
 			if(!Strings.isNullOrEmpty(entity.getSupplyName())) {sql.WHERE("supply_name = #{supplyName}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+			sql.WHERE("state <> '2'");
 		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
@@ -91,9 +99,10 @@ public class ChSupplyProvider {
 	 */
 	public String selectChSupply(ChSupply entity) {
 		SQL sql = new SQL().SELECT("*").FROM("ch_supply");
-					if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditProduct())) {sql.WHERE("accredit_product = #{accreditProduct}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.WHERE("cooperation_type = #{cooperationType}");}
@@ -111,7 +120,7 @@ public class ChSupplyProvider {
 			if(!Strings.isNullOrEmpty(entity.getSupplyName())) {sql.WHERE("supply_name = #{supplyName}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+			sql.WHERE("state <> '2'");
 		return sql.toString();
 	}
 	/**
@@ -119,9 +128,14 @@ public class ChSupplyProvider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(int id) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_supply");
-		sql.WHERE("id="+id);
+	public String selectOne(@Param("id")int id) {
+		SQL sql = new SQL().SELECT("id, accredit_end_time as accreditEndTime,accredit_level as accreditLevel,accredit_product as accreditProduct,"
+				+ " accredit_brand as accreditBrand,accredit_start_time as accreditStartTime,company_name as companyName,cooperation_type as cooperationType, "
+				+ " supply_account as supplyAccount,supply_account_name as supplyAccountName,supply_address as supplyAddress, "
+				+ " supply_certificate as supplyCertificate,supply_code as supplyCode,supply_contact as supplyContact, "
+				+ " supply_contact_position as supplyContactPosition,supply_mobile as supplyMobile,supply_name as supplyName,"
+				+ " user_id as userId,id,createtime,updatetime ").FROM("ch_supply");
+		sql.WHERE("id= #{id}");
 		return sql.toString();
 	}
 	/**
@@ -131,9 +145,10 @@ public class ChSupplyProvider {
 	 */
 	public String updateChSupply(ChSupply entity) {
 		SQL sql = new SQL().UPDATE("ch_supply");
-				sql.SET("accredit_end_time = #{accreditEndTime}");
+		sql.SET("accredit_end_time = #{accreditEndTime}");
 		sql.SET("accredit_level = #{accreditLevel}");
 		sql.SET("accredit_product = #{accreditProduct}");
+		sql.SET("accredit_brand = #{accreditBrand}");
 		sql.SET("accredit_start_time = #{accreditStartTime}");
 		sql.SET("company_name = #{companyName}");
 		sql.SET("cooperation_type = #{cooperationType}");
@@ -151,6 +166,7 @@ public class ChSupplyProvider {
 		sql.SET("updatetime = now()");
 
 		sql.WHERE("id = #{id}");
+		System.out.println(sql);
 		return sql.toString();
 	}
 	/**
@@ -160,9 +176,10 @@ public class ChSupplyProvider {
 	 */
 	public String updateChSupplyByNullChk(ChSupply entity) {
 		SQL sql = new SQL().UPDATE("ch_supply");
-					if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.SET("accredit_end_time = #{accreditEndTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.SET("accredit_end_time = #{accreditEndTime}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.SET("accredit_level = #{accreditLevel}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditProduct())) {sql.SET("accredit_product = #{accreditProduct}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.SET("accredit_start_time = #{accreditStartTime}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.SET("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.SET("cooperation_type = #{cooperationType}");}
@@ -197,9 +214,21 @@ public class ChSupplyProvider {
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(int id) {
+	public String deleteByLogic(@Param("id")int id) {
 		SQL sql = new SQL().UPDATE("ch_supply");
 		sql.SET("state=2");
+		sql.WHERE("id = #{id}");
+		return sql.toString();
+	}
+	
+	/**
+	 * 禁用实体
+	 * @param entity
+	 * @return
+	 */
+	public String updateState(@Param("id")int id) {
+		SQL sql = new SQL().UPDATE("ch_supply");
+		sql.SET("state=3");
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}

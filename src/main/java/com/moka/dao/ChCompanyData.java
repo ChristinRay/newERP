@@ -83,6 +83,7 @@ public interface ChCompanyData {
 	 */
 	@UpdateProvider(type = ChCompanyProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id") int id);
+	
 }
 
 

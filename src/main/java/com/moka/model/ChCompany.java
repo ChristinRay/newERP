@@ -23,6 +23,7 @@ public class ChCompany extends BaseModel {
 	private String  companyName;
 	private String  companyDeputy;
 	private String  companyAccountName;
+	private String  tax;
 	private String  accountBank;
 	private String  accountNo;
 	private Integer  userId;
@@ -30,7 +31,7 @@ public class ChCompany extends BaseModel {
 	private String  updatetime;
 
 	public void check(){
-		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要字段不能为空", "必要字段不能为空",companyCode,companyName);
+		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要字段不能为空", "必要字段不能为空",tax,companyCode,companyName);
 	}
 
 	

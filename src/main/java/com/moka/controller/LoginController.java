@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.moka.model.SysUser;
 import com.moka.req.UserReq;
 import com.moka.result.Result;
+import com.moka.result.ResultFul;
 /**
 * @author    created by lbq
 * @date	     2018年9月20日 下午4:15:43
@@ -47,8 +48,8 @@ public class LoginController {
     
 
     @GetMapping( "/login")
-    public Result<?> loginPage() {
-        return Result.create("请登录！");
+    public ResultFul loginPage() {
+        return ResultFul.create("ERROR", "请重新登录！");
     }
 
 //    @PostMapping("/index")
@@ -67,8 +68,8 @@ public class LoginController {
 
     //被踢出后跳转的页面
     @GetMapping("/kickout")
-    public Result<?> kickOut() {
-        return Result.create("您的账号已在别的地方登录");
+    public ResultFul kickOut() {
+        return ResultFul.create("ERROR", "您的账号已在别处登录！");
     }
     
 }

@@ -129,7 +129,7 @@ public class ChCompanyProvider {
 	 */
 	public String updateChCompanyByNullChk(ChCompany entity) {
 		SQL sql = new SQL().UPDATE("ch_company");
-					if(!Strings.isNullOrEmpty(entity.getCompanyCode())) {sql.SET("company_code = #{companyCode}");}
+			if(!Strings.isNullOrEmpty(entity.getCompanyCode())) {sql.SET("company_code = #{companyCode}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.SET("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyDeputy())) {sql.SET("company_deputy = #{companyDeputy}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyAccountName())) {sql.SET("company_account_name = #{companyAccountName}");}
@@ -163,4 +163,7 @@ public class ChCompanyProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+
+	
+	
 }

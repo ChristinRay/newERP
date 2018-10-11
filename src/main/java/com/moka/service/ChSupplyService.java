@@ -19,7 +19,19 @@ public class ChSupplyService {
 	@Transactional
 	public int add(ChSupply chSupply){
 		chSupply.setState("1");
+		chSupply.setSupplyCertificate("1");
 		int a = chSupplyData.insertChSupply(chSupply);
 		return a ;
 	}
+	
+	public int update(ChSupply chSupply){
+		return chSupplyData.updateChSupplyByNullChk(chSupply);
+	}
+	
+	public ChSupply getOne(Integer id){
+		ChSupply chSupply = chSupplyData.selectOne(id);
+		return chSupply;
+	}
+	
+		
 }

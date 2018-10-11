@@ -23,7 +23,7 @@ public class ChDepotService {
 	}
 	
 	public int update (ChDepot chDepot){
-		int a= chDepotData.updateChDepot(chDepot);
+		int a= chDepotData.updateChDepotByNullChk(chDepot);
 		return a;
 	}
 }

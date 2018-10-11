@@ -69,7 +69,7 @@ public class ChCompanyController {
 	 */
 	@PostMapping("update")
 	public Result<?> update(@RequestBody ChCompany ChCompany){
-		chCompanyData.updateChCompany(ChCompany);
+		chCompanyData.updateChCompanyByNullChk(ChCompany);
 		return Result.create("OK","修改成功");
 	}
 	/**

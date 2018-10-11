@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.moka.model.ChSupply;
 
 @Mapper
@@ -51,7 +53,7 @@ public interface ChSupplyData {
 	 * @return
 	 */
 	@SelectProvider(type = ChSupplyProvider.class, method = "selectOne")
-	public ChSupply selectOne(int id);
+	public ChSupply selectOne(@Param("id") int id);
 	/**
 	 * 更新实体
 	 * @param entity
@@ -79,5 +81,13 @@ public interface ChSupplyData {
 	 * @return
 	 */
 	@UpdateProvider(type = ChSupplyProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
+	
+	/**
+	 * 禁用实体
+	 * @param entity
+	 * @return
+	 */
+	@UpdateProvider(type = ChSupplyProvider.class, method = "updateState")
+	public int updateState(@Param("id")int id);
 }

@@ -67,7 +67,7 @@ public class ChDepotController {
 	 * @param chDepot
 	 * @return
 	 */
-	@PostMapping
+	@PostMapping("update")
 	public Result<?> update(@RequestBody ChDepot chDepot){
 		chDepotService.update(chDepot);
 		return Result.create("OK","修改成功");
@@ -93,8 +93,13 @@ public class ChDepotController {
 	@GetMapping("delete")
 	public Result<?> delete(Integer id){
 		int a= chDepotData.deleteByLogic(id);
-		return Result.create(a);
+		if(a==1){
+			return Result.create("OK","删除成功");
+		}
+		return Result.create("ERROR","删除失败");
 	}
+	
+	
 }
 
 

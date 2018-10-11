@@ -22,20 +22,19 @@ public class ChSupply extends BaseModel {
 	private String  accreditEndTime;
 	private String  accreditLevel;
 	private String  accreditProduct;
+    private String	accreditBrand;
 	private String  accreditStartTime;
 	private String  companyName;
 	private String  cooperationType;
 	private String  createtime;
-	private Integer id;
-	private String  state;
-	private String  supplyAccount;
-	private String  supplyAccountName;
-	private String  supplyAddress;
-	private String  supplyCertificate;
-	private String  supplyCode;
-	private String  supplyContact;
-	private String  supplyContactPosition;
-	private String  supplyMobile;
+	private String  supplyAccount;//供应商开户行
+	private String  supplyAccountName;//供应商开户行名称
+	private String  supplyAddress;//供应商地址
+	private String  supplyCertificate;//供应商三证
+	private String  supplyCode;//供应商编码
+	private String  supplyContact;//供应商联系人
+	private String  supplyContactPosition;//联系人职位
+	private String  supplyMobile;//联系人手机号
 	private String  supplyName;
 	private String  updatetime;
 	private Integer  userId;
