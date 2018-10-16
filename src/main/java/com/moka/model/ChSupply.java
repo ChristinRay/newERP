@@ -25,6 +25,7 @@ public class ChSupply extends BaseModel {
     private String	accreditBrand;
 	private String  accreditStartTime;
 	private String  companyName;
+	private String  companyCode;
 	private String  cooperationType;
 	private String  createtime;
 	private String  supplyAccount;//供应商开户行

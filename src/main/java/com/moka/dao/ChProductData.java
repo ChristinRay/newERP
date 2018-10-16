@@ -2,15 +2,16 @@ package com.moka.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.model.ChProduct;
+
 @Mapper
 public interface ChProductData {
 	
@@ -52,14 +53,7 @@ public interface ChProductData {
 	 * @return
 	 */
 	@SelectProvider(type = ChProductProvider.class, method = "selectOne")
-	public ChProduct selectOne(int id);
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = ChProductProvider.class, method = "updateChProduct")
-	public int updateChProduct(ChProduct entity);
+	public ChProduct selectOne(@Param("id")int id);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity
@@ -68,17 +62,10 @@ public interface ChProductData {
 	@UpdateProvider(type = ChProductProvider.class, method = "updateChProductByNullChk")
 	public int updateChProductByNullChk(ChProduct entity);
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = ChProductProvider.class, method = "deleteChProduct")
-	public int deleteChProduct(int id);
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = ChProductProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.ChProduct;
+import com.moka.req.ChProductReq;
+import com.moka.result.Result;
 import com.moka.service.ChProductService;
 
 /**
@@ -26,8 +28,8 @@ public class ChProductController {
 	 * @return
 	 */
 	@PostMapping("add")
-	public Object add(@RequestBody ChProduct chProduct){
-		chProduct.check();
+	public Result<?> add(@RequestBody ChProductReq chProduct){
+		
 		return chProductService.add(chProduct);
 	}
 }
