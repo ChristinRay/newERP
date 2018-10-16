@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.ChBrand;
+import com.moka.result.Result;
 import com.moka.result.ResultFul;
 import com.moka.service.ChBrandService;
 
@@ -25,6 +26,12 @@ public class ChBrandController {
 	public  ResultFul add (@RequestBody ChBrand entity){
 		entity.check();
 		return chBrandService.add(entity);
+	}
+	
+	@PostMapping("list")
+	public  Result<?> list (@RequestBody ChBrand entity){
+		
+		return chBrandService.list(entity);
 	}
 	
 }

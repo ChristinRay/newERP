@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.Enum.CodeEnum;
-import com.moka.dao.UserMapper;
+import com.moka.dao.WebRedisMapper;
 import com.moka.dao.WebData;
 import com.moka.model.ChCategory;
 import com.moka.model.ChCompany;
@@ -27,7 +27,7 @@ import com.moka.utils.ParamPreconditions;
 @RequestMapping("/api/erp/v1/web")
 public class WebController {
 	@Autowired
-	private UserMapper userMapper;
+	private WebRedisMapper webRedisMapper;
 	@Autowired
 	private WebData webData;
 	@Autowired

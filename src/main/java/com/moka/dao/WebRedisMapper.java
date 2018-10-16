@@ -19,7 +19,7 @@ import com.moka.model.SysUser;
 **/
 @Mapper
 @CacheConfig(cacheNames = "users")
-public interface UserMapper {
+public interface WebRedisMapper {
     @Insert("insert into sys_user(user_name,pass_word) values(#{userName},#{passWord})")
     int addUser(@Param("userName")String userName,@Param("passWord")String passWord);
     

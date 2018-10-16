@@ -49,7 +49,7 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrandByLimt(ChBrand entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_brand");
+		SQL sql = new SQL().SELECT(" id,brand_name as brandName,brand_code as brandCode,user_id as userId ").FROM("ch_brand");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
@@ -66,7 +66,7 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrand(ChBrand entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_brand");
+		SQL sql = new SQL().SELECT("id,brand_name as brandName,brand_code as brandCode,user_id as userId").FROM("ch_brand");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
