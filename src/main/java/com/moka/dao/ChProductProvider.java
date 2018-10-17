@@ -19,7 +19,7 @@ public class ChProductProvider {
 	 */
 	public String insertChProduct(ChProduct entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_product");
-		sql.VALUES("product_code,brand_code,product_name,product_english_name,product_size,product_type,product_unit,product_weight,length,width,height,picture,sku,user_id,state,createtime,updatetime", "#{productCode},#{brandCode},#{productName},#{productEnglishName},#{productSize},#{productType},#{productUnit},#{productWeight},#{length},#{width},#{height},#{picture},#{sku},#{userId},#{state},now(),now()");
+		sql.VALUES("product_code,brand_code,product_name,product_english_name,product_size,product_type,product_unit,product_weight,length,width,height,picture,sku,user_id,state,createtime,updatetime", "#{productCode},#{brandCode},#{productName},#{productEnglishName},#{productSize},#{productType},#{productUnit},#{productWeight},#{length},#{width},#{height},#{picture},#{sku},'1','1',now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -59,7 +59,10 @@ public class ChProductProvider {
 	 * @return
 	 */
 	public String selectChProductByLimt(ChProduct entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_product");
+		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,"
+				+ "product_english_name as productEnglishName,product_size as productSize,product_type as  productType,"
+				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,"
+				+ "state,createtime,updatetime").FROM("ch_product");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getProductCode())) {sql.WHERE("product_code = #{productCode}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
@@ -87,7 +90,10 @@ public class ChProductProvider {
 	 * @return
 	 */
 	public String selectChProduct(ChProduct entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_product");
+		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,"
+				+ "product_english_name as productEnglishName,product_size as productSize,product_type as  productType,"
+				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,"
+				+ "state,createtime,updatetime").FROM("ch_product");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getProductCode())) {sql.WHERE("product_code = #{productCode}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
@@ -114,9 +120,9 @@ public class ChProductProvider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(int id) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_product");
-		sql.WHERE("id="+id);
+	public String selectOne(@Param("id")int id) {
+		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,product_english_name as productEnglishName,product_size as productSize,product_type as  productType,product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,state,createtime,updatetime").FROM("ch_product");
+		sql.WHERE("id=#{id}");
 		return sql.toString();
 	}
 	/**

@@ -56,7 +56,7 @@ public class ChBrandService {
         // 从 DB中获取品牌信息
         List<ChBrand> list= chBrandData.selectChBrand(entity);
         ParamPreconditions.checkNotNull(list, CodeEnum.FAIL.getCode(), "不能为空");
-        operations.set(key, list,10, TimeUnit.SECONDS);
+        operations.set(key, list,10, TimeUnit.HOURS);
         return Result.create(list);
 	}
 }

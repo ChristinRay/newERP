@@ -21,13 +21,21 @@ public class ChBrandController {
 	
 	@Autowired
 	private ChBrandService chBrandService;
-
+	/**
+	 * 添加品牌接口（暂无使用）
+	 * @param entity
+	 * @return
+	 */
 	@PostMapping("add")
 	public  ResultFul add (@RequestBody ChBrand entity){
 		entity.check();
 		return chBrandService.add(entity);
 	}
-	
+	/**
+	 * 品牌查询接口
+	 * @param entity
+	 * @return
+	 */
 	@PostMapping("list")
 	public  Result<?> list (@RequestBody ChBrand entity){
 		

@@ -10,13 +10,14 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ProductSize {
-	private String color;
+	private String color;//颜色
 	private String volume;//容积
-	private String material;//才智
+	private String material;//材质
 	private String style;//风格
 	private String model;//型号
 	private String thickness;//厚度
 	private String sex;//男士或者女士
 	private String chinese;//系列中文
 	private String english;//系列英文
+	private String size;
 }

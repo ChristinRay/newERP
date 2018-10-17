@@ -1,7 +1,9 @@
 package com.moka.req;
 
+import com.moka.Enum.CodeEnum;
 import com.moka.model.BaseModel;
 import com.moka.model.ProductSize;
+import com.moka.utils.ParamPreconditions;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,5 +35,10 @@ public class ChProductReq extends BaseModel {
 	private Integer  userId;
 	private String  createtime;
 	private String  updatetime;
+	
+	public void check(){
+		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要字段不能为空", "必要字段不能为空", productCode,
+				brandCode,productName,productType,productUnit,productWeight,length,width,height);
+	}
 	
 }
