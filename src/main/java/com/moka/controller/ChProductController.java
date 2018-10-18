@@ -3,11 +3,13 @@ package com.moka.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moka.dao.ChProductData;
 import com.moka.model.ChProduct;
 import com.moka.req.ChProductReq;
 import com.moka.result.Result;
@@ -26,6 +28,8 @@ public class ChProductController {
 	private ChProductService chProductService;
 	@Autowired
 	private CommonService commonService;
+	@Autowired
+	private ChProductData chProductData;
 	
 	/**
 	 * 商品添加
@@ -55,6 +59,19 @@ public class ChProductController {
 		return Result.create("ERROR","参数类型不匹配");
 	}
 	
+	/**
+	 * 根据id 逻辑删除一个仓库信息
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("delete")
+	public Result<?> delete(Integer id){
+		int a= chProductData.deleteByLogic(id);
+		if(a==1){
+			return Result.create("OK","删除成功");
+		}
+		return Result.create("ERROR","删除失败");
+	}
 }
 
 

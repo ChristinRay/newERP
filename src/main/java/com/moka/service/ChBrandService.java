@@ -50,7 +50,7 @@ public class ChBrandService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
         	List<ChBrand> list = operations.get(key);
-            log.info("CityServiceImpl.findCityById() : 从缓存中获取了城市 >> " + list.toString());
+            log.info("CityServiceImpl.findCityById() : 从缓存中获取了品牌 >> " + list.toString());
             return Result.create(list);
         }
         // 从 DB中获取品牌信息

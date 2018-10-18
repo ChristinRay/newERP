@@ -1,13 +1,5 @@
 package com.moka.model;
 
-import java.lang.Integer;
-import java.lang.String;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-
 import lombok.Getter;
 import lombok.Setter;
 /**

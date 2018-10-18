@@ -61,7 +61,7 @@ public class ChProductProvider {
 	public String selectChProductByLimt(ChProduct entity) {
 		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,"
 				+ "product_english_name as productEnglishName,product_size as productSize,product_type as  productType,"
-				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,"
+				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,sku,"
 				+ "state,createtime,updatetime").FROM("ch_product");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getProductCode())) {sql.WHERE("product_code = #{productCode}");}
@@ -92,7 +92,7 @@ public class ChProductProvider {
 	public String selectChProduct(ChProduct entity) {
 		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,"
 				+ "product_english_name as productEnglishName,product_size as productSize,product_type as  productType,"
-				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,"
+				+ "product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,sku"
 				+ "state,createtime,updatetime").FROM("ch_product");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getProductCode())) {sql.WHERE("product_code = #{productCode}");}
@@ -121,7 +121,7 @@ public class ChProductProvider {
 	 * @return
 	 */
 	public String selectOne(@Param("id")int id) {
-		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,product_english_name as productEnglishName,product_size as productSize,product_type as  productType,product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,state,createtime,updatetime").FROM("ch_product");
+		SQL sql = new SQL().SELECT(" id,product_code as productCode,brand_code as brandCode,product_name as productName,product_english_name as productEnglishName,product_size as productSize,product_type as  productType,product_unit as productUnit,product_weight as productWeight,length,width,height,picture,user_id as userId ,sku,state,createtime,updatetime").FROM("ch_product");
 		sql.WHERE("id=#{id}");
 		return sql.toString();
 	}

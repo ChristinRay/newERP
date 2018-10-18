@@ -27,12 +27,12 @@ public class PictureController {
 
     @RequestMapping("upload")
     @ResponseBody
-    public Result<?> getfile(@RequestParam("myfile") MultipartFile file){
+    public Result<?> getfile(MultipartFile file){
         System.out.println("file name = "+file.getOriginalFilename());
         // 获取文件名
         String fileName = file.getOriginalFilename();
-        // 获取后缀
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+//        // 获取后缀
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
         // 文件上产的路径
         String filePath = "G:/pic/";
         // fileName处理
