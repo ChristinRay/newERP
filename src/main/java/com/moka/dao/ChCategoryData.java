@@ -1,13 +1,14 @@
 package com.moka.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
-import org.apache.ibatis.annotations.Mapper;
+
 import com.moka.model.ChCategory;
 
 @Mapper
@@ -66,4 +67,10 @@ public interface ChCategoryData {
 	 */
 	@UpdateProvider(type = ChCategoryProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(int id);
+	/**
+	 * 查询所有类型
+	 * @return
+	 */
+	@SelectProvider(type = ChCategoryProvider.class, method = "selectChCategoryAll")
+	public List<ChCategory> selectChCategoryAll();
 }

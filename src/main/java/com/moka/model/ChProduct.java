@@ -31,6 +31,5 @@ public class ChProduct extends BaseModel {
 	private String  updatetime;
 
 
-
 	
 }

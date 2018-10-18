@@ -98,4 +98,12 @@ public class ChCategoryProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	/**
+	 * 查询所有类别
+	 * @return
+	 */
+	public String selectChCategoryAll(){
+		SQL sql = new SQL().SELECT("id,category_name as categoryName,father_id as fatherId").FROM("ch_category");
+		return sql.toString();
+	}
 }

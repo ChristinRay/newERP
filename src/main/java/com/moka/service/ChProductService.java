@@ -1,16 +1,19 @@
 package com.moka.service;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.moka.dao.ChProductData;
+import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
 import com.moka.model.ProductSize;
 import com.moka.req.ChProductReq;
@@ -26,6 +29,14 @@ public class ChProductService {
 	@Autowired
 	private ChProductData chProductData;
 	
+	@Autowired
+	private RedisTemplate  redisTemplate;
+	
+	@Autowired
+	private ChBrandService chBrandService;
+	
+	@Autowired
+	private ChCategoryService chCategoryService;
 	/**
 	 * 商品添加逻辑
 	 * @param entity
@@ -69,14 +80,33 @@ public class ChProductService {
 		return  chProductData.selectChProductByCount(product);
 	}
 	
-	 /** 分页查询
+	 /** 分页查询ListService
 	 * @param product
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public List<ChProduct> selectChProductByLimt(ChProduct product){
+	public List<ChProductDto> selectChProductByLimt(ChProduct product) throws UnsupportedEncodingException{
 		product.setState("1");
+		List<ChProductDto> list= chProductData.selectChProductByLimt(product);
 		
-		return  chProductData.selectChProductByLimt(product);
+		
+		for (ChProductDto chProductDto : list) {
+			String brandName= chBrandService.findNameByCode(chProductDto.getBrandCode());
+			String typeName=  chCategoryService.findNameByCode(chProductDto.getProductType());
+			chProductDto.setBrandName(brandName);
+			chProductDto.setProductTypeName(typeName);
+		}
+		
+		return list;
+	}
+	/**
+	 * 得到一个商品信息
+	 * @param id
+	 * @return
+	 */
+	public Object selectOne(int id){
+		chProductData.selectOne(id);
+		return null;
 	}
 }
 

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
+import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
 
 @Mapper
@@ -39,7 +40,7 @@ public interface ChProductData {
 	 * @return
 	 */
 	@SelectProvider(type = ChProductProvider.class, method = "selectChProductByLimt")
-	public List<ChProduct> selectChProductByLimt(ChProduct entity);
+	public List<ChProductDto> selectChProductByLimt(ChProduct entity);
 	/**
 	 * 按条件查询记录
 	 * @param entity

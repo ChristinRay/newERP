@@ -1,5 +1,6 @@
 package com.moka.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.dao.ChProductData;
+import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
 import com.moka.req.ChProductReq;
 import com.moka.result.Result;
@@ -44,23 +46,24 @@ public class ChProductController {
 	 * 商品查询接口
 	 * @param product
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@PostMapping("list")
-	public Result<?> list(@RequestBody ChProduct product){
+	public Result<?> list(@RequestBody ChProduct product) throws UnsupportedEncodingException{
 		if(commonService.paginationSupport(product.getPageIndex(), product.getPageSize())) {
 			int count = chProductService.selectChProductByCount(product);
 			int[] page = commonService.getLimit(product.getPageIndex(), product.getPageSize());
 			product.setLimit(page[0]);
 			product.setLimitLen(page[1]);
 			product.setOrderBy("updatetime");
-			List<ChProduct> result = chProductService.selectChProductByLimt(product);
+			List<ChProductDto> result = chProductService.selectChProductByLimt(product);
 			return Result.createPage(result,(long)count);
 		}
 		return Result.create("ERROR","参数类型不匹配");
 	}
 	
 	/**
-	 * 根据id 逻辑删除一个仓库信息
+	 * 根据id 逻辑删除一个商品信息
 	 * @param id
 	 * @return
 	 */
@@ -72,6 +75,17 @@ public class ChProductController {
 		}
 		return Result.create("ERROR","删除失败");
 	}
+	/**
+	 * 根据id得到一个公司
+	 * @param id
+	 * @return
+	 */
+//	@GetMapping("get/one")
+//	public Result<?> getOne(Integer id){
+//		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
+//		ChProduct chProduct= chProductService.selectOne(id);
+//		return Result.create(chProduct);
+//	}
 }
 
 

@@ -140,4 +140,12 @@ public class ChBrandProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	/**
+	 * 查询所有
+	 * @return
+	 */
+	public String  selectChBrandAll(){
+		SQL sql = new SQL().SELECT("id,brand_name as brandName,brand_code as brandCode,user_id as userId").FROM("ch_brand");
+		return sql.toString();
+	}
 }

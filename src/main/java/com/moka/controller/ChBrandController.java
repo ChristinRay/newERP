@@ -1,14 +1,14 @@
 package com.moka.controller;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.moka.model.ChBrand;
+import com.moka.dao.ChBrandData;
 import com.moka.result.Result;
-import com.moka.result.ResultFul;
 import com.moka.service.ChBrandService;
 
 /**
@@ -21,25 +21,30 @@ public class ChBrandController {
 	
 	@Autowired
 	private ChBrandService chBrandService;
+	@Autowired
+	private ChBrandData chBrandData;
 	/**
-	 * 添加品牌接口（暂无使用）
+	 * 品牌查询接口(缓存)
 	 * @param entity
 	 * @return
-	 */
-	@PostMapping("add")
-	public  ResultFul add (@RequestBody ChBrand entity){
-		entity.check();
-		return chBrandService.add(entity);
-	}
-	/**
-	 * 品牌查询接口
-	 * @param entity
-	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@PostMapping("list")
-	public  Result<?> list (@RequestBody ChBrand entity){
-		
-		return chBrandService.list(entity);
+	public  Result<?> list () {
+		return Result.create(chBrandData.selectChBrandAll()); 
 	}
 	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+

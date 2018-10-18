@@ -35,7 +35,11 @@ public class ChProductItemController {
 		chProductItemAddReq.check();
 		return chproductItemService.add(chProductItemAddReq);
 	}
-	
+	/**
+	 * 
+	 * @param ChProductItem
+	 * @return
+	 */
 	@PostMapping("list")
 	public Object list(@RequestBody ChProductItem ChProductItem){
 		chproductItemService.list(ChProductItem);

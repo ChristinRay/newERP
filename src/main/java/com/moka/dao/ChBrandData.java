@@ -81,4 +81,9 @@ public interface ChBrandData {
 	 */
 	@UpdateProvider(type = ChBrandProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(int id);
+	/**
+	 * 查询所有
+	 */
+	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrandAll")
+	public List<ChBrand> selectChBrandAll();
 }
