@@ -35,4 +35,5 @@ public class ChProductDto {
 	private String state;//状态
 	private String brandName;//品牌名称
 	private String productTypeName;//品牌类别名称
+	private String productUnitNmae;//商品单位名称
 }

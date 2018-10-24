@@ -78,7 +78,7 @@ public class ChProductController {
 		return Result.create("ERROR","删除失败");
 	}
 	/**
-	 * 根据id得到一个公司
+	 * 根据id得到一个商品
 	 * @param id
 	 * @return
 	 * @throws UnsupportedEncodingException 
@@ -88,6 +88,12 @@ public class ChProductController {
 		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
 		 
 		return Result.create(chProductService.selectOne(id));
+	}
+	
+	@PostMapping("update")
+	public Result<?> update(){
+		
+		return Result.create("");	
 	}
 }
 

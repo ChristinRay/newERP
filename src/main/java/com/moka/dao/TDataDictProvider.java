@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -60,6 +61,16 @@ public class TDataDictProvider {
 	public String deleteTDataDict(int id) {
 		SQL sql = new SQL().DELETE_FROM("t_data_dict");
 		sql.WHERE("id = #{id}");
+		return sql.toString();
+	}
+	/**
+	 * 根据id得到相应的值
+	 * @param id
+	 * @return
+	 */
+	public String getValueById(@Param("id")int id){
+		SQL sql = new SQL().SELECT(" id,sys_code as sysCode,field_code as fieldCode,code,value").FROM("t_data_dict");
+		sql.WHERE("id=#{id}");
 		return sql.toString();
 	}
 }

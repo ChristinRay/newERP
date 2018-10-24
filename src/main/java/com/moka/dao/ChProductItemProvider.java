@@ -22,7 +22,7 @@ public class ChProductItemProvider {
 	 */
 	public String insertChProductItem(ChProductItem entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_product_item");
-		sql.VALUES("product_id,supply_id,brand_code,supply_product_no,purchase_price,pack_price,freight_price,user_id,state,createtime,updatetime", "#{productId},#{supplyId},#{brandCode},#{supplyProductNo},#{purchasePrice},#{packPrice},#{freightPrice},#{userId},#{state},now(),now()");
+		sql.VALUES("product_id,supply_id,brand_code,supply_product_no,purchase_price,pack_price,freight_price,freightway, user_id,state,createtime,updatetime", "#{productId},#{supplyId},#{brandCode},#{supplyProductNo},#{purchasePrice},#{packPrice},#{freightPrice},#{freightway},#{userId},#{state},now(),now()");
 		return sql.toString();
 	}
 	/**

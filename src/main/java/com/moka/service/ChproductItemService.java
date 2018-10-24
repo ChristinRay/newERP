@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moka.dao.ChProductItemData;
-import com.moka.dto.ChProductDto;
 import com.moka.dto.ChProductItemDto;
 import com.moka.dto.ChProductItemSupplyDto;
 import com.moka.model.ChProductItem;
 import com.moka.req.ChProductItemAddReq;
-import com.moka.req.ChProductItemListReq;
 import com.moka.req.ChProductItemSupplyReq;
 import com.moka.result.Result;
 
@@ -44,7 +42,7 @@ public class ChproductItemService {
 		chProductItem.setState("1");
 		int a= chProductItemData.insertChProductItem(chProductItem);
 		if(a==1){
-			return Result.create(chProductItem.getId());
+			return Result.create("OK","添加成功");
 		}
 		return Result.create("ERROR","添加失败");
 	}
@@ -85,5 +83,5 @@ public class ChproductItemService {
 		}
 		return list;
 	}
-	
+
 }

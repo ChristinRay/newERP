@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.moka.model.TDataDict;
 
 @Mapper
@@ -42,4 +44,11 @@ public interface TDataDictData {
 	 */
 	@DeleteProvider(type = TDataDictProvider.class, method = "deleteTDataDict")
 	public int deleteTDataDict(int id);
+	/**
+	 * 根据id查找value
+	 * @param id
+	 * @return
+	 */
+	@SelectProvider(type = TDataDictProvider.class, method = "getValueById")
+	public TDataDict getValueById(@Param("id")int id);
 }

@@ -25,6 +25,7 @@ public class ChProductItemDto {
 	private BigDecimal  purchasePrice;//进货价
 	private BigDecimal  packPrice;//包装费
 	private BigDecimal  freightPrice;//运费
+	private String freightway;//运费类型
 	private Integer  userId;
 	private String  createtime;
 	private String  updatetime;

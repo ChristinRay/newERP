@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.dto.ChProductItemDto;
-import com.moka.dto.ChProductItemSupplyDto;
 import com.moka.model.ChProductItem;
 import com.moka.req.ChProductItemAddReq;
 import com.moka.req.ChProductItemSupplyReq;
@@ -42,6 +41,7 @@ public class ChProductItemController {
 	@PostMapping("add")
 	public Result<?> add(@RequestBody ChProductItemAddReq chProductItemAddReq) throws IllegalAccessException, InvocationTargetException{
 		chProductItemAddReq.check();
+		
 		return chproductItemService.add(chProductItemAddReq);
 	}
 	/**

@@ -16,6 +16,7 @@ import com.moka.dao.ChProductData;
 import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
 import com.moka.model.ProductSize;
+import com.moka.model.TDataDict;
 import com.moka.req.ChProductReq;
 import com.moka.result.Result;
 
@@ -37,6 +38,8 @@ public class ChProductService {
 	
 	@Autowired
 	private ChCategoryService chCategoryService;
+	@Autowired
+	private DictionaryService dictionaryService;
 	/**
 	 * 商品添加逻辑
 	 * @param entity
@@ -88,13 +91,14 @@ public class ChProductService {
 	public List<ChProductDto> selectChProductByLimt(ChProduct product) throws UnsupportedEncodingException{
 		product.setState("1");
 		List<ChProductDto> list= chProductData.selectChProductByLimt(product);
-		
-		
 		for (ChProductDto chProductDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductDto.getBrandCode());
 			String typeName=  chCategoryService.findNameByCode(chProductDto.getProductType());
 			chProductDto.setBrandName(brandName);
 			chProductDto.setProductTypeName(typeName);
+			
+			TDataDict dict= dictionaryService.getValueById(Integer.parseInt(chProductDto.getProductUnit()));
+			chProductDto.setProductUnitNmae(dict.getValue());
 		}
 		
 		return list;
@@ -105,11 +109,15 @@ public class ChProductService {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	public ChProductDto selectOne(int id) throws UnsupportedEncodingException{
+	public ChProductDto selectOne(Integer id) throws UnsupportedEncodingException{
 		ChProductDto dto=chProductData.selectOne(id);
 		String brandName= chBrandService.findNameByCode(dto.getBrandCode());
 		String typeName=  chCategoryService.findNameByCode(dto.getProductType());
-		return chProductData.selectOne(id);
+		TDataDict dict= dictionaryService.getValueById(Integer.parseInt(dto.getProductUnit()));
+		dto.setBrandName(brandName);
+		dto.setProductTypeName(typeName);
+		dto.setProductUnitNmae(dict.getValue());
+		return dto;
 	}
 }
 
