@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChProductData;
 import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
@@ -17,6 +18,7 @@ import com.moka.req.ChProductReq;
 import com.moka.result.Result;
 import com.moka.service.ChProductService;
 import com.moka.service.CommonService;
+import com.moka.utils.ParamPreconditions;
 
 /**
 * @author    created by lbq
@@ -79,13 +81,14 @@ public class ChProductController {
 	 * 根据id得到一个公司
 	 * @param id
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-//	@GetMapping("get/one")
-//	public Result<?> getOne(Integer id){
-//		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
-//		ChProduct chProduct= chProductService.selectOne(id);
-//		return Result.create(chProduct);
-//	}
+	@GetMapping("get/one")
+	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
+		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
+		 
+		return Result.create(chProductService.selectOne(id));
+	}
 }
 
 

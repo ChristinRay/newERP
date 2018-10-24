@@ -51,6 +51,7 @@ public class ChSupplyProvider {
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			sql.WHERE("a.state <> '2'");
 			sql.WHERE("b.state <>'2'");
+			System.out.println(sql);
 		return sql.toString();
 	}
 	/**

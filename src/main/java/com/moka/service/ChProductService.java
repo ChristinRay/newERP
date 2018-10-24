@@ -103,10 +103,13 @@ public class ChProductService {
 	 * 得到一个商品信息
 	 * @param id
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public Object selectOne(int id){
-		chProductData.selectOne(id);
-		return null;
+	public ChProductDto selectOne(int id) throws UnsupportedEncodingException{
+		ChProductDto dto=chProductData.selectOne(id);
+		String brandName= chBrandService.findNameByCode(dto.getBrandCode());
+		String typeName=  chCategoryService.findNameByCode(dto.getProductType());
+		return chProductData.selectOne(id);
 	}
 }
 

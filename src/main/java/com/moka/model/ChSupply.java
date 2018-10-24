@@ -22,7 +22,7 @@ public class ChSupply extends BaseModel {
 	private String  accreditEndTime;
 	private String  accreditLevel;
 	private String  accreditProduct;
-    private String	accreditBrand;
+    private String	accreditBrand;//授权品牌
 	private String  accreditStartTime;
 	private String  companyName;
 	private String  companyCode;
@@ -39,6 +39,7 @@ public class ChSupply extends BaseModel {
 	private String  supplyName;
 	private String  updatetime;
 	private Integer  userId;
+	private String	accreditBrandName;
 
 	public void check(){
 		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要参数不能为空", "必要参数不能为空",

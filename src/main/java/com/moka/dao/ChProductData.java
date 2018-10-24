@@ -54,7 +54,7 @@ public interface ChProductData {
 	 * @return
 	 */
 	@SelectProvider(type = ChProductProvider.class, method = "selectOne")
-	public ChProduct selectOne(@Param("id")int id);
+	public ChProductDto selectOne(@Param("id")int id);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity

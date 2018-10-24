@@ -11,7 +11,9 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.dto.ChProductItemDto;
+import com.moka.dto.ChProductItemSupplyDto;
 import com.moka.model.ChProductItem;
+import com.moka.req.ChProductItemSupplyReq;
 
 @Mapper
 public interface ChProductItemData {
@@ -69,4 +71,10 @@ public interface ChProductItemData {
 	 */
 	@UpdateProvider(type = ChProductItemProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id")int id);
+	/**
+	 * 查询已授权品牌信息和供应商下商品基本信息
+	 * @return
+	 */
+	@SelectProvider(type = ChProductItemProvider.class, method = "findSupplyByBrand")
+	public List<ChProductItemSupplyDto> findSupplyByBrand(ChProductItemSupplyReq req);
 }

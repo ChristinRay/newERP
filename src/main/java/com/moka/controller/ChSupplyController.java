@@ -1,5 +1,6 @@
 package com.moka.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChSupplyData;
 import com.moka.model.ChSupply;
 import com.moka.result.Result;
+import com.moka.service.ChBrandService;
 import com.moka.service.ChSupplyService;
 import com.moka.service.CommonService;
 import com.moka.utils.ParamPreconditions;
@@ -32,6 +34,8 @@ public class ChSupplyController {
 	
 	@Autowired
 	private CommonService commonService;
+	@Autowired
+	private ChBrandService chBrandService;
 	
 	/**
 	 * 供应商添加
@@ -47,9 +51,10 @@ public class ChSupplyController {
 	 * 供应商列表接口
 	 * @param chSupply
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@PostMapping("list")
-	public Result<?> list(@RequestBody ChSupply chSupply){
+	public Result<?> list(@RequestBody ChSupply chSupply) throws UnsupportedEncodingException{
 		if(commonService.paginationSupport(chSupply.getPageIndex(), chSupply.getPageSize())) {
 			int count = chSupplyData.selectChSupplyByCount(chSupply);
 			int[] page = commonService.getLimit(chSupply.getPageIndex(), chSupply.getPageSize());
@@ -57,6 +62,11 @@ public class ChSupplyController {
 			chSupply.setLimitLen(page[1]);
 			chSupply.setOrderBy("updatetime");
 			List<ChSupply> result = chSupplyData.selectChSupplyByLimt(chSupply);
+			for (ChSupply chSupply2 : result) {
+				String brandName= chBrandService.findNameByCode(chSupply2.getAccreditBrand());
+				chSupply2.setAccreditBrandName(brandName);
+			}
+			
 			return Result.createPage(result,(long)count);
 		}
 		return Result.create("未传分页");
@@ -78,9 +88,10 @@ public class ChSupplyController {
 	 * 得到一个供应商
 	 * @param id
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
 	@GetMapping("get/one")
-	public Result<?> getOne(Integer id){
+	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
 		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
 		return Result.create(chSupplyService.getOne(id));
 	}

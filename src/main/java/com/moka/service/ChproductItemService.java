@@ -1,5 +1,6 @@
 package com.moka.service;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -8,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moka.dao.ChProductItemData;
+import com.moka.dto.ChProductDto;
 import com.moka.dto.ChProductItemDto;
+import com.moka.dto.ChProductItemSupplyDto;
 import com.moka.model.ChProductItem;
 import com.moka.req.ChProductItemAddReq;
 import com.moka.req.ChProductItemListReq;
+import com.moka.req.ChProductItemSupplyReq;
 import com.moka.result.Result;
 
 /**
@@ -22,6 +26,10 @@ import com.moka.result.Result;
 public class ChproductItemService {
 	@Autowired
 	private ChProductItemData  chProductItemData;
+	
+	@Autowired
+	private ChBrandService chBrandService;
+	
 	/**
 	 * 添加商品供应商详情
 	 * @param chProductItemAddReq
@@ -38,18 +46,44 @@ public class ChproductItemService {
 		if(a==1){
 			return Result.create(chProductItem.getId());
 		}
-		
-		
 		return Result.create("ERROR","添加失败");
 	}
 	/**
-	 * 
+	 * 查询商品供应商详情Service
 	 * @param ChProductItem
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	public Result<?> list(ChProductItem ChProductItem){
+	public List<ChProductItemDto> list(ChProductItem ChProductItem) throws UnsupportedEncodingException{
 		List<ChProductItemDto> list= chProductItemData.selectChProductItemByLimt(ChProductItem);
-		return null;
+		for (ChProductItemDto chProductItemDto : list) {
+			String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
+			chProductItemDto.setBrandName(brandName);
+		}
+		return list;
+	}
+	/**
+	 * 查询总记录数
+	 * @param chProductItem
+	 * @return
+	 */
+	public int selectChProductByCount(ChProductItem chProductItem){
+		int a =chProductItemData.selectChProductItemByCount(chProductItem);
+		return a;
+	}
+	
+	/**
+	 * 根据品牌查供应商信息接口
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public List<ChProductItemSupplyDto> findSupplyByBrand(ChProductItemSupplyReq req) throws UnsupportedEncodingException{
+		List<ChProductItemSupplyDto> list= chProductItemData.findSupplyByBrand(req); 
+		for (ChProductItemSupplyDto chProductItemSupplyDto : list) {
+			String brandName= chBrandService.findNameByCode(chProductItemSupplyDto.getAccreditBrand());
+			chProductItemSupplyDto.setBrandName(brandName);
+		}
+		return list;
 	}
 	
 }

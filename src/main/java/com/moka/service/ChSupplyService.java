@@ -1,5 +1,7 @@
 package com.moka.service;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import com.moka.model.ChSupply;
 public class ChSupplyService {
 	@Autowired
 	private ChSupplyData chSupplyData;
+	@Autowired
+	private ChBrandService chBrandService;
 	
 	@Transactional
 	public int add(ChSupply chSupply){
@@ -28,8 +32,10 @@ public class ChSupplyService {
 		return chSupplyData.updateChSupplyByNullChk(chSupply);
 	}
 	
-	public ChSupply getOne(Integer id){
+	public ChSupply getOne(Integer id) throws UnsupportedEncodingException{
 		ChSupply chSupply = chSupplyData.selectOne(id);
+		String accreditBrandName= chBrandService.findNameByCode(chSupply.getAccreditBrand());
+		chSupply.setAccreditBrandName(accreditBrandName);
 		return chSupply;
 	}
 	

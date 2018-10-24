@@ -2,23 +2,19 @@ package com.moka.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChBrandData;
 import com.moka.model.ChBrand;
 import com.moka.result.Result;
-import com.moka.result.ResultFul;
 import com.moka.utils.ParamPreconditions;
 
 import lombok.extern.slf4j.Slf4j;
