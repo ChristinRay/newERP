@@ -63,8 +63,8 @@ public class ChProductItemProvider {
 	public String selectChProductItemByLimt(ChProductItem entity) {
 		SQL sql = new SQL().SELECT(" a.id AS id,a.product_id AS productId,a.supply_id AS supplyId,"
 				+ " b.sku,b.brand_code AS brandCode, b.product_type AS productType, c.supply_name AS supplyName,"
-				+ " a.supply_product_no AS supplyProductNo, a.freight_price AS freightPrice, a.pack_price as packPrice, "
-				+ " a.purchase_price AS purchasePrice ").FROM("ch_product_item a "
+				+ " a.supply_product_no AS supplyProductNo, a.freight_price AS freightPrice,a.freightway, a.pack_price as packPrice, "
+				+ " a.purchase_price AS purchasePrice,b.product_code AS productCode,a.createtime,a.updatetime,a.state ").FROM("ch_product_item a "
 				+ " INNER JOIN ch_product b ON ( a.product_id = b.id ) "
 				+ " INNER JOIN ch_supply c ON ( a.supply_id = c.id )");
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
@@ -107,8 +107,8 @@ public class ChProductItemProvider {
 	public String selectOne(@Param("id")int id) {
 		SQL sql = new SQL().SELECT(" a.id AS id,a.product_id AS productId,a.supply_id AS supplyId,"
 				+ " b.sku,b.brand_code AS brandCode, b.product_type AS productType, c.supply_name AS supplyName,"
-				+ " a.supply_product_no AS supplyProductNo, a.freight_price AS freightPrice, a.pack_price as packPrice, "
-				+ " a.purchase_price AS purchasePrice ").FROM("ch_product_item a "
+				+ " a.supply_product_no AS supplyProductNo, a.freight_price AS freightPrice,a.freightway, a.pack_price as packPrice, "
+				+ " a.purchase_price AS purchasePrice,b.product_code AS productCode,a.createtime,a.updatetime,a.state ").FROM("ch_product_item a "
 				+ " INNER JOIN ch_product b ON ( a.product_id = b.id ) "
 				+ " INNER JOIN ch_supply c ON ( a.supply_id = c.id )");
 		sql.WHERE("id=#{id}");

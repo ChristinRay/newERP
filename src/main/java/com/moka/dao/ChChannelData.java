@@ -53,26 +53,12 @@ public interface ChChannelData {
 	@SelectProvider(type = ChChannelProvider.class, method = "selectOne")
 	public ChChannel selectOne(int id);
 	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = ChChannelProvider.class, method = "updateChChannel")
-	public int updateChChannel(ChChannel entity);
-	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = ChChannelProvider.class, method = "updateChChannelByNullChk")
 	public int updateChChannelByNullChk(ChChannel entity);
-	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = ChChannelProvider.class, method = "deleteChChannel")
-	public int deleteChChannel(int id);
 	/**
 	 * 逻辑删除实体
 	 * @param entity

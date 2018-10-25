@@ -6,7 +6,7 @@ import java.lang.String;
 import lombok.Getter;
 import lombok.Setter;
 /**
- * 渠道表
+ * 
  * modle
  */
 @Setter
@@ -16,17 +16,15 @@ public class ChChannel extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer  productId;
+		private String  channelAddress;
+	private String  channelContact;
+	private String  channelMobile;
 	private String  channelName;
-	private String  channelAddress;
-	private String  commission;
-	private String  integral;
-	private Integer  userId;
-	private String  state;
 	private String  createtime;
 	private String  updatetime;
+	private Integer  userId;
 
 
-	
+
 	
 }

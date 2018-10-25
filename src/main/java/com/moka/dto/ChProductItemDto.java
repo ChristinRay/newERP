@@ -12,12 +12,14 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ChProductItemDto {
+	private Integer  id;//编号Id
 	private Integer  productId;//商品id
 	private Integer  supplyId;//供应商id
 	private String  brandCode;//品牌编码
 	private String  brandName;//品牌名称
 	private String  productCode;//商品编码
 	private String  productType;//商品类型
+	private String  typeName;//类型名称
 	private String  productUnit;//商品单位
 	private String  productWeight;//商品重量
 	private String  sku;//商品sku名称
@@ -27,6 +29,7 @@ public class ChProductItemDto {
 	private BigDecimal  freightPrice;//运费
 	private String freightway;//运费类型
 	private Integer  userId;
+	private String  state;
 	private String  createtime;
 	private String  updatetime;
 	

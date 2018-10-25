@@ -28,6 +28,9 @@ public class ChproductItemService {
 	@Autowired
 	private ChBrandService chBrandService;
 	
+	@Autowired
+	private ChCategoryService chCategoryService;
+	
 	/**
 	 * 添加商品供应商详情
 	 * @param chProductItemAddReq
@@ -56,7 +59,9 @@ public class ChproductItemService {
 		List<ChProductItemDto> list= chProductItemData.selectChProductItemByLimt(ChProductItem);
 		for (ChProductItemDto chProductItemDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
+			String typeName=  chCategoryService.findNameByCode(chProductItemDto.getProductType());
 			chProductItemDto.setBrandName(brandName);
+			chProductItemDto.setTypeName(typeName);
 		}
 		return list;
 	}
@@ -83,5 +88,13 @@ public class ChproductItemService {
 		}
 		return list;
 	}
-
+	
+	public ChProductItemDto getOne(Integer id) throws UnsupportedEncodingException{
+		ChProductItemDto chProductItemDto= chProductItemData.selectOne(id);
+		String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
+		String typeName=  chCategoryService.findNameByCode(chProductItemDto.getProductType());
+		chProductItemDto.setBrandName(brandName);
+		chProductItemDto.setTypeName(typeName);
+		return chProductItemDto;
+	}
 }

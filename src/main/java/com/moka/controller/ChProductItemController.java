@@ -5,11 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moka.Enum.CodeEnum;
+import com.moka.dao.ChProductItemData;
 import com.moka.dto.ChProductItemDto;
 import com.moka.model.ChProductItem;
 import com.moka.req.ChProductItemAddReq;
@@ -17,6 +20,7 @@ import com.moka.req.ChProductItemSupplyReq;
 import com.moka.result.Result;
 import com.moka.service.ChproductItemService;
 import com.moka.service.CommonService;
+import com.moka.utils.ParamPreconditions;
 
 /**
 * @author    created by lbq
@@ -30,6 +34,8 @@ public class ChProductItemController {
 	private ChproductItemService chproductItemService;
 	@Autowired
 	private CommonService commonService;
+	@Autowired
+	private ChProductItemData  chProductItemData;
 	
 	/**
 	 * 添加商品供应商信息
@@ -75,6 +81,28 @@ public class ChProductItemController {
 		return Result.create(chproductItemService.findSupplyByBrand(req));
 	}
 	
+	@GetMapping("get/one")
+	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
+		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
+		
+		return Result.create(chproductItemService.getOne(id));
+	}
+	
+	
+	/**
+	 * 根据id 逻辑删除一个授权合作信息
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("delete")
+	public Result<?> delete(Integer id){
+		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
+		int a= chProductItemData.deleteByLogic(id);
+		if(a==1){
+			return Result.create("OK","删除成功");
+		}
+		return Result.create("ERROR","删除失败");
+	}
 }
 
 
