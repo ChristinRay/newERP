@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.moka.model.ChChannel;
 
 @Mapper
@@ -51,7 +53,7 @@ public interface ChChannelData {
 	 * @return
 	 */
 	@SelectProvider(type = ChChannelProvider.class, method = "selectOne")
-	public ChChannel selectOne(int id);
+	public ChChannel selectOne(@Param("id")int id);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity
@@ -65,5 +67,5 @@ public interface ChChannelData {
 	 * @return
 	 */
 	@UpdateProvider(type = ChChannelProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
 }

@@ -56,6 +56,7 @@ public class ChproductItemService {
 	 * @throws UnsupportedEncodingException 
 	 */
 	public List<ChProductItemDto> list(ChProductItem ChProductItem) throws UnsupportedEncodingException{
+		ChProductItem.setState("1");
 		List<ChProductItemDto> list= chProductItemData.selectChProductItemByLimt(ChProductItem);
 		for (ChProductItemDto chProductItemDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());

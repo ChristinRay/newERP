@@ -73,7 +73,7 @@ public class ChProductItemProvider {
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
 			if(!Strings.isNullOrEmpty(entity.getSupplyProductNo())) {sql.WHERE("supply_product_no = #{supplyProductNo}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
+			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
 
 		return sql.toString() + " order by a." + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}

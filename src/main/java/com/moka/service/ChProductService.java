@@ -79,7 +79,6 @@ public class ChProductService {
 	 * @return
 	 */
 	public int selectChProductByCount(ChProduct product){
-		product.setState("1");
 		return  chProductData.selectChProductByCount(product);
 	}
 	
@@ -89,7 +88,6 @@ public class ChProductService {
 	 * @throws UnsupportedEncodingException 
 	 */
 	public List<ChProductDto> selectChProductByLimt(ChProduct product) throws UnsupportedEncodingException{
-		product.setState("1");
 		List<ChProductDto> list= chProductData.selectChProductByLimt(product);
 		for (ChProductDto chProductDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductDto.getBrandCode());

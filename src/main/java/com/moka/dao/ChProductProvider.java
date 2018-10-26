@@ -44,7 +44,7 @@ public class ChProductProvider {
 			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.WHERE("picture = #{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getSku())) {sql.WHERE("sku = #{sku}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
+			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = '1'");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 

@@ -16,7 +16,7 @@ public class ChChannel extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private String  channelAddress;
+	private String  channelAddress;
 	private String  channelContact;
 	private String  channelMobile;
 	private String  channelName;

@@ -37,7 +37,7 @@ public class ChChannelController {
 	public Result<?> add (@RequestBody ChChannel chChannel){
 		int a = chChannelData.insertChChannel(chChannel);
 		if(a==1){
-			Result.create("OK", "添加成功");
+			return Result.create("OK", "添加成功");
 		}
 		
 		return Result.create("ERROR", "数据错误");
@@ -69,7 +69,7 @@ public class ChChannelController {
 	public Result<?> update (@RequestBody ChChannel chChannel){
 		int a = chChannelData.updateChChannelByNullChk(chChannel);
 		if(a==1){
-			Result.create("OK", "修改成功");
+			return Result.create("OK", "修改成功");
 		}
 		return Result.create("ERROR", "数据错误");
 	}
@@ -78,7 +78,7 @@ public class ChChannelController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("get")
+	@GetMapping("get/one")
 	public Result<?> get (Integer id){
 		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
 		ChChannel chChannel = chChannelData.selectOne(id);
