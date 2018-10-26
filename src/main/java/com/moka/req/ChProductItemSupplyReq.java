@@ -13,4 +13,5 @@ public class ChProductItemSupplyReq {
 	private Integer supplyId;
 	private Integer productId;
 	private String accreditBrand;
+	private String productName;
 }

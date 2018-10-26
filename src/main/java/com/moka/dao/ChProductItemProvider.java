@@ -46,7 +46,7 @@ public class ChProductItemProvider {
 			if(!Objects.isNull(entity.getPackPrice())) {sql.WHERE("pack_price = #{packPrice}");}
 			if(!Objects.isNull(entity.getFreightPrice())) {sql.WHERE("freight_price = #{freightPrice}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
+			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			
@@ -156,6 +156,7 @@ public class ChProductItemProvider {
 				+ " b.product_name AS productName").FROM(" ch_supply a INNER JOIN ch_product b ON(a.accredit_brand=b.brand_code)");
 		if(!Objects.isNull(req.getProductId())) {sql.WHERE(" b.id = #{productId}");}
 		if(!Objects.isNull(req.getSupplyId())) {sql.WHERE(" a.id = #{supplyId}");}
+		if(!Strings.isNullOrEmpty(req.getProductName())){sql.WHERE(" b.product_name=#{productName}");}
 		if(!Strings.isNullOrEmpty(req.getAccreditBrand())) {sql.WHERE(" a.accredit_brand = #{accreditBrand}");}
 		sql.WHERE("  a.state='1' AND b.state='1'");
 		return sql.toString();

@@ -55,9 +55,9 @@ public class ChproductItemService {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	public List<ChProductItemDto> list(ChProductItem ChProductItem) throws UnsupportedEncodingException{
-		ChProductItem.setState("1");
-		List<ChProductItemDto> list= chProductItemData.selectChProductItemByLimt(ChProductItem);
+	public List<ChProductItemDto> list(ChProductItem chProductItem) throws UnsupportedEncodingException{
+		chProductItem.setState("1");
+		List<ChProductItemDto> list= chProductItemData.selectChProductItemByLimt(chProductItem);
 		for (ChProductItemDto chProductItemDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
 			String typeName=  chCategoryService.findNameByCode(chProductItemDto.getProductType());
@@ -72,6 +72,7 @@ public class ChproductItemService {
 	 * @return
 	 */
 	public int selectChProductByCount(ChProductItem chProductItem){
+		chProductItem.setState("1");
 		int a =chProductItemData.selectChProductItemByCount(chProductItem);
 		return a;
 	}

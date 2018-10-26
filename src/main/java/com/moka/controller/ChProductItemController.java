@@ -76,8 +76,8 @@ public class ChProductItemController {
 	 */
 	@PostMapping("get/supply")
 	public Result<?> findSupplyByBrand(@RequestBody ChProductItemSupplyReq req) throws UnsupportedEncodingException{
-		
-		
+
+
 		return Result.create(chproductItemService.findSupplyByBrand(req));
 	}
 	
