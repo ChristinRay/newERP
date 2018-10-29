@@ -19,11 +19,7 @@ public class ChSupply extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String  accreditEndTime;
-	private String  accreditLevel;
-	private String  accreditProduct;
     private String	accreditBrand;//授权品牌
-	private String  accreditStartTime;
 	private String  companyName;
 	private String  companyCode;
 	private String  cooperationType;
@@ -43,7 +39,7 @@ public class ChSupply extends BaseModel {
 
 	public void check(){
 		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要参数不能为空", "必要参数不能为空",
-				supplyCode,supplyName,accreditLevel,supplyAccount,supplyAccountName,supplyContact,supplyMobile );
+				supplyCode,supplyName,supplyAccount,supplyAccountName,supplyContact,supplyMobile );
 	}
 	
 }

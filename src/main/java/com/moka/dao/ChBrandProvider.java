@@ -1,6 +1,6 @@
 package com.moka.dao;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 import com.google.common.base.Strings;
 import java.util.Objects;
@@ -10,7 +10,6 @@ import com.moka.model.ChBrand;
  * 品牌表
  * provider
  */
-@Mapper
 public class ChBrandProvider {
 	
 	/**
@@ -20,7 +19,7 @@ public class ChBrandProvider {
 	 */
 	public String insertChBrand(ChBrand entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_brand");
-		sql.VALUES("brand_name,brand_code,user_id,state,createtime,updatetime", "#{brandName},#{brandCode},#{userId},#{state},now(),now()");
+		sql.VALUES("brand_name,brand_code,accredit_level,accredit_start_time,accredit_end_time,company_id,user_id,state,createtime,updatetime", "#{brandName},#{brandCode},#{accreditLevel},#{accreditStartTime},#{accreditEndTime},#{companyId},#{userId},#{state},now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -33,6 +32,10 @@ public class ChBrandProvider {
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -49,10 +52,16 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrandByLimt(ChBrand entity) {
-		SQL sql = new SQL().SELECT(" id,brand_name as brandName,brand_code as brandCode,user_id as userId ").FROM("ch_brand");
+		SQL sql = new SQL().SELECT("id,brand_code AS brandCode,brand_name AS brand_name,accredit_level AS accreditLevel,"
+				+ "accredit_start_time AS accreditStartTime,accredit_end_time AS accreditEndTime,company_id AS companyId,"
+				+ "state,user_id as userId,createtime,updatetime").FROM("ch_brand");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -66,15 +75,19 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrand(ChBrand entity) {
-		SQL sql = new SQL().SELECT("id,brand_name as brandName,brand_code as brandCode,user_id as userId").FROM("ch_brand");
+		SQL sql = new SQL().SELECT("*").FROM("ch_brand");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
+			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-
+			sql.WHERE("state='1'");
 		return sql.toString();
 	}
 	/**
@@ -82,8 +95,10 @@ public class ChBrandProvider {
 	 * @param id
 	 * @return
 	 */
-	public String selectOne(long id) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_brand");
+	public String selectOne(@Param("id")int id) {
+		SQL sql = new SQL().SELECT( "id,brand_code AS brandCode,brand_name AS brand_name,accredit_level AS accreditLevel,"
+				+ "accredit_start_time AS accreditStartTime,accredit_end_time AS accreditEndTime,company_id AS companyId,"
+				+ "state,user_id as userId,createtime,updatetime").FROM("ch_brand");
 		sql.WHERE("id="+id);
 		return sql.toString();
 	}
@@ -96,6 +111,10 @@ public class ChBrandProvider {
 		SQL sql = new SQL().UPDATE("ch_brand");
 				sql.SET("brand_name = #{brandName}");
 		sql.SET("brand_code = #{brandCode}");
+		sql.SET("accredit_level = #{accreditLevel}");
+		sql.SET("accredit_start_time = #{accreditStartTime}");
+		sql.SET("accredit_end_time = #{accreditEndTime}");
+		sql.SET("company_id = #{companyId}");
 		sql.SET("user_id = #{userId}");
 		sql.SET("state = #{state}");
 		sql.SET("updatetime = now()");
@@ -112,6 +131,10 @@ public class ChBrandProvider {
 		SQL sql = new SQL().UPDATE("ch_brand");
 					if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.SET("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.SET("brand_code = #{brandCode}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.SET("accredit_level = #{accreditLevel}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.SET("accredit_start_time = #{accreditStartTime}");}
+			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.SET("accredit_end_time = #{accreditEndTime}");}
+			if(!Objects.isNull(entity.getCompanyId())) {sql.SET("company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.SET("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.SET("state = #{state}");}
 		sql.SET("updatetime = now()");
@@ -120,21 +143,11 @@ public class ChBrandProvider {
 		return sql.toString();
 	}
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	public String deleteChBrand(long id) {
-		SQL sql = new SQL().DELETE_FROM("ch_brand");
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(long id) {
+	public String deleteByLogic(@Param("id")int id) {
 		SQL sql = new SQL().UPDATE("ch_brand");
 		sql.SET("state=2");
 		sql.WHERE("id = #{id}");

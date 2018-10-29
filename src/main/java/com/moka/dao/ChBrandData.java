@@ -1,12 +1,13 @@
 package com.moka.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.model.ChBrand;
@@ -52,14 +53,7 @@ public interface ChBrandData {
 	 * @return
 	 */
 	@SelectProvider(type = ChBrandProvider.class, method = "selectOne")
-	public ChBrand selectOne(int id);
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = ChBrandProvider.class, method = "updateChBrand")
-	public int updateChBrand(ChBrand entity);
+	public ChBrand selectOne(@Param("id")int id);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity
@@ -68,19 +62,13 @@ public interface ChBrandData {
 	@UpdateProvider(type = ChBrandProvider.class, method = "updateChBrandByNullChk")
 	public int updateChBrandByNullChk(ChBrand entity);
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = ChBrandProvider.class, method = "deleteChBrand")
-	public int deleteChBrand(int id);
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = ChBrandProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
+	
 	/**
 	 * 查询所有
 	 */

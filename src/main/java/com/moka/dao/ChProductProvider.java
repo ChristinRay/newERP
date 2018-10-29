@@ -47,7 +47,7 @@ public class ChProductProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = '1'");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-
+			sql.WHERE(" state='1'");
 		return sql.toString();
 	}
 	/**
@@ -81,6 +81,7 @@ public class ChProductProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
+			sql.WHERE(" state='1'");
 
 		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
