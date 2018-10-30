@@ -70,7 +70,7 @@ public class ChProductItemController {
 		return Result.create("ERROR","参数类型不匹配");
 	}
 	/**
-	 * 查询品牌信息商品基本信息
+	 * 查询品牌下商品基本信息
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */

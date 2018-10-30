@@ -151,9 +151,9 @@ public class ChProductItemProvider {
 	 * @return
 	 */
 	public String findProductByBrand(ChProductItemSupplyReq req){
-		SQL sql = new SQL().SELECT(" b.id AS productId,b.brand_code  AS brandCode,"
+		SQL sql = new SQL().SELECT(" b.id AS productId,b.brand_code  AS brandCode,b.product_type AS productType,"
 				+ "b.product_code AS productCode,b.sku,b.product_unit AS productUnit,b.product_weight AS productWeight,"
-				+ "b.product_name AS productName").FROM(" ch_supply a INNER JOIN ch_product b ON(a.accredit_brand=b.brand_code)");
+				+ "b.product_name AS productName").FROM(" ch_product b ");
 		if(!Objects.isNull(req.getProductId())) {sql.WHERE(" b.id = #{productId}");}
 		if(!Strings.isNullOrEmpty(req.getProductName())){sql.WHERE(" b.product_name like concat ('%',#{productName},'%')");}
 		if(!Strings.isNullOrEmpty(req.getBrandCode())) {sql.WHERE(" b.brand_code = #{brandCode}");}

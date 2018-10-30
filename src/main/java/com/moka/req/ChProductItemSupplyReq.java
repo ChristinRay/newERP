@@ -14,4 +14,5 @@ public class ChProductItemSupplyReq {
 	private Integer productId;
 	private String brandCode;
 	private String productName;
+	private String productType;
 }

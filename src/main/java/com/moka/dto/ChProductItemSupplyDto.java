@@ -20,5 +20,7 @@ public class ChProductItemSupplyDto {
 	private String productName;//商品名称
 	private String sku;//商品的sku
 	private String brandName;//品牌名称
+	private String typeName;//种类名称
+	private String productType;//种类
 	
 }

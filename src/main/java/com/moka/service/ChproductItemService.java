@@ -87,10 +87,17 @@ public class ChproductItemService {
 		for (ChProductItemSupplyDto chProductItemSupplyDto : list) {
 			String brandName= chBrandService.findNameByCode(chProductItemSupplyDto.getBrandCode());
 			chProductItemSupplyDto.setBrandName(brandName);
+			String typeName=chCategoryService.findNameByCode(chProductItemSupplyDto.getProductType());
+			chProductItemSupplyDto.setTypeName(typeName);
 		}
 		return list;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public ChProductItemDto getOne(Integer id) throws UnsupportedEncodingException{
 		ChProductItemDto chProductItemDto= chProductItemData.selectOne(id);
 		String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
