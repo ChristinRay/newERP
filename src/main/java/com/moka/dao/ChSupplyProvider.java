@@ -28,7 +28,7 @@ public class ChSupplyProvider {
 	 * @return
 	 */
 	public String selectChSupplyByCount(ChSupply entity) {
-		SQL sql = new SQL().SELECT("count(*)").FROM("ch_supply a inner join ch_company b on (a.company_code=b.company_code)");
+		SQL sql = new SQL().SELECT("count(*)").FROM("ch_supply a ");
 			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.WHERE("cooperation_type = #{cooperationType}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -46,7 +46,7 @@ public class ChSupplyProvider {
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			sql.WHERE("a.state <> '2'");
-			sql.WHERE("b.state <>'2'");
+			//sql.WHERE("b.state <>'2'");
 			System.out.println(sql);
 		return sql.toString();
 	}
@@ -59,12 +59,12 @@ public class ChSupplyProvider {
 	 * @return
 	 */
 	public String selectChSupplyByLimt(ChSupply entity) {
-		SQL sql = new SQL().SELECT("a.id, accredit_brand as accreditBrand,b.company_name as companyName,cooperation_type as cooperationType, "
+		SQL sql = new SQL().SELECT("a.id, accredit_brand as accreditBrand,cooperation_type as cooperationType, "
 				+ " supply_account as supplyAccount,supply_account_name as supplyAccountName,supply_address as supplyAddress, "
 				+ " supply_certificate as supplyCertificate,supply_code as supplyCode,supply_contact as supplyContact, "
 				+ " supply_contact_position as supplyContactPosition,supply_mobile as supplyMobile,supply_name as supplyName,"
 				+ " a.user_id as userId").FROM("ch_supply a ");
-			sql.INNER_JOIN(" ch_company b on (a.company_code=b.company_code )");
+			//sql.INNER_JOIN(" ch_company b on (a.company_code=b.company_code )");
 			if(!Strings.isNullOrEmpty(entity.getAccreditBrand())){sql.WHERE("accredit_brand = #{accreditBrand}");}
 			if(!Strings.isNullOrEmpty(entity.getCompanyName())) {sql.WHERE("company_name = #{companyName}");}
 			if(!Strings.isNullOrEmpty(entity.getCooperationType())) {sql.WHERE("cooperation_type = #{cooperationType}");}
@@ -83,7 +83,7 @@ public class ChSupplyProvider {
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("a.updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("a.user_id = #{userId}");}
 			sql.WHERE("a.state <> '2'");
-			sql.WHERE(" b.state <>'2'");
+			//sql.WHERE(" b.state <>'2'");
 		return sql.toString() + " order by a." + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
@@ -93,12 +93,12 @@ public class ChSupplyProvider {
 	 */
 	public String selectOne(@Param("id")int id) {
 		SQL sql = new SQL().SELECT("a.id,"
-				+ " accredit_brand as accreditBrand,b.company_name as companyName,cooperation_type as cooperationType, "
+				+ " accredit_brand as accreditBrand ,cooperation_type as cooperationType, "
 				+ " supply_account as supplyAccount,supply_account_name as supplyAccountName,supply_address as supplyAddress, "
 				+ " supply_certificate as supplyCertificate,supply_code as supplyCode,supply_contact as supplyContact, "
 				+ " supply_contact_position as supplyContactPosition,supply_mobile as supplyMobile,supply_name as supplyName,"
 				+ " a.user_id as userId").FROM("ch_supply a");
-		sql.INNER_JOIN(" ch_company b on (a.company_code=b.company_code )");
+		//sql.INNER_JOIN(" ch_company b on (a.company_code=b.company_code )");
 		sql.WHERE("a.id= #{id}");
 		//System.out.println("aaaaaaa"+sql);
 		return sql.toString();

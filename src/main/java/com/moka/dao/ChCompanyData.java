@@ -42,26 +42,12 @@ public interface ChCompanyData {
 	@SelectProvider(type = ChCompanyProvider.class, method = "selectChCompanyByLimt")
 	public List<ChCompany> selectChCompanyByLimt(ChCompany entity);
 	/**
-	 * 按条件查询记录
-	 * @param entity
-	 * @return
-	 */
-	@SelectProvider(type = ChCompanyProvider.class, method = "selectChCompany")
-	public List<ChCompany> selectChCompany(ChCompany entity);
-	/**
 	 * 根据主键id查询实体
 	 * @param id
 	 * @return
 	 */
 	@SelectProvider(type = ChCompanyProvider.class, method = "selectOne")
 	public ChCompany selectOne(@Param("id")int id);
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = ChCompanyProvider.class, method = "updateChCompany")
-	public int updateChCompany(ChCompany entity);
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity
@@ -70,13 +56,6 @@ public interface ChCompanyData {
 	@UpdateProvider(type = ChCompanyProvider.class, method = "updateChCompanyByNullChk")
 	public int updateChCompanyByNullChk(ChCompany entity);
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = ChCompanyProvider.class, method = "deleteChCompany")
-	public int deleteChCompany(int id);
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
@@ -84,6 +63,13 @@ public interface ChCompanyData {
 	@UpdateProvider(type = ChCompanyProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id") int id);
 	
+	/**
+	 * 按条件查询记录
+	 * @param entity
+	 * @return
+	 */
+	@SelectProvider(type = ChCompanyProvider.class, method = "selectChCompanyAll")
+	public List<ChCompany> selectChCompanyAll();
 }
 
 

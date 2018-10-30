@@ -1,14 +1,14 @@
 package com.moka.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.moka.model.ChSupply;
 
@@ -41,13 +41,6 @@ public interface ChSupplyData {
 	@SelectProvider(type = ChSupplyProvider.class, method = "selectChSupplyByLimt")
 	public List<ChSupply> selectChSupplyByLimt(ChSupply entity);
 	/**
-	 * 按条件查询记录
-	 * @param entity
-	 * @return
-	 */
-	@SelectProvider(type = ChSupplyProvider.class, method = "selectChSupply")
-	public List<ChSupply> selectChSupply(ChSupply entity);
-	/**
 	 * 根据主键id查询实体
 	 * @param id
 	 * @return
@@ -55,26 +48,12 @@ public interface ChSupplyData {
 	@SelectProvider(type = ChSupplyProvider.class, method = "selectOne")
 	public ChSupply selectOne(@Param("id") int id);
 	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = ChSupplyProvider.class, method = "updateChSupply")
-	public int updateChSupply(ChSupply entity);
-	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = ChSupplyProvider.class, method = "updateChSupplyByNullChk")
 	public int updateChSupplyByNullChk(ChSupply entity);
-	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = ChSupplyProvider.class, method = "deleteChSupply")
-	public int deleteChSupply(int id);
 	/**
 	 * 逻辑删除实体
 	 * @param entity

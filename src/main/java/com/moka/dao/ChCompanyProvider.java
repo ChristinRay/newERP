@@ -106,26 +106,6 @@ public class ChCompanyProvider {
 		return sql.toString();
 	}
 	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	public String updateChCompany(ChCompany entity) {
-		SQL sql = new SQL().UPDATE("ch_company");
-				sql.SET("company_code = #{companyCode}");
-		sql.SET("company_name = #{companyName}");
-		sql.SET("company_deputy = #{companyDeputy}");
-		sql.SET("company_account_name = #{companyAccountName}");
-		sql.SET("account_bank = #{accountBank}");
-		sql.SET("account_no = #{accountNo}");
-		sql.SET("user_id = #{userId}");
-		sql.SET("state = #{state}");
-		sql.SET("updatetime = now()");
-
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
@@ -146,16 +126,6 @@ public class ChCompanyProvider {
 		return sql.toString();
 	}
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	public String deleteChCompany(int id) {
-		SQL sql = new SQL().DELETE_FROM("ch_company");
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
@@ -167,6 +137,9 @@ public class ChCompanyProvider {
 		return sql.toString();
 	}
 
-	
+	public String selectChCompanyAll(){
+		SQL sql = new SQL().SELECT("id, company_code as companyCode,tax,company_name as companyName,company_deputy as companyDeputy,company_account_name as companyAccountName,account_bank as accountBank,account_no as accountNo,user_id as userId,state,createtime,updatetime ").FROM("ch_company");
+		return sql.toString();
+	}
 	
 }

@@ -41,13 +41,6 @@ public interface ChBrandData {
 	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrandByLimt")
 	public List<ChBrand> selectChBrandByLimt(ChBrand entity);
 	/**
-	 * 按条件查询记录
-	 * @param entity
-	 * @return
-	 */
-	@SelectProvider(type = ChBrandProvider.class, method = "selectChBrand")
-	public List<ChBrand> selectChBrand(ChBrand entity);
-	/**
 	 * 根据主键id查询实体
 	 * @param id
 	 * @return

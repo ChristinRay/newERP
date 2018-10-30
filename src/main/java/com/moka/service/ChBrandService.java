@@ -31,7 +31,11 @@ public class ChBrandService {
 	private ChBrandData chBrandData;
 	@Autowired
 	private StringRedisTemplate redisTemplate;
-	
+	/**
+	 * 缓存
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public Result<?> list() throws UnsupportedEncodingException {
 		String key ="brandList";
 		ValueOperations<String, String> vo  = redisTemplate.opsForValue();
@@ -81,6 +85,19 @@ public class ChBrandService {
         log.info("方法结束");
 	}
 	
+	/**
+	 * 添加品牌接口
+	 * @param chBrand
+	 * @return
+	 */
+	public Result<?> insertChBrand(ChBrand chBrand){
+		chBrand.check();
+		int a=  chBrandData.insertChBrand(chBrand);
+		if(a==1){
+			return Result.create("OK",chBrand.getId()+"");
+		}
+		return Result.create("ERROR", "添加品牌失败");
+	}
 }
 
 
