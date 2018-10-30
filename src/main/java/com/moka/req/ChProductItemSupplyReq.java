@@ -12,6 +12,6 @@ import lombok.Setter;
 public class ChProductItemSupplyReq {
 	private Integer supplyId;
 	private Integer productId;
-	private String accreditBrand;
+	private String brandCode;
 	private String productName;
 }

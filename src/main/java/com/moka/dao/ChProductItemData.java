@@ -72,9 +72,9 @@ public interface ChProductItemData {
 	@UpdateProvider(type = ChProductItemProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id")int id);
 	/**
-	 * 查询已授权品牌信息和供应商下商品基本信息
+	 * 查询品牌的商品信息
 	 * @return
 	 */
-	@SelectProvider(type = ChProductItemProvider.class, method = "findSupplyByBrand")
-	public List<ChProductItemSupplyDto> findSupplyByBrand(ChProductItemSupplyReq req);
+	@SelectProvider(type = ChProductItemProvider.class, method = "findProductByBrand")
+	public List<ChProductItemSupplyDto> findProductByBrand(ChProductItemSupplyReq req);
 }

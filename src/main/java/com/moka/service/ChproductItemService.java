@@ -82,10 +82,10 @@ public class ChproductItemService {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	public List<ChProductItemSupplyDto> findSupplyByBrand(ChProductItemSupplyReq req) throws UnsupportedEncodingException{
-		List<ChProductItemSupplyDto> list= chProductItemData.findSupplyByBrand(req); 
+	public List<ChProductItemSupplyDto> findProductByBrand(ChProductItemSupplyReq req) throws UnsupportedEncodingException{
+		List<ChProductItemSupplyDto> list= chProductItemData.findProductByBrand(req); 
 		for (ChProductItemSupplyDto chProductItemSupplyDto : list) {
-			String brandName= chBrandService.findNameByCode(chProductItemSupplyDto.getAccreditBrand());
+			String brandName= chBrandService.findNameByCode(chProductItemSupplyDto.getBrandCode());
 			chProductItemSupplyDto.setBrandName(brandName);
 		}
 		return list;

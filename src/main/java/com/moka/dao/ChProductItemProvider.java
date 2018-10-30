@@ -147,18 +147,17 @@ public class ChProductItemProvider {
 		return sql.toString();
 	}
 	/**
-	 * 查询已授权品牌信息和供应商下商品基本信息SQL
+	 * 查询品牌信息和商品基本信息SQL
 	 * @return
 	 */
-	public String findSupplyByBrand(ChProductItemSupplyReq req){
-		SQL sql = new SQL().SELECT(" a.id AS supplyId,b.id AS productId,a.supply_name as supplyName, a.accredit_brand AS accreditBrand,"
-				+ " b.product_code AS productCode,b.sku,b.product_unit AS productUnit,b.product_weight AS productWeight,"
-				+ " b.product_name AS productName").FROM(" ch_supply a INNER JOIN ch_product b ON(a.accredit_brand=b.brand_code)");
+	public String findProductByBrand(ChProductItemSupplyReq req){
+		SQL sql = new SQL().SELECT(" b.id AS productId,b.brand_code  AS brandCode,"
+				+ "b.product_code AS productCode,b.sku,b.product_unit AS productUnit,b.product_weight AS productWeight,"
+				+ "b.product_name AS productName").FROM(" ch_supply a INNER JOIN ch_product b ON(a.accredit_brand=b.brand_code)");
 		if(!Objects.isNull(req.getProductId())) {sql.WHERE(" b.id = #{productId}");}
-		if(!Objects.isNull(req.getSupplyId())) {sql.WHERE(" a.id = #{supplyId}");}
-		if(!Strings.isNullOrEmpty(req.getProductName())){sql.WHERE(" b.product_name=#{productName}");}
-		if(!Strings.isNullOrEmpty(req.getAccreditBrand())) {sql.WHERE(" a.accredit_brand = #{accreditBrand}");}
-		sql.WHERE("  a.state='1' AND b.state='1'");
+		if(!Strings.isNullOrEmpty(req.getProductName())){sql.WHERE(" b.product_name like concat ('%',#{productName},'%')");}
+		if(!Strings.isNullOrEmpty(req.getBrandCode())) {sql.WHERE(" b.brand_code = #{brandCode}");}
+		sql.WHERE(" b.state='1'");
 		return sql.toString();
 	}
 }

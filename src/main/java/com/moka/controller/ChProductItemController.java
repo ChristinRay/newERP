@@ -51,7 +51,7 @@ public class ChProductItemController {
 		return chproductItemService.add(chProductItemAddReq);
 	}
 	/**
-	 * 查询商品供应商详情Controller
+	 * 查询供应商与商品详情Controller
 	 * @param ChProductItem
 	 * @return
 	 * @throws UnsupportedEncodingException 
@@ -70,17 +70,23 @@ public class ChProductItemController {
 		return Result.create("ERROR","参数类型不匹配");
 	}
 	/**
-	 * 查询已授权品牌信息和供应商下商品基本信息
+	 * 查询品牌信息商品基本信息
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
 	@PostMapping("get/supply")
 	public Result<?> findSupplyByBrand(@RequestBody ChProductItemSupplyReq req) throws UnsupportedEncodingException{
+		ParamPreconditions.checkNotEmpty(req.getBrandCode(), CodeEnum.FAIL.getCode(), "品牌编码不能为空", "品牌编码不能为空");
 
-
-		return Result.create(chproductItemService.findSupplyByBrand(req));
+		return Result.create(chproductItemService.findProductByBrand(req));
 	}
 	
+	/**
+	 * 查询一条商品和供应商的信息
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@GetMapping("get/one")
 	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
 		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
@@ -103,6 +109,10 @@ public class ChProductItemController {
 		}
 		return Result.create("ERROR","删除失败");
 	}
+	
+	
+	
+	
 }
 
 

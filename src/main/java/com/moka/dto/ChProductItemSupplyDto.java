@@ -10,15 +10,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChProductItemSupplyDto {
-	private Integer supplyId;
-	private Integer productId;
-	private String supplyName;
-	private String accreditBrand;
-	private String productCode;
-	private String productUnit;
-	private String productWeight;
-	private String productName;
-	private String sku;
-	private String brandName;
+	private Integer supplyId;//供应商id
+	private Integer productId;//商品id
+	private String supplyName;//供应商名称
+	private String brandCode;//品牌Code
+	private String productCode;//商品Code
+	private String productUnit;//单位
+	private String productWeight;//重量
+	private String productName;//商品名称
+	private String sku;//商品的sku
+	private String brandName;//品牌名称
 	
 }
