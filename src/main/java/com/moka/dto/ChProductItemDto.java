@@ -32,5 +32,5 @@ public class ChProductItemDto {
 	private String  state;
 	private String  createtime;
 	private String  updatetime;
-	
+	private String supplyName;//供应商名称
 }
