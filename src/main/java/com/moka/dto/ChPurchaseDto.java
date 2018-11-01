@@ -1,4 +1,4 @@
-package com.moka.model;
+package com.moka.dto;
 
 import java.math.BigDecimal;
 

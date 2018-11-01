@@ -1,10 +1,13 @@
 package com.moka.dao;
 
+import java.util.Objects;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
+
 import com.google.common.base.Strings;
-import java.util.Objects;
 import com.moka.model.ChPurchaseOrder;
+import com.moka.req.ChPurchaseSupplyReq;
 
 /**
  * 
@@ -180,7 +183,7 @@ public class ChPurchaseOrderProvider {
 		return sql.toString();
 	}
 	/**
-	 * 
+	 * 采购订单查询列表
 	 * @return
 	 */
 	public String  selectChPurchaseAll(ChPurchaseOrder entity){
@@ -191,6 +194,7 @@ public class ChPurchaseOrderProvider {
 				+ "a.product_type AS productType,"
 				+ "a.product_unit AS productUnit,"
 				+ "a.product_weight AS productWeight,"
+				+ "b.id AS productItemId,"
 				+ "b.brand_code AS brandCode,"
 				+ "b.supply_id AS supplyId,"
 				+ "b.purchase_price AS purchasePrice,"
@@ -205,10 +209,22 @@ public class ChPurchaseOrderProvider {
 				INNER_JOIN(" ch_brand d ON ( d.brand_code = a.brand_code )").
 				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
 		sql.WHERE(" a.state='1'");
+		
 		return sql.toString();
 	}
 	
-	
-	
+	/**
+	 * 根据采购公司的品牌编码查询供应商信息
+	 * @return
+	 */
+	public String  findSupplyByCompany(ChPurchaseSupplyReq req){
+		SQL sql=new SQL();
+		sql.SELECT(" a.supply_name AS supplyName,a.id AS supplyId,a.supply_code AS supplyCode ").
+		FROM("ch_supply a").
+		INNER_JOIN("ch_brand b ON (a.accredit_brand=b.brand_code)");
+		sql.WHERE(" a.state='1' AND b.state='1'");
+		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("b.company_id = #{companyId}");}
+		return sql.toString();
+	}
 	
 }

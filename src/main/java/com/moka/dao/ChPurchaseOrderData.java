@@ -10,8 +10,10 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
-import com.moka.model.ChPurchaseDto;
+import com.moka.dto.ChPurchaseDto;
+import com.moka.dto.ChPurchaseSupplyDto;
 import com.moka.model.ChPurchaseOrder;
+import com.moka.req.ChPurchaseSupplyReq;
 
 @Mapper
 public interface ChPurchaseOrderData {
@@ -79,7 +81,7 @@ public interface ChPurchaseOrderData {
 	
 	
 	/**
-	 * 查询条件下的所有商品
+	 * 查询条件下的所有商品    lbq
 	 * @param entity
 	 * @param orderBy
 	 * @param limit
@@ -88,4 +90,12 @@ public interface ChPurchaseOrderData {
 	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "selectChPurchaseAll")
 	public List<ChPurchaseDto> selectChPurchaseAll(ChPurchaseDto entity);
+	
+	/**
+	 * 根据采购公司的品牌编码查询供应商信息 lbq
+	 * @param req
+	 * @return
+	 */
+	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "findSupplyByCompany")
+	public List<ChPurchaseSupplyDto> findSupplyByCompany(ChPurchaseSupplyReq req);
 }
