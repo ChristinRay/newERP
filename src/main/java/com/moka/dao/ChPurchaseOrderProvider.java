@@ -19,7 +19,7 @@ public class ChPurchaseOrderProvider {
 	 */
 	public String insertChPurchaseOrder(ChPurchaseOrder entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_purchase_order");
-		sql.VALUES("company_id,createtime,depot_id,id,memo,predict_time,pur_bills_date,pur_bills_id,pur_bills_type,pur_order_type,reality_time,state,updatetime,user_id", "#{companyId},now(),#{depotId},#{id},#{memo},#{predictTime},#{purBillsDate},#{purBillsId},#{purBillsType},#{purOrderType},#{realityTime},#{state},now(),#{userId}");
+		sql.VALUES("company_id,createtime,depot_id,id,memo,picture,predict_time,price,pur_bills_date,pur_bills_id,pur_bills_type,pur_order_type,reality_time,state,updatetime,user_id", "#{companyId},now(),#{depotId},#{id},#{memo},#{picture},#{predictTime},#{price},#{purBillsDate},#{purBillsId},#{purBillsType},#{purOrderType},#{realityTime},#{state},now(),#{userId}");
 		return sql.toString();
 	}
 	/**
@@ -35,7 +35,9 @@ public class ChPurchaseOrderProvider {
 			if(!Objects.isNull(entity.getDepotId())) {sql.WHERE("depot_id = #{depotId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getMemo())) {sql.WHERE("memo = #{memo}");}
+			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.WHERE("picture = #{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getPredictTime())) {sql.WHERE("predict_time = #{predictTime}");}
+			if(!Objects.isNull(entity.getPrice())) {sql.WHERE("price = #{price}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("pur_bills_date = #{purBillsDate}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("pur_bills_id = #{purBillsId}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("pur_bills_type = #{purBillsType}");}
@@ -63,7 +65,9 @@ public class ChPurchaseOrderProvider {
 			if(!Objects.isNull(entity.getDepotId())) {sql.WHERE("depot_id = #{depotId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getMemo())) {sql.WHERE("memo = #{memo}");}
+			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.WHERE("picture = #{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getPredictTime())) {sql.WHERE("predict_time = #{predictTime}");}
+			if(!Objects.isNull(entity.getPrice())) {sql.WHERE("price = #{price}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("pur_bills_date = #{purBillsDate}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("pur_bills_id = #{purBillsId}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("pur_bills_type = #{purBillsType}");}
@@ -88,7 +92,9 @@ public class ChPurchaseOrderProvider {
 			if(!Objects.isNull(entity.getDepotId())) {sql.WHERE("depot_id = #{depotId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getMemo())) {sql.WHERE("memo = #{memo}");}
+			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.WHERE("picture = #{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getPredictTime())) {sql.WHERE("predict_time = #{predictTime}");}
+			if(!Objects.isNull(entity.getPrice())) {sql.WHERE("price = #{price}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("pur_bills_date = #{purBillsDate}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("pur_bills_id = #{purBillsId}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("pur_bills_type = #{purBillsType}");}
@@ -111,6 +117,32 @@ public class ChPurchaseOrderProvider {
 		return sql.toString();
 	}
 	/**
+	 * 更新实体
+	 * @param entity
+	 * @return
+	 */
+	public String updateChPurchaseOrder(ChPurchaseOrder entity) {
+		SQL sql = new SQL().UPDATE("ch_purchase_order");
+				sql.SET("approver_id = #{approverId}");
+		sql.SET("company_id = #{companyId}");
+		sql.SET("depot_id = #{depotId}");
+		sql.SET("memo = #{memo}");
+		sql.SET("picture = #{picture}");
+		sql.SET("predict_time = #{predictTime}");
+		sql.SET("price = #{price}");
+		sql.SET("pur_bills_date = #{purBillsDate}");
+		sql.SET("pur_bills_id = #{purBillsId}");
+		sql.SET("pur_bills_type = #{purBillsType}");
+		sql.SET("pur_order_type = #{purOrderType}");
+		sql.SET("reality_time = #{realityTime}");
+		sql.SET("state = #{state}");
+		sql.SET("user_id = #{userId}");
+		sql.SET("updatetime = now()");
+
+		sql.WHERE("id = #{id}");
+		return sql.toString();
+	}
+	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
@@ -121,7 +153,9 @@ public class ChPurchaseOrderProvider {
 			if(!Objects.isNull(entity.getCompanyId())) {sql.SET("company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getDepotId())) {sql.SET("depot_id = #{depotId}");}
 			if(!Strings.isNullOrEmpty(entity.getMemo())) {sql.SET("memo = #{memo}");}
+			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.SET("picture = #{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getPredictTime())) {sql.SET("predict_time = #{predictTime}");}
+			if(!Objects.isNull(entity.getPrice())) {sql.SET("price = #{price}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.SET("pur_bills_date = #{purBillsDate}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.SET("pur_bills_id = #{purBillsId}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.SET("pur_bills_type = #{purBillsType}");}
@@ -134,7 +168,6 @@ public class ChPurchaseOrderProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
-
 	/**
 	 * 逻辑删除实体
 	 * @param entity
@@ -146,4 +179,36 @@ public class ChPurchaseOrderProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String  selectChPurchaseAll(ChPurchaseOrder entity){
+		SQL sql = new SQL().SELECT("a.id,"
+				+ "a.product_code AS productCode,"
+				+ "a.product_name AS productName,"
+				+ "a.product_size AS productSize,"
+				+ "a.product_type AS productType,"
+				+ "a.product_unit AS productUnit,"
+				+ "a.product_weight AS productWeight,"
+				+ "b.brand_code AS brandCode,"
+				+ "b.supply_id AS supplyId,"
+				+ "b.purchase_price AS purchasePrice,"
+				+ "b.supply_product_no AS supplyProductNo,"
+				+ "e.id AS companyId,"
+				+ "c.supply_code AS supplyCode,"
+				+ "c.supply_name AS supplyName,"
+				+ "e.company_name AS companyName").
+				FROM("ch_product a").
+				INNER_JOIN(" ch_product_item b ON ( a.id = b.product_id )").
+				INNER_JOIN(" ch_supply c ON ( b.supply_id = c.id )").
+				INNER_JOIN(" ch_brand d ON ( d.brand_code = a.brand_code )").
+				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
+		sql.WHERE(" a.state='1'");
+		return sql.toString();
+	}
+	
+	
+	
+	
 }

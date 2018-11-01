@@ -66,7 +66,6 @@ public class ChSupplyController {
 				String brandName= chBrandService.findNameByCode(chSupply2.getAccreditBrand());
 				chSupply2.setAccreditBrandName(brandName);
 			}
-			
 			return Result.createPage(result,(long)count);
 		}
 		return Result.create("未传分页");

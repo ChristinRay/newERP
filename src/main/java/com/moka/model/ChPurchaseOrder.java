@@ -1,6 +1,7 @@
 package com.moka.model;
 
 import java.lang.Integer;
+import java.math.BigDecimal;
 import java.lang.String;
 
 import lombok.Getter;
@@ -22,7 +23,9 @@ public class ChPurchaseOrder extends BaseModel {
 	private Integer  depotId;
 	private Integer  id;
 	private String  memo;
+	private String  picture;
 	private String  predictTime;
+	private BigDecimal  price;
 	private String  purBillsDate;
 	private String  purBillsId;
 	private String  purBillsType;
