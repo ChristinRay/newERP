@@ -118,6 +118,7 @@ public class ChCompanyProvider {
 			if(!Strings.isNullOrEmpty(entity.getCompanyAccountName())) {sql.SET("company_account_name = #{companyAccountName}");}
 			if(!Strings.isNullOrEmpty(entity.getAccountBank())) {sql.SET("account_bank = #{accountBank}");}
 			if(!Strings.isNullOrEmpty(entity.getAccountNo())) {sql.SET("account_no = #{accountNo}");}
+			if(!Strings.isNullOrEmpty(entity.getTax())){sql.SET(" tax=#{tax}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.SET("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.SET("state = #{state}");}
 		sql.SET("updatetime = now()");

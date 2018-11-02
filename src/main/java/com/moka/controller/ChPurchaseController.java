@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.Enum.CodeEnum;
-import com.moka.dto.ChPurchaseDto;
 import com.moka.req.ChPurchaseAddReq;
+import com.moka.req.ChPurchaseAllReq;
 import com.moka.req.ChPurchaseSupplyReq;
 import com.moka.result.Result;
 import com.moka.service.ChPurchaseService;
@@ -29,9 +29,9 @@ public class ChPurchaseController {
 	 * @return
 	 */
 	@PostMapping("all")
-	public Result<?> selectChPurchaseAll(@RequestBody ChPurchaseDto purchaseDto){
+	public Result<?> selectChPurchaseAll(@RequestBody ChPurchaseAllReq req){
 		
-		return chPurchaseService.selectChPurchaseAll(purchaseDto);
+		return chPurchaseService.selectChPurchaseAll(req);
 	}
 	/**
 	 * 下单接口

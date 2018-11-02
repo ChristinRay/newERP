@@ -1,18 +1,24 @@
 package com.moka.dao;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.google.common.base.Strings;
+import com.moka.model.ChPurchaseItem;
 import com.moka.model.ChPurchaseOrder;
+import com.moka.req.ChPurchaseAllReq;
 import com.moka.req.ChPurchaseSupplyReq;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
  * provider
  */
+@Slf4j
 public class ChPurchaseOrderProvider {
 	
 	/**
@@ -186,7 +192,7 @@ public class ChPurchaseOrderProvider {
 	 * 采购订单查询列表
 	 * @return
 	 */
-	public String  selectChPurchaseAll(ChPurchaseOrder entity){
+	public String  selectChPurchaseAll(ChPurchaseAllReq req){
 		SQL sql = new SQL().SELECT("a.id,"
 				+ "a.product_code AS productCode,"
 				+ "a.product_name AS productName,"
@@ -209,7 +215,9 @@ public class ChPurchaseOrderProvider {
 				INNER_JOIN(" ch_brand d ON ( d.brand_code = a.brand_code )").
 				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
 		sql.WHERE(" a.state='1'");
-		
+		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("e.id = #{companyId}");}
+		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("c.id = #{supplyId}");}
+		log.info("查询商品的sql语句"+sql);
 		return sql.toString();
 	}
 	
@@ -227,4 +235,21 @@ public class ChPurchaseOrderProvider {
 		return sql.toString();
 	}
 	
+	
+	/**
+	 * 插入操作
+	 * @param entity
+	 * @return
+	 */
+	public String insertChPurchaseOrderItem(ChPurchaseItem chPurchaseItem) {
+		SQL sql = new SQL().INSERT_INTO("ch_purchase_order_item");
+		sql.VALUES(" pur_bills_id,product_item_id,product_name,product_size,purchase_price,product_price,pur_number,money,else_price,memo "
+				, "#{purBillsId},#{productItemId},#{productNmae},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elseMoney},#{memo}");
+		return sql.toString();
+	}
 }
+
+
+
+
+

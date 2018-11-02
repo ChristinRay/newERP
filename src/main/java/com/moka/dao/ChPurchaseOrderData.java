@@ -12,7 +12,9 @@ import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.dto.ChPurchaseDto;
 import com.moka.dto.ChPurchaseSupplyDto;
+import com.moka.model.ChPurchaseItem;
 import com.moka.model.ChPurchaseOrder;
+import com.moka.req.ChPurchaseAllReq;
 import com.moka.req.ChPurchaseSupplyReq;
 
 @Mapper
@@ -89,7 +91,7 @@ public interface ChPurchaseOrderData {
 	 * @return
 	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "selectChPurchaseAll")
-	public List<ChPurchaseDto> selectChPurchaseAll(ChPurchaseDto entity);
+	public List<ChPurchaseDto> selectChPurchaseAll(ChPurchaseAllReq req);
 	
 	/**
 	 * 根据采购公司的品牌编码查询供应商信息 lbq
@@ -98,4 +100,12 @@ public interface ChPurchaseOrderData {
 	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "findSupplyByCompany")
 	public List<ChPurchaseSupplyDto> findSupplyByCompany(ChPurchaseSupplyReq req);
+	/**
+	 * 采购详情插入
+	 * @param entity
+	 * @return
+	 */
+	@InsertProvider(type = ChPurchaseOrderProvider.class, method = "insertChPurchaseOrderItem")
+	@SelectKey(before=false,keyProperty="id",resultType=Integer.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
+	public int insertChPurchaseOrderItem(ChPurchaseItem entity);
 }
