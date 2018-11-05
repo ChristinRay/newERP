@@ -40,8 +40,8 @@ public class ChPurchaseController {
 	@PostMapping("add")
 	public Result<?> addChPurchase(@RequestBody ChPurchaseAddReq req){
 		req.check();
-		
-		
+
+
 		return chPurchaseService.add(req);
 	}
 	

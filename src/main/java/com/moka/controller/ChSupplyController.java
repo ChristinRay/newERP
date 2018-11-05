@@ -54,7 +54,7 @@ public class ChSupplyController {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@PostMapping("list")
-	public Result<?> list(@RequestBody ChSupply chSupply) throws UnsupportedEncodingException{
+	public Result<?> list(@RequestBody ChSupply chSupply) throws UnsupportedEncodingException {
 		if(commonService.paginationSupport(chSupply.getPageIndex(), chSupply.getPageSize())) {
 			int count = chSupplyData.selectChSupplyByCount(chSupply);
 			int[] page = commonService.getLimit(chSupply.getPageIndex(), chSupply.getPageSize());
@@ -119,7 +119,7 @@ public class ChSupplyController {
 			return Result.create("OK","操作成功");
 		}
 		return Result.create("ERROR","操作失败");
-	} 
+	}
 }
 
 
