@@ -13,6 +13,7 @@ import lombok.Setter;
 @Setter
 public class ChPurchaseDto {
 	private Integer id;
+	private Integer productId;//商品id
 	private Integer supplyId;//供应商id
 	private Integer companyId;//公司id
 	private String brandCode;//品牌id

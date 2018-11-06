@@ -193,7 +193,7 @@ public class ChPurchaseOrderProvider {
 	 * @return
 	 */
 	public String  selectChPurchaseAll(ChPurchaseAllReq req){
-		SQL sql = new SQL().SELECT("a.id,"
+		SQL sql = new SQL().SELECT("a.id as productId,"
 				+ "a.product_code AS productCode,"
 				+ "a.product_name AS productName,"
 				+ "a.product_size AS productSize,"
@@ -216,7 +216,8 @@ public class ChPurchaseOrderProvider {
 				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
 		sql.WHERE(" a.state='1'");
 		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("e.id = #{companyId}");}
-		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("c.id = #{supplyId}");}
+		if(!Objects.isNull(req.getSupplyId())) {sql.WHERE("c.id = #{supplyId}");}
+		if(!Objects.isNull(req.getProductId())){sql.WHERE("a.id = #{productId}");}
 		log.info("查询商品的sql语句"+sql);
 		return sql.toString();
 	}
