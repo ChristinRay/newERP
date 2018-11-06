@@ -14,6 +14,7 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
@@ -24,7 +25,13 @@ import org.apache.shiro.mgt.SecurityManager;
 **/
 @Configuration
 public class ShiroConfig {
-
+	
+    @Value("${spring.redis.password}")
+    private String password;
+    
+    @Value("${spring.redis.host}")
+    private String host;
+    
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -96,11 +103,11 @@ public class ShiroConfig {
      */
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
-        redisManager.setHost("localhost");
+        redisManager.setHost(host);
         redisManager.setPort(6379);
         redisManager.setExpire(1800);// 配置缓存过期时间
         redisManager.setTimeout(0);
-        // redisManager.setPassword(password);
+        redisManager.setPassword(password);
         return redisManager;
     }
 
