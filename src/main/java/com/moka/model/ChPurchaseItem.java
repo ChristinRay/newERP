@@ -12,9 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ChPurchaseItem {
+	private Integer id;
 	private String purBillsId;//采购订单编号
 	private Integer productItemId;//商品详情id
-	private String productNmae;//商品名称
+	private String productName;//商品名称
 	private String productSize;//商品规格
 	private BigDecimal purchasePrice;//采购单价
 	private BigDecimal productPrice;//实际采购单价

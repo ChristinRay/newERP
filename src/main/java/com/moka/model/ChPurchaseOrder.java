@@ -17,12 +17,9 @@ public class ChPurchaseOrder extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private Integer  approverId;
 	private Integer  companyId;
-	private String  createtime;
+	private Integer supplyId;
 	private Integer  depotId;
-	private Integer  id;
-	private String  memo;
 	private String  picture;
 	private String  predictTime;
 	private BigDecimal  price;
@@ -31,9 +28,11 @@ public class ChPurchaseOrder extends BaseModel {
 	private String  purBillsType;
 	private String  purOrderType;
 	private String  realityTime;
-	private String  state;
-	private String  updatetime;
+	private Integer  approverId;
 	private Integer  userId;
+	private String  memo;
+	private String  createtime;
+	private String  updatetime;
 
 
 

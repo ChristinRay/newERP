@@ -5,11 +5,13 @@ import java.util.Objects;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
+import org.apache.ibatis.scripting.xmltags.WhereSqlNode;
 
 import com.google.common.base.Strings;
 import com.moka.model.ChPurchaseItem;
 import com.moka.model.ChPurchaseOrder;
 import com.moka.req.ChPurchaseAllReq;
+import com.moka.req.ChPurchaseItemReq;
 import com.moka.req.ChPurchaseSupplyReq;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +30,7 @@ public class ChPurchaseOrderProvider {
 	 */
 	public String insertChPurchaseOrder(ChPurchaseOrder entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_purchase_order");
-		sql.VALUES("company_id,createtime,depot_id,id,memo,picture,predict_time,price,pur_bills_date,pur_bills_id,pur_bills_type,pur_order_type,reality_time,state,updatetime,user_id", "#{companyId},now(),#{depotId},#{id},#{memo},#{picture},#{predictTime},#{price},#{purBillsDate},#{purBillsId},#{purBillsType},#{purOrderType},#{realityTime},#{state},now(),#{userId}");
+		sql.VALUES("company_id,supply_id,createtime,depot_id,id,memo,picture,predict_time,price,pur_bills_date,pur_bills_id,pur_bills_type,pur_order_type,reality_time,state,updatetime,user_id", "#{companyId},#{supplyId},now(),#{depotId},#{id},#{memo},#{picture},#{predictTime},#{price},#{purBillsDate},#{purBillsId},#{purBillsType},#{purOrderType},#{realityTime},#{state},now(),#{userId}");
 		return sql.toString();
 	}
 	/**
@@ -55,7 +57,7 @@ public class ChPurchaseOrderProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+			sql.WHERE(" state='1'");
 		return sql.toString();
 	}
 	/**
@@ -67,25 +69,21 @@ public class ChPurchaseOrderProvider {
 	 * @return
 	 */
 	public String selectChPurchaseOrderByLimt(ChPurchaseOrder entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_purchase_order");
-					if(!Objects.isNull(entity.getApproverId())) {sql.WHERE("approver_id = #{approverId}");}
-			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
-			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
-			if(!Objects.isNull(entity.getDepotId())) {sql.WHERE("depot_id = #{depotId}");}
-			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getMemo())) {sql.WHERE("memo = #{memo}");}
-			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.WHERE("picture = #{picture}");}
-			if(!Strings.isNullOrEmpty(entity.getPredictTime())) {sql.WHERE("predict_time = #{predictTime}");}
-			if(!Objects.isNull(entity.getPrice())) {sql.WHERE("price = #{price}");}
-			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("pur_bills_date = #{purBillsDate}");}
-			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("pur_bills_id = #{purBillsId}");}
-			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("pur_bills_type = #{purBillsType}");}
-			if(!Strings.isNullOrEmpty(entity.getPurOrderType())) {sql.WHERE("pur_order_type = #{purOrderType}");}
-			if(!Strings.isNullOrEmpty(entity.getRealityTime())) {sql.WHERE("reality_time = #{realityTime}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
-			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+		SQL sql = new SQL().SELECT("a.id,a.pur_bills_id AS purBillsId,a.pur_order_type AS purOrderType,"
+				+ "a.predict_time AS predictTime,a.reality_time AS realityTime,a.company_id AS companyId,"
+				+ "a.supply_id AS supplyId,b.supply_name AS supplyName,a.memo,a.picture,a.user_id AS userId,"
+				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType ").FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
+			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("a.company_id = #{companyId}");}
+			if(!Objects.isNull(entity.getId())) {sql.WHERE("a.id = #{id}");}
+			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("a.pur_bills_date = #{purBillsDate}");}
+			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("a.pur_bills_id = #{purBillsId}");}
+			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("a.pur_bills_type = #{purBillsType}");}
+			if(!Strings.isNullOrEmpty(entity.getPurOrderType())) {sql.WHERE("a.pur_order_type = #{purOrderType}");}
+			if(!Strings.isNullOrEmpty(entity.getRealityTime())) {sql.WHERE("a.reality_time = #{realityTime}");}
+			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
+			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("a.user_id = #{userId}");}
+			sql.WHERE(" a.state='1'");
+			sql.WHERE(" b.state='1'");
 		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
@@ -94,7 +92,9 @@ public class ChPurchaseOrderProvider {
 	 * @return
 	 */
 	public String selectChPurchaseOrder(ChPurchaseOrder entity) {
-		SQL sql = new SQL().SELECT("*").FROM("ch_purchase_order");
+		SQL sql = new SQL().SELECT(" id,pur_bills_id AS purBillsId,pur_order_type AS purOrderType,predict_time AS predictTime,"
+				+ "reality_time AS realityTime,company_id AS companyId,supply_id AS supplyId,memo,"
+				+ "picture,user_id AS userId,approver_id AS approverId,state").FROM("ch_purchase_order");
 					if(!Objects.isNull(entity.getApproverId())) {sql.WHERE("approver_id = #{approverId}");}
 			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -112,7 +112,7 @@ public class ChPurchaseOrderProvider {
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+			sql.WHERE(" state='1'");
 		return sql.toString();
 	}
 	/**
@@ -218,7 +218,7 @@ public class ChPurchaseOrderProvider {
 		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("e.id = #{companyId}");}
 		if(!Objects.isNull(req.getSupplyId())) {sql.WHERE("c.id = #{supplyId}");}
 		if(!Objects.isNull(req.getProductId())){sql.WHERE("a.id = #{productId}");}
-		log.info("查询商品的sql语句"+sql);
+		//log.info("查询商品的sql语句"+sql);
 		return sql.toString();
 	}
 	
@@ -236,16 +236,27 @@ public class ChPurchaseOrderProvider {
 		return sql.toString();
 	}
 	
-	
 	/**
-	 * 插入操作
+	 * 详情插入操作
 	 * @param entity
 	 * @return
 	 */
 	public String insertChPurchaseOrderItem(ChPurchaseItem chPurchaseItem) {
 		SQL sql = new SQL().INSERT_INTO("ch_purchase_order_item");
 		sql.VALUES(" pur_bills_id,product_item_id,product_name,product_size,purchase_price,product_price,pur_number,money,else_price,memo "
-				, "#{purBillsId},#{productItemId},#{productNmae},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elseMoney},#{memo}");
+				, "#{purBillsId},#{productItemId},#{productName},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elseMoney},#{memo}");
+		return sql.toString();
+	}
+	/**
+	 * 采购订单详情查询
+	 * @param req
+	 * @return
+	 */
+	public String listItem(ChPurchaseItemReq req){
+		SQL sql = new SQL().SELECT(" a.id,a.pur_bills_id AS purBillsId, a.product_item_id AS productItemId,"
+				+ "a.product_name AS productName,a.product_size	AS productSize,a.product_price AS productPrice,"
+				+ "a.pur_number AS purNumber,a.money,a.else_price AS elsePrice,a.memo").FROM(" ch_purchase_order_item a");
+		if(!Strings.isNullOrEmpty(req.getPurBillsId())) {sql.SET(" a.pur_bills_id = #{purBillsId}");}
 		return sql.toString();
 	}
 }

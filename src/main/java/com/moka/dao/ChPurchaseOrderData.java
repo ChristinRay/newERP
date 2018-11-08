@@ -10,11 +10,13 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
+import com.moka.dto.ChProductListDto;
 import com.moka.dto.ChPurchaseDto;
 import com.moka.dto.ChPurchaseSupplyDto;
 import com.moka.model.ChPurchaseItem;
 import com.moka.model.ChPurchaseOrder;
 import com.moka.req.ChPurchaseAllReq;
+import com.moka.req.ChPurchaseItemReq;
 import com.moka.req.ChPurchaseSupplyReq;
 
 @Mapper
@@ -44,14 +46,14 @@ public interface ChPurchaseOrderData {
 	 * @return
 	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "selectChPurchaseOrderByLimt")
-	public List<ChPurchaseOrder> selectChPurchaseOrderByLimt(ChPurchaseOrder entity);
+	public List<ChProductListDto> selectChPurchaseOrderByLimt(ChPurchaseOrder entity);
 	/**
 	 * 按条件查询记录
 	 * @param entity
 	 * @return
 	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "selectChPurchaseOrder")
-	public List<ChPurchaseOrder> selectChPurchaseOrder(ChPurchaseOrder entity);
+	public List<ChProductListDto> selectChPurchaseOrder(ChPurchaseOrder entity);
 	/**
 	 * 根据主键id查询实体
 	 * @param id
@@ -108,4 +110,14 @@ public interface ChPurchaseOrderData {
 	@InsertProvider(type = ChPurchaseOrderProvider.class, method = "insertChPurchaseOrderItem")
 	@SelectKey(before=false,keyProperty="id",resultType=Integer.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
 	public int insertChPurchaseOrderItem(ChPurchaseItem entity);
+	
+	
+	
+	
+	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "listItem")
+	public List<ChPurchaseItem> listItem(ChPurchaseItemReq req);
+	
+	
+	
+	
 }

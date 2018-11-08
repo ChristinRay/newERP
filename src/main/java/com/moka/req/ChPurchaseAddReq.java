@@ -17,6 +17,7 @@ import lombok.Data;
 public class ChPurchaseAddReq {
 	private Integer  companyId;//公司id
 	private Integer  depotId;//仓库id
+	private Integer supplyId;//供应商id
 	private String  memo;//备注
 	private String  picture;//图片
 	private String  predictTime;//预计到货时间
@@ -35,7 +36,7 @@ public class ChPurchaseAddReq {
 	
 	public void check (){
 		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要字段不能为空", "必要字段不能为空",
-				purBillsDate,purBillsId,purBillsType,purOrderType,predictTime );
+				purBillsDate,purOrderType,predictTime,supplyCode );
 		ParamPreconditions.checkNotNull(purchaseList, CodeEnum.FAIL.getCode(), "没有商品不能下单");
 		ParamPreconditions.checkNotNull(companyId, CodeEnum.FAIL.getCode(), "公司id不能为空");
 		ParamPreconditions.checkNotNull(depotId, CodeEnum.FAIL.getCode(), "仓库id不能为空");

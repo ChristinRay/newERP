@@ -1,5 +1,6 @@
 package com.moka.service;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -8,13 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moka.dao.ChPurchaseOrderData;
+import com.moka.dto.ChProductListDto;
 import com.moka.dto.ChPurchaseDto;
 import com.moka.model.ChPurchaseItem;
 import com.moka.model.ChPurchaseOrder;
 import com.moka.req.ChPurchaseAddReq;
 import com.moka.req.ChPurchaseAllReq;
+import com.moka.req.ChPurchaseItemReq;
 import com.moka.req.ChPurchaseSupplyReq;
 import com.moka.result.Result;
+import com.moka.utils.DateTimes;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +31,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ChPurchaseService {
 	@Autowired
 	private ChPurchaseOrderData chPurchaseOrderData;
+	@Autowired
+	private ChCompanyService chCompanyService;
+	
 	
 	
 	/**
@@ -45,10 +52,8 @@ public class ChPurchaseService {
 	 * @return
 	 */
 	public Result<?> findSupplyByCompany(ChPurchaseSupplyReq req){
-		
 		return Result.create(chPurchaseOrderData.findSupplyByCompany(req));
 	}
-	
 	
 	/**
 	 * 下单接口
@@ -59,14 +64,16 @@ public class ChPurchaseService {
 	public Result<?> add(ChPurchaseAddReq req){
 		ChPurchaseOrder entity=new ChPurchaseOrder();
 		String supplyCode = req.getSupplyCode();
-		String purBillsId =supplyCode+"-"+System.currentTimeMillis()+"";
+		String purBillsId =supplyCode+"-"+DateTimes.nowDateTimetrim();
 		entity.setPurBillsId(purBillsId);//订单id
 		entity.setPurBillsDate(req.getPurBillsDate());//采购单据日期
 		entity.setPurOrderType(req.getPurOrderType());//采购订单类型
 		entity.setPurBillsType("1");//单据状态(新下的采购订单为1)
 		entity.setPredictTime(req.getPredictTime());//预计到货日期
 		entity.setCompanyId(req.getCompanyId());//我司ID
+		entity.setSupplyId(req.getSupplyId());
 		entity.setState("1");//数据状态 1正常
+		entity.setUserId(req.getUserId());
 		List<ChPurchaseItem> list=  req.getPurchaseList();
 		BigDecimal price=list.stream().map(ChPurchaseItem::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);//lambda表达式
 		entity.setPrice(price);
@@ -85,10 +92,33 @@ public class ChPurchaseService {
 		 		return Result.create("ERROR", "订单详情添加失败");
 		 	}
 		}
-		return Result.create("");
+		return Result.create(entity.getId());
 	}
 	
-	
+	/**
+	 * 查询订单列表
+	 * @param order
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public List<ChProductListDto> list (ChPurchaseOrder order) throws UnsupportedEncodingException{
+		List<ChProductListDto> list=chPurchaseOrderData.selectChPurchaseOrderByLimt(order);
+		for (ChProductListDto chProductListDto : list) {
+			String companyName= chCompanyService.findNameById(chProductListDto.getCompanyId());
+			chProductListDto.setCompanyName(companyName);
+		}
+		return list;
+	}
+	/**
+	 * 查询订单详情列表
+	 * @param req
+	 * @return
+	 */
+	public Result<?> listItem(ChPurchaseItemReq req){
+		List<ChPurchaseItem> list=chPurchaseOrderData.listItem(req);
+		
+		return Result.create(list);
+	}
 }
 
 
