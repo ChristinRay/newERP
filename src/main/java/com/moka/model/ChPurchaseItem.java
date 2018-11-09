@@ -21,7 +21,7 @@ public class ChPurchaseItem {
 	private BigDecimal productPrice;//实际采购单价
 	private Integer purNumber;//商品数量
 	private BigDecimal money;//金额（商品单价*采购数量）
-	private BigDecimal elseMoney;//其他费用
+	private BigDecimal elsePrice;//其他费用
 	private String memo;//备注
 	private String productDepot;//商品的库存数量
 }

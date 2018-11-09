@@ -40,11 +40,8 @@ public class ChProductItemProvider {
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Objects.isNull(entity.getProductId())) {sql.WHERE("product_id = #{productId}");}
 			if(!Objects.isNull(entity.getSupplyId())) {sql.WHERE("supply_id = #{supplyId}");}
-			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
-			if(!Strings.isNullOrEmpty(entity.getSupplyProductNo())) {sql.WHERE("supply_product_no = #{supplyProductNo}");}
-			if(!Objects.isNull(entity.getPurchasePrice())) {sql.WHERE("purchase_price = #{purchasePrice}");}
-			if(!Objects.isNull(entity.getPackPrice())) {sql.WHERE("pack_price = #{packPrice}");}
-			if(!Objects.isNull(entity.getFreightPrice())) {sql.WHERE("freight_price = #{freightPrice}");}
+			if(!Strings.isNullOrEmpty(entity.getProductCode())){sql.WHERE("b.product_code like CONCAT ('%',#{productCode},'%')  ");}
+			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("b.brand_code = #{brandCode}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
@@ -70,7 +67,8 @@ public class ChProductItemProvider {
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Objects.isNull(entity.getProductId())) {sql.WHERE("product_id = #{productId}");}
 			if(!Objects.isNull(entity.getSupplyId())) {sql.WHERE("supply_id = #{supplyId}");}
-			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
+			if(!Strings.isNullOrEmpty(entity.getProductCode())){sql.WHERE("b.product_code like CONCAT ('%',#{productCode},'%')  ");}
+			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("b.brand_code = #{brandCode}");}
 			if(!Strings.isNullOrEmpty(entity.getSupplyProductNo())) {sql.WHERE("supply_product_no = #{supplyProductNo}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}

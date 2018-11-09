@@ -113,7 +113,11 @@ public interface ChPurchaseOrderData {
 	
 	
 	
-	
+	/**
+	 * 采购详情查看
+	 * @param req
+	 * @return
+	 */
 	@SelectProvider(type = ChPurchaseOrderProvider.class, method = "listItem")
 	public List<ChPurchaseItem> listItem(ChPurchaseItemReq req);
 	

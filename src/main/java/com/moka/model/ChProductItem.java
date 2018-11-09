@@ -28,6 +28,7 @@ public class ChProductItem extends BaseModel {
 	private BigDecimal  purchasePrice;//进货价
 	private BigDecimal  packPrice;//包装费
 	private BigDecimal  freightPrice;//运费
+	private String productCode;
 	private String freightway;
 	private Integer  userId;
 	private String  createtime;

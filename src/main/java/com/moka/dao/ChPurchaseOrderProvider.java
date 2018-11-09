@@ -1,11 +1,9 @@
 package com.moka.dao;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
-import org.apache.ibatis.scripting.xmltags.WhereSqlNode;
 
 import com.google.common.base.Strings;
 import com.moka.model.ChPurchaseItem;
@@ -72,10 +70,10 @@ public class ChPurchaseOrderProvider {
 		SQL sql = new SQL().SELECT("a.id,a.pur_bills_id AS purBillsId,a.pur_order_type AS purOrderType,"
 				+ "a.predict_time AS predictTime,a.reality_time AS realityTime,a.company_id AS companyId,"
 				+ "a.supply_id AS supplyId,b.supply_name AS supplyName,a.memo,a.picture,a.user_id AS userId,"
-				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType ").FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
+				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType,a.pur_bills_date as purBillsDate  ").FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
 			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("a.company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("a.id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("a.pur_bills_date = #{purBillsDate}");}
+			if(!Strings.isNullOrEmpty(entity.getPurBillsDate())) {sql.WHERE("a.pur_bills_date like CONCAT ('%',#{purBillsDate},'%') ");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsId())) {sql.WHERE("a.pur_bills_id = #{purBillsId}");}
 			if(!Strings.isNullOrEmpty(entity.getPurBillsType())) {sql.WHERE("a.pur_bills_type = #{purBillsType}");}
 			if(!Strings.isNullOrEmpty(entity.getPurOrderType())) {sql.WHERE("a.pur_order_type = #{purOrderType}");}
@@ -84,6 +82,7 @@ public class ChPurchaseOrderProvider {
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("a.user_id = #{userId}");}
 			sql.WHERE(" a.state='1'");
 			sql.WHERE(" b.state='1'");
+			System.out.println(sql);
 		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
@@ -244,7 +243,7 @@ public class ChPurchaseOrderProvider {
 	public String insertChPurchaseOrderItem(ChPurchaseItem chPurchaseItem) {
 		SQL sql = new SQL().INSERT_INTO("ch_purchase_order_item");
 		sql.VALUES(" pur_bills_id,product_item_id,product_name,product_size,purchase_price,product_price,pur_number,money,else_price,memo "
-				, "#{purBillsId},#{productItemId},#{productName},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elseMoney},#{memo}");
+				, "#{purBillsId},#{productItemId},#{productName},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elsePrice},#{memo}");
 		return sql.toString();
 	}
 	/**
@@ -255,8 +254,8 @@ public class ChPurchaseOrderProvider {
 	public String listItem(ChPurchaseItemReq req){
 		SQL sql = new SQL().SELECT(" a.id,a.pur_bills_id AS purBillsId, a.product_item_id AS productItemId,"
 				+ "a.product_name AS productName,a.product_size	AS productSize,a.product_price AS productPrice,"
-				+ "a.pur_number AS purNumber,a.money,a.else_price AS elsePrice,a.memo").FROM(" ch_purchase_order_item a");
-		if(!Strings.isNullOrEmpty(req.getPurBillsId())) {sql.SET(" a.pur_bills_id = #{purBillsId}");}
+				+ "a.pur_number AS purNumber,a.money,a.else_price AS elsePrice,a.memo,a.purchase_price as purchasePrice").FROM(" ch_purchase_order_item a");
+		if(!Strings.isNullOrEmpty(req.getPurBillsId())) {sql.WHERE(" a.pur_bills_id = #{purBillsId}");}
 		return sql.toString();
 	}
 }

@@ -17,7 +17,7 @@ public class ChProductItemDto {
 	private Integer  supplyId;//供应商id
 	private String  brandCode;//品牌编码
 	private String  brandName;//品牌名称
-	private String  productCode;//商品编码
+	private String  productCode;//商品编码(商品货号)
 	private String  productType;//商品类型
 	private String  typeName;//类型名称
 	private String  productUnit;//商品单位
