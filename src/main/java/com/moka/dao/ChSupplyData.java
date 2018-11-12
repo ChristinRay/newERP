@@ -74,5 +74,5 @@ public interface ChSupplyData {
 	 * @return
 	 */
 	@SelectProvider(type = ChSupplyProvider.class, method = "getSupply")
-	public ChSupply getSupply();
+	public List<ChSupply> getSupply();
 }
