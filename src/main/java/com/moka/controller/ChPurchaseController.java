@@ -83,7 +83,6 @@ public class ChPurchaseController {
 			return Result.createPage(result,(long)count);
 		}
 		return Result.create("ERROR","参数类型不匹配");
-		
 	}
 	
 	/**

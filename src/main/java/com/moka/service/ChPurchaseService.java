@@ -74,6 +74,7 @@ public class ChPurchaseService {
 		entity.setSupplyId(req.getSupplyId());
 		entity.setState("1");//数据状态 1正常
 		entity.setUserId(req.getUserId());
+		entity.setDepotId(req.getDepotId());//仓库id
 		List<ChPurchaseItem> list=  req.getPurchaseList();
 		BigDecimal price=list.stream().map(ChPurchaseItem::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);//lambda表达式
 		entity.setPrice(price);

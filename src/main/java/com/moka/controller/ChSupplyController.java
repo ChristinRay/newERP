@@ -120,6 +120,17 @@ public class ChSupplyController {
 		}
 		return Result.create("ERROR","操作失败");
 	}
+	
+	
+	/**
+	 * 供应商下拉框接口
+	 */
+	@GetMapping("get/supply")
+	public Result<?> getSupply(){
+		
+		
+		return Result.create(chSupplyData.getSupply());
+	}
 }
 
 

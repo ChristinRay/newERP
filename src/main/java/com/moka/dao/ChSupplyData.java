@@ -69,4 +69,10 @@ public interface ChSupplyData {
 	 */
 	@UpdateProvider(type = ChSupplyProvider.class, method = "updateState")
 	public int updateState(@Param("id")int id);
+	/**
+	 * 供应商下拉列表
+	 * @return
+	 */
+	@SelectProvider(type = ChSupplyProvider.class, method = "getSupply")
+	public ChSupply getSupply();
 }

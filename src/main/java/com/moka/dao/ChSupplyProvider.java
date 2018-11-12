@@ -151,4 +151,11 @@ public class ChSupplyProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	
+	public String getSupply(){
+		SQL sql=new SQL().SELECT(" id,supply_name as supplyName ").FROM(" ch_supply");
+		
+		sql.WHERE(" state='1'");
+		return sql.toString();
+	}
 }
