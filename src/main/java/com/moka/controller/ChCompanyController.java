@@ -95,6 +95,15 @@ public class ChCompanyController {
 		int a= chCompanyData.deleteByLogic(id);
 		return Result.create(a);
 	}
+	
+	
+	
+	@GetMapping("ceshi")
+	public Result<?> ceshi()
+	{
+		
+		return Result.create(chCompanyService.getAll());
+	}
 }
 
 
