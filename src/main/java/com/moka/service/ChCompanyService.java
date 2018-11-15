@@ -2,11 +2,13 @@ package com.moka.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +81,23 @@ public class ChCompanyService {
 	        }
 	        return "类型测试";
 		}
-		
+		/**
+		 * 获取列表(测试)
+		 * @param id
+		 * @return
+		 * @throws UnsupportedEncodingException
+		 */
+		public Map<String, String> getAll()  {
+			HashOperations<String, String, String> vo= redisTemplate.opsForHash();
+			// 缓存存在
+	        boolean hasKey = redisTemplate.hasKey(key);
+	        if (hasKey) {
+	        	Map<String, String> map= vo.entries(key);
+	            log.info("从缓存获取类型名称 >> " + map.toString());
+	            return map;
+	        }
+	        return null;
+		}
 		
 		
 }
