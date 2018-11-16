@@ -246,8 +246,8 @@ public class ChPurchaseOrderProvider {
 	 */
 	public String insertChPurchaseOrderItem(ChPurchaseItem chPurchaseItem) {
 		SQL sql = new SQL().INSERT_INTO("ch_purchase_order_item");
-		sql.VALUES(" pur_bills_id,product_item_id,product_name,product_size,purchase_price,product_price,pur_number,money,else_price,memo "
-				, "#{purBillsId},#{productItemId},#{productName},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elsePrice},#{memo}");
+		sql.VALUES(" pur_bills_id,product_item_id,product_name,product_size,purchase_price,product_price,pur_number,money,else_price,memo,product_weight,product_unit"
+				, "#{purBillsId},#{productItemId},#{productName},#{productSize},#{purchasePrice},#{productPrice},#{purNumber},#{money},#{elsePrice},#{memo},#{productWeight},#{productUnit}");
 		return sql.toString();
 	}
 	/**
@@ -258,7 +258,8 @@ public class ChPurchaseOrderProvider {
 	public String listItem(ChPurchaseItemReq req){
 		SQL sql = new SQL().SELECT(" a.id,a.pur_bills_id AS purBillsId, a.product_item_id AS productItemId,"
 				+ "a.product_name AS productName,a.product_size	AS productSize,a.product_price AS productPrice,"
-				+ "a.pur_number AS purNumber,a.money,a.else_price AS elsePrice,a.memo,a.purchase_price as purchasePrice").FROM(" ch_purchase_order_item a");
+				+ "a.pur_number AS purNumber,a.money,a.else_price AS elsePrice,a.memo,a.purchase_price as purchasePrice,"
+				+ "a.product_weight as productWeight,a.product_unit as productUnit").FROM(" ch_purchase_order_item a");
 		if(!Strings.isNullOrEmpty(req.getPurBillsId())) {sql.WHERE(" a.pur_bills_id = #{purBillsId}");}
 		return sql.toString();
 	}

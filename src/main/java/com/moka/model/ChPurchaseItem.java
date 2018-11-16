@@ -2,6 +2,8 @@ package com.moka.model;
 
 import java.math.BigDecimal;
 
+import com.moka.utils.ParamPreconditions;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +28,7 @@ public class ChPurchaseItem {
 	private String productDepot;//商品的库存数量
 	private String productWeight;//重量
 	private String productUnit;//单位
+	
+	
+	
 }

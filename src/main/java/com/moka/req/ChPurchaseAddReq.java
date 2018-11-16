@@ -41,6 +41,8 @@ public class ChPurchaseAddReq {
 		ParamPreconditions.checkNotNull(companyId, CodeEnum.FAIL.getCode(), "公司id不能为空");
 		ParamPreconditions.checkNotNull(depotId, CodeEnum.FAIL.getCode(), "仓库id不能为空");
 		ParamPreconditions.checkNotNull(userId, CodeEnum.FAIL.getCode(), "采购订单申请人不能为空");
+		
+		
 	}
 }
 

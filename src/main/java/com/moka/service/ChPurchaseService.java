@@ -3,6 +3,7 @@ package com.moka.service;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +77,17 @@ public class ChPurchaseService {
 		entity.setUserId(req.getUserId());
 		entity.setDepotId(req.getDepotId());//仓库id
 		List<ChPurchaseItem> list=  req.getPurchaseList();
+		//订单金额
 		BigDecimal price=list.stream().map(ChPurchaseItem::getMoney).reduce(BigDecimal.ZERO, BigDecimal::add);//lambda表达式
-		entity.setPrice(price);
+		
+		BigDecimal elsePrice=new BigDecimal("0");
+		for (ChPurchaseItem chPurchaseItem : list) {
+			if(Objects.isNull(chPurchaseItem.getElsePrice())){
+			}else{
+				elsePrice= elsePrice.add(chPurchaseItem.getElsePrice());
+			}
+		}
+		entity.setPrice(price.add(elsePrice));
 		int aa= chPurchaseOrderData.insertChPurchaseOrder(entity);//订单表
 		if(aa==1){
 			log.info("订单表添加成功");
