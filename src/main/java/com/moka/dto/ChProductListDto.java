@@ -32,4 +32,9 @@ public class ChProductListDto {
 	private String  memo;
 	private String  createtime;
 	private String  updatetime;
+	private String supplyAddress;
+	private String supplyContact;
+	private String supplyAccount;
+	private String supplyAccountName;
+	
 }

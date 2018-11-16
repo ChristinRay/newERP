@@ -70,7 +70,10 @@ public class ChPurchaseOrderProvider {
 		SQL sql = new SQL().SELECT("a.id,a.pur_bills_id AS purBillsId,a.pur_order_type AS purOrderType,"
 				+ "a.predict_time AS predictTime,a.reality_time AS realityTime,a.company_id AS companyId,"
 				+ "a.supply_id AS supplyId,b.supply_name AS supplyName,a.memo,a.picture,a.user_id AS userId,"
-				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType,a.pur_bills_date as purBillsDate,a.depot_id as depotId  ").FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
+				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType,a.pur_bills_date as purBillsDate,"
+				+ "a.depot_id as depotId,b.supply_address as  supplyAddress,b.supply_contact AS supplyContact,"
+				+ "b.supply_account AS supplyAccount,b.supply_account_name AS supplyAccountName ")
+				.FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
 			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("a.company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getSupplyId())) {sql.WHERE("a.supply_id = #{supplyId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("a.id = #{id}");}

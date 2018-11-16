@@ -24,4 +24,6 @@ public class ChPurchaseItem {
 	private BigDecimal elsePrice;//其他费用
 	private String memo;//备注
 	private String productDepot;//商品的库存数量
+	private String productWeight;//重量
+	private String productUnit;//单位
 }
