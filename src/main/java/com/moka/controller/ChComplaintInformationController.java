@@ -1,45 +1,22 @@
 package com.moka.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URLEncoder;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChComplaintInformationData;
 import com.moka.model.ChComplaintInformation;
-import com.moka.req.ChComplaintInformationReq;
 import com.moka.result.Result;
 import com.moka.service.ChComplaintInformationService;
 import com.moka.service.CommonService;
@@ -239,18 +216,6 @@ public class ChComplaintInformationController {
 	public Result<?> solutionList() throws UnsupportedEncodingException{
 		return chComplaintInformationService.solutionList();
 	}
-	
-	/*public static void main(String[] args) {
-		System.out.println(countDaysInMonth("12"));
-		String s = "2018-10";
-		System.out.println(s.substring(s.indexOf("-") + 1));
-		String a = "2018-10-12";
-		System.out.println(a.substring(a.indexOf("-") + 1, a.lastIndexOf("-")));
-		System.out.println(StringDateUtil.stringToDate("2018-10-08", 3));
-		System.out.println(StringDateUtil.dateToString(StringDateUtil.addDates(StringDateUtil.stringToDate("2018-10-08", 3), 2), 3));
-	}*/
-	 
-
 	/**
 	 * 获得某个月的天数
 	 * 
