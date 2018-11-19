@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -14,11 +15,8 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 
 /**
 * @author    created by lbq
@@ -100,7 +98,7 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost("localhost");
         redisManager.setPort(6379);
-        redisManager.setExpire(1800);// 配置缓存过期时间
+        redisManager.setExpire(2400);// 配置缓存过期时间
         redisManager.setTimeout(0);
         return redisManager;
     }
@@ -177,9 +175,9 @@ public class ShiroConfig {
     /***
      * 使授权注解起作用不如不想配置可以在pom文件中加入
      * <dependency>
-     *<groupId>org.springframework.boot</groupId>
-     *<artifactId>spring-boot-starter-aop</artifactId>
-     *</dependency>
+     * <groupId>org.springframework.boot</groupId>
+     * <artifactId>spring-boot-starter-aop</artifactId>
+     * </dependency>
      * @param securityManager
      * @return
      */

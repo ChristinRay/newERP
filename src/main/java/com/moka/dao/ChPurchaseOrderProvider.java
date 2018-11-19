@@ -218,9 +218,11 @@ public class ChPurchaseOrderProvider {
 				INNER_JOIN(" ch_brand d ON ( d.brand_code = a.brand_code )").
 				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
 		sql.WHERE(" a.state='1'");
+		sql.WHERE(" b.state='1'");
 		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("e.id = #{companyId}");}
 		if(!Objects.isNull(req.getSupplyId())) {sql.WHERE("c.id = #{supplyId}");}
 		if(!Objects.isNull(req.getProductId())){sql.WHERE("a.id = #{productId}");}
+		if(!Objects.isNull(req.getProductItemId())){sql.WHERE("b.id = #{productItemId}");}
 		//log.info("查询商品的sql语句"+sql);
 		return sql.toString();
 	}

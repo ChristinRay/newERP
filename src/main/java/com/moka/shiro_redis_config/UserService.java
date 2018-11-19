@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 import com.moka.dao.SysUserData;
 import com.moka.model.SysUser;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
 * @author    created by lbq
 * @date	     2018年9月20日 上午11:25:08
 **/
 @Service
+@Slf4j
 public class UserService {
 	
 	@Autowired
@@ -25,7 +28,7 @@ public class UserService {
 	 */
 	public SysUser getUser(SysUser user) {
 		SysUser sysUsers= sysUserData.selectSysUser(user);
-		System.out.println(sysUsers);
+		log.info("登录的用户信息"+sysUsers);
 		return sysUsers;
 	}
 	/**

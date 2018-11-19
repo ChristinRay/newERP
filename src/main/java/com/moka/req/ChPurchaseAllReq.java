@@ -11,5 +11,5 @@ public class ChPurchaseAllReq {
 	private Integer  companyId;
 	private Integer supplyId;
 	private Integer productId;
-	
+	private Integer productItemId;
 }

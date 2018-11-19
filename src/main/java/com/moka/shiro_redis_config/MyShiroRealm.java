@@ -73,7 +73,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		logger.info("---------------- 执行 Shiro 权限获取 ---------------------");
-		Object principal = principals.getPrimaryPrincipal();
+		Object principal = principals.getPrimaryPrincipal();//身份验证
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		if (principal instanceof SysUser) {
 			SysUser userLogin = (SysUser) principal;
