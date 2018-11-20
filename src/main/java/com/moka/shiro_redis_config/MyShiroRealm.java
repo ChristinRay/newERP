@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.moka.model.SysUser;
 
 /**
+ * 自定义Realm
  * @author created by lbq
  * @date 2018年9月19日 下午7:45:29
  **/

@@ -24,7 +24,6 @@ import org.springframework.context.annotation.Configuration;
 **/
 @Configuration
 public class ShiroConfig {
-	
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -52,7 +51,10 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;	
     }
-
+    /**
+     * 创建对象
+     * @return
+     */
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -159,7 +161,6 @@ public class ShiroConfig {
         return kickoutSessionControlFilter;
     }
 
-
     /***
      * 授权所用配置
      *
@@ -171,7 +172,6 @@ public class ShiroConfig {
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;
     }
-
     /***
      * 使授权注解起作用不如不想配置可以在pom文件中加入
      * <dependency>
@@ -187,7 +187,6 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
-
     /**
      * Shiro生命周期处理器
      *

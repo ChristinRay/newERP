@@ -2,8 +2,6 @@ package com.moka.result;
 
 import java.util.List;
 
-import org.springframework.validation.FieldError;
-
 /**
 * @author    created by lbq
 * @date	     2018年4月6日 下午3:35:39
