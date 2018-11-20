@@ -12,15 +12,15 @@ import lombok.Data;
 @Data
 @Component
 public class ConstantQiniu {
-	  @Value("${qiniu.accessKey}")
-	    private String accessKey;
+  	@Value("${qiniu.accessKey}")
+    private String accessKey;
 
-	    @Value("${qiniu.secretKey}")
-	    private String secretKey;
+    @Value("${qiniu.secretKey}")
+    private String secretKey;
 
-	    @Value("${qiniu.bucket}")
-	    private String bucket;
+    @Value("${qiniu.bucket}")
+    private String bucket;
 
-	    @Value("${qiniu.path}")
-	    private String path;
+    @Value("${qiniu.path}")
+    private String path;
 }
