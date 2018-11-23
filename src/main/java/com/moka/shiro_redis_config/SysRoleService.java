@@ -21,9 +21,9 @@ public class SysRoleService {
 
 	public Set<String> findRoleNameByUserId(Integer id) {
 		Set<String>  set=Sets.newHashSet();
+		set.add("1");
 		
-		
-		return null;
+		return set;
 	}
 
 }

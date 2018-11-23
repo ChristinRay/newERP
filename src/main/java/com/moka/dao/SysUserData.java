@@ -3,15 +3,17 @@ package com.moka.dao;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.model.SysUser;
+
+
 @Mapper
 public interface SysUserData {
 	
@@ -48,20 +50,6 @@ public interface SysUserData {
 	@SelectProvider(type = SysUserProvider.class, method = "selectSysUser")
 	public SysUser selectSysUser(SysUser entity);
 	/**
-	 * 根据主键id查询实体
-	 * @param id
-	 * @return
-	 */
-	@SelectProvider(type = SysUserProvider.class, method = "selectOne")
-	public SysUser selectOne(int id);
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	@UpdateProvider(type = SysUserProvider.class, method = "updateSysUser")
-	public int updateSysUser(SysUser entity);
-	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
@@ -69,19 +57,12 @@ public interface SysUserData {
 	@UpdateProvider(type = SysUserProvider.class, method = "updateSysUserByNullChk")
 	public int updateSysUserByNullChk(SysUser entity);
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	@DeleteProvider(type = SysUserProvider.class, method = "deleteSysUser")
-	public int deleteSysUser(int id);
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
 	@UpdateProvider(type = SysUserProvider.class, method = "deleteByLogic")
-	public int deleteByLogic(int id);
+	public int deleteByLogic(@Param("id")int id);
 	
 	/**
 	 * 根据登录人id获取登录人权限
@@ -89,7 +70,7 @@ public interface SysUserData {
 	 * @return
 	 */
 	@SelectProvider(type = SysUserProvider.class, method = "findPermissionsByUserId")
-	public Set<String> findPermissionsByUserId(int id);
+	public Set<String> findPermissionsByUserId(@Param("id")int id);
 	
 }
 

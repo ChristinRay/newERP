@@ -1,15 +1,19 @@
 package com.moka.dao;
 
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.jdbc.SQL;
-import com.google.common.base.Strings;
 import java.util.Objects;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.jdbc.SQL;
+
+import com.google.common.base.Strings;
 import com.moka.model.SysUser;
+
 
 /**
  * 用户user表
  * provider
  */
+
 public class SysUserProvider {
 	
 	/**
@@ -68,31 +72,6 @@ public class SysUserProvider {
 		return sql.toString();
 	}
 	/**
-	 * 根据主键id查询实体
-	 * @param id
-	 * @return
-	 */
-	public String selectOne(long id) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_user");
-		sql.WHERE("id="+id);
-		return sql.toString();
-	}
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	public String updateSysUser(SysUser entity) {
-		SQL sql = new SQL().UPDATE("sys_user");
-				sql.SET("user_name = #{userName}");
-		sql.SET("pass_word = #{passWord}");
-		sql.SET("user_enable = #{userEnable}");
-		sql.SET("updatetime = now()");
-
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 更新实体，过滤空值
 	 * @param entity
 	 * @return
@@ -108,21 +87,11 @@ public class SysUserProvider {
 		return sql.toString();
 	}
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	public String deleteSysUser(long id) {
-		SQL sql = new SQL().DELETE_FROM("sys_user");
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
 	 */
-	public String deleteByLogic(long id) {
+	public String deleteByLogic(@Param("id") int id) {
 		SQL sql = new SQL().UPDATE("sys_user");
 		sql.SET("state=2");
 		sql.WHERE("id = #{id}");
@@ -133,17 +102,9 @@ public class SysUserProvider {
 	 * @param entity
 	 * @return
 	 */
-	public String findPermissionsByUserId(int id) {
-		String  sql = new SQL()
-		{
-			{
-				SELECT("  c.res_url   ");
-				FROM("from sys_user_role a INNER JOIN sys_role_resources b on (a.role_id=b.role_id) INNER JOIN sys_resources c ON(b.resources_id=c.id)");
-				if(!Objects.isNull(id)) {
-					WHERE(" a.user_id = #{id}");
-				}
-			}
-		}.toString();
+	public String findPermissionsByUserId(@Param("id") int id) {
+		SQL sql = new SQL().SELECT("c.res_url").FROM(" sys_user_role a INNER JOIN sys_role_resources b on (a.role_id=b.role_id) INNER JOIN sys_resources c ON(b.resources_id=c.id)");
+				sql.WHERE(" a.user_id = #{id}");
 		return sql.toString();
 	}
 }

@@ -38,6 +38,7 @@ public class UserService {
 	 */
 	public Set<String> findPermissionsByUserId(Integer id) {
 		Set<String> set =sysUserData.findPermissionsByUserId(id);
+		set.add("1");
 		return set;
 	}
 

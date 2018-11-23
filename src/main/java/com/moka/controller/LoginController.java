@@ -17,22 +17,26 @@ import com.moka.model.SysUser;
 import com.moka.req.UserReq;
 import com.moka.result.Result;
 import com.moka.result.ResultFul;
+
+import lombok.extern.slf4j.Slf4j;
 /**
 * @author    created by lbq
 * @date	     2018年9月20日 下午4:15:43
 **/
 @RestController
 @RequestMapping("/api/erp/v1/user")
+@Slf4j
 public class LoginController {
 
     @PostMapping("/login")
     public Result<?> submitLogin(@RequestBody UserReq req, HttpServletRequest request) {
     	SysUser user;
+    	UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
+    	Subject subject = SecurityUtils.getSubject();
         try {
-            UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
-            Subject subject = SecurityUtils.getSubject();
             subject.login(token);
             user= (SysUser) subject.getPrincipal();
+            //PrincipalCollection asd= subject.getPreviousPrincipals();//得到登录人的所有权限
         } catch (DisabledAccountException e) {
             request.setAttribute("msg", "账户已被禁用");
             return Result.create("ERROR", "账户已被禁用");
@@ -40,15 +44,26 @@ public class LoginController {
             request.setAttribute("msg", "用户名或密码错误");
             return Result.create("ERROR", "用户名或密码错误");
         }
-
         // 执行到这里说明用户已登录成功
-        return Result.create(user);
+        return Result.create(subject.getSession().getId());
     }
     
+    /**
+     * 退出登录
+     * @return
+     */
+    @GetMapping("/logout")
+    public ResultFul logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        System.out.println("11");
+        return ResultFul.create("OK", "已退出");
+    }
     
 
-    @GetMapping( "/login")
+    @GetMapping( "/unauth")
     public ResultFul loginPage() {
+    	log.info("测试登录");
         return ResultFul.create("ERROR", "请重新登录！");
     }
 
