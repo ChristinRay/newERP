@@ -16,8 +16,8 @@ import com.moka.utils.ParamPreconditions;
 
 /**
  * 项目service
- * @author  created by boming
- * @date    2018年1月5日 上午9:40:37
+ * @author  created by lbq
+ * @date    2018年10月5日 上午9:40:37
  */
 @Service
 @EnableAsync

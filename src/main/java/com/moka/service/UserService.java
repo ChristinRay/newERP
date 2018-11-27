@@ -27,6 +27,8 @@ public class UserService {
 	 * @return
 	 */
 	public Result<?> add(SysUser sysUser){
+		sysUser.setUserEnable(1);
+		sysUser.setState("1");
 		
 		return Result.create(sysUserData.insertSysUser(sysUser));
 	}
@@ -37,7 +39,7 @@ public class UserService {
 	 */
 	public Result<?> list(SysUser sysUser){
 		
-		return Result.create(sysUserData.selectSysUser(sysUser));
+		return Result.create(sysUserData.selectSysUserList(sysUser));
 	}
 	
 	

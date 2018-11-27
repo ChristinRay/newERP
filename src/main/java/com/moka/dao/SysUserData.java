@@ -1,5 +1,6 @@
 package com.moka.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.ibatis.annotations.InsertProvider;
@@ -31,6 +32,16 @@ public interface SysUserData {
 	 */
 	@SelectProvider(type = SysUserProvider.class, method = "selectSysUser")
 	public SysUser selectSysUser(SysUser entity);
+	
+	/**
+	 * 按条件查询所有
+	 * @param entity
+	 * @return
+	 */
+	@SelectProvider(type = SysUserProvider.class, method = "selectSysUserList")
+	public List<SysUser> selectSysUserList(SysUser entity);
+	
+	
 	/**
 	 * 更新实体，过滤空值
 	 * @param entity

@@ -24,21 +24,34 @@ public class SysUserProvider {
 	public String insertSysUser(SysUser entity) {
 		SQL sql = new SQL().INSERT_INTO("sys_user");
 		sql.VALUES("user_name,pass_word,name,mobile,picture,birthday,user_enable,user_id,state,createtime,updatetime", 
-				   "#{username},#{password},#{name},#{mobile},#{picture},#{birthday},#{userEnable},#{userId},'1',now(),now()");
+				   "#{username},#{password},#{name},#{mobile},#{picture},#{birthday},#{userEnable},#{userId},#{state},now(),now()");
 		return sql.toString();
 	}
+	/**
+	 * 按条件查询一个用户
+	 * @param entity
+	 * @return
+	 */
+	public String selectSysUser(SysUser entity) {
+		SQL sql = new SQL().SELECT("id as id ,user_name as username,pass_word as password,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
+					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
+			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{username}");}
+			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{password}");}
+			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
+		return sql.toString();
+	}
+	
 	/**
 	 * 按条件查询记录
 	 * @param entity
 	 * @return
 	 */
-	public String selectSysUser(SysUser entity) {
-		SQL sql = new SQL().SELECT("id as id ,user_name as userName,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
+	public String selectSysUserList(SysUser entity) {
+		SQL sql = new SQL().SELECT("id as id ,user_name as username,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{userName}");}
-			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{passWord}");}
+			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{username}");}
+			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{password}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
-			System.out.println(sql+"&&&&&&&&&&&&");
 		return sql.toString();
 	}
 	/**

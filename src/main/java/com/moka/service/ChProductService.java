@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
 import com.moka.dao.ChProductData;
 import com.moka.dto.ChProductDto;
 import com.moka.model.ChProduct;
