@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.Enum.CodeEnum;
-import com.moka.dao.WebRedisMapper;
 import com.moka.dao.WebData;
+import com.moka.dao.WebRedisMapper;
 import com.moka.model.ChCategory;
 import com.moka.model.ChCompany;
-import com.moka.model.SysUser;
 import com.moka.result.Result;
 import com.moka.service.ChCategoryService;
 import com.moka.utils.ParamPreconditions;

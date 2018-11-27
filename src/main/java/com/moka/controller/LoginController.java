@@ -1,5 +1,7 @@
 package com.moka.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Maps;
 import com.moka.model.SysUser;
 import com.moka.req.UserReq;
 import com.moka.result.Result;
@@ -30,7 +33,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public Result<?> submitLogin(@RequestBody UserReq req, HttpServletRequest request) {
-    	@SuppressWarnings("unused")
 		SysUser user;
     	UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
     	Subject subject = SecurityUtils.getSubject();
@@ -45,8 +47,11 @@ public class LoginController {
             request.setAttribute("msg", "用户名或密码错误");
             return Result.create("ERROR", "用户名或密码错误");
         }
+        Map<String, Object> map=Maps.newLinkedHashMap();
+        map.put("session", subject.getSession().getId());
+        map.put("userId",user.getId());
         // 执行到这里说明用户已登录成功
-        return Result.create(subject.getSession().getId());
+        return Result.create(map);
     }
     
     /**

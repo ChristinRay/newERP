@@ -24,7 +24,7 @@ public class SysUserProvider {
 	public String insertSysUser(SysUser entity) {
 		SQL sql = new SQL().INSERT_INTO("sys_user");
 		sql.VALUES("user_name,pass_word,name,mobile,picture,birthday,user_enable,user_id,state,createtime,updatetime", 
-				   "#{userName},#{passWord},#{name},#{mobile},#{picture},#{birthday},#{userEnable},#{user_id},now(),now()");
+				   "#{username},#{password},#{name},#{mobile},#{picture},#{birthday},#{userEnable},#{userId},'1',now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -35,8 +35,8 @@ public class SysUserProvider {
 	public String selectSysUser(SysUser entity) {
 		SQL sql = new SQL().SELECT("id as id ,user_name as userName,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
-			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
+			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{userName}");}
+			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{passWord}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
 			System.out.println(sql+"&&&&&&&&&&&&");
 		return sql.toString();
@@ -48,8 +48,8 @@ public class SysUserProvider {
 	 */
 	public String updateSysUserByNullChk(SysUser entity) {
 		SQL sql = new SQL().UPDATE("sys_user");
-					if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.SET("user_name = #{userName}");}
-			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.SET("pass_word = #{passWord}");}
+					if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.SET("user_name = #{username}");}
+			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.SET("pass_word = #{password}");}
 			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.SET(" picture=#{picture}");}
 			if(!Strings.isNullOrEmpty(entity.getMobile())) {sql.SET(" mobile=#{mobile}");}
 			if(!Strings.isNullOrEmpty(entity.getBirthday())) {sql.SET(" birthday=#{birthday}");}

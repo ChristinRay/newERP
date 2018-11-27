@@ -16,8 +16,8 @@ public class SysUser extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String  userName;//登录账号名称
-	private String  passWord;//密码
+	private String  username;//登录账号名称
+	private String  password;//密码
 	private String  name;//员工姓名
 	private String  mobile;//员工手机号
 	private String  picture;//员工头像
