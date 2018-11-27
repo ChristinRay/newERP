@@ -30,7 +30,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public Result<?> submitLogin(@RequestBody UserReq req, HttpServletRequest request) {
-    	SysUser user;
+    	@SuppressWarnings("unused")
+		SysUser user;
     	UsernamePasswordToken token = new UsernamePasswordToken(req.getUsername(), req.getPassword());
     	Subject subject = SecurityUtils.getSubject();
         try {
@@ -56,7 +57,7 @@ public class LoginController {
     public ResultFul logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        System.out.println("11");
+        log.info("已退出");
         return ResultFul.create("OK", "已退出");
     }
     

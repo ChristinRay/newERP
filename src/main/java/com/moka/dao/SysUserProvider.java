@@ -23,39 +23,9 @@ public class SysUserProvider {
 	 */
 	public String insertSysUser(SysUser entity) {
 		SQL sql = new SQL().INSERT_INTO("sys_user");
-		sql.VALUES("user_name,pass_word,user_enable", "#{userName},#{passWord},#{userEnable}");
+		sql.VALUES("user_name,pass_word,name,mobile,picture,birthday,user_enable,user_id,state,createtime,updatetime", 
+				   "#{userName},#{passWord},#{name},#{mobile},#{picture},#{birthday},#{userEnable},#{user_id},now(),now()");
 		return sql.toString();
-	}
-	/**
-	 * 按条件查询总记录数
-	 * @param entity
-	 * @return
-	 */
-	public String selectSysUserByCount(SysUser entity) {
-		SQL sql = new SQL().SELECT("count(*)").FROM("sys_user");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
-			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
-			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
-			
-		return sql.toString();
-	}
-	/**
-	 * 按条件分页查询
-	 * @param entity
-	 * @param orderBy
-	 * @param limit
-	 * @param limitLen
-	 * @return
-	 */
-	public String selectSysUserByLimt(SysUser entity) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_user");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
-			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
-			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
-
-		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
 	 * 按条件查询记录
@@ -63,7 +33,7 @@ public class SysUserProvider {
 	 * @return
 	 */
 	public String selectSysUser(SysUser entity) {
-		SQL sql = new SQL().SELECT("id as id ,user_name as userName,pass_word as passWord,user_enable as userEnable").FROM("sys_user");
+		SQL sql = new SQL().SELECT("id as id ,user_name as userName,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.WHERE("user_name = #{userName}");}
 			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.WHERE("pass_word = #{passWord}");}
@@ -80,6 +50,9 @@ public class SysUserProvider {
 		SQL sql = new SQL().UPDATE("sys_user");
 					if(!Strings.isNullOrEmpty(entity.getUserName())) {sql.SET("user_name = #{userName}");}
 			if(!Strings.isNullOrEmpty(entity.getPassWord())) {sql.SET("pass_word = #{passWord}");}
+			if(!Strings.isNullOrEmpty(entity.getPicture())) {sql.SET(" picture=#{picture}");}
+			if(!Strings.isNullOrEmpty(entity.getMobile())) {sql.SET(" mobile=#{mobile}");}
+			if(!Strings.isNullOrEmpty(entity.getBirthday())) {sql.SET(" birthday=#{birthday}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.SET("user_enable = #{userEnable}");}
 		sql.SET("updatetime = now()");
 

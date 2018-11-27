@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Sets;
 import com.moka.dao.SysRoleData;
+import com.moka.dao.SysUserRoleData;
 
 /**
 * @author    created by lbq
@@ -16,11 +17,17 @@ import com.moka.dao.SysRoleData;
 public class SysRoleService {
 	
 	@Autowired
-	private SysRoleData sysRoleData;
+	private SysUserRoleData sysUserRoleData;
 	
-
+	/**
+	 * 根据登录人id查找登录人角色
+	 * @param id
+	 * @return
+	 */
 	public Set<String> findRoleNameByUserId(Integer id) {
 		Set<String>  set=Sets.newHashSet();
+//		Set<Integer> sett= sysUserRoleData.findRolesByUserId(id);
+		
 		set.add("1");
 		
 		return set;

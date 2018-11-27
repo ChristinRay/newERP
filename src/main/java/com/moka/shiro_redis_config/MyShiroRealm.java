@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moka.model.SysUser;
+import com.moka.service.UserService;
 
 /**
  * 自定义Realm

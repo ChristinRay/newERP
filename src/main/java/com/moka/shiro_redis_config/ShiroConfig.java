@@ -28,27 +28,32 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-/*        // 没有登陆的用户只能访问登陆页面
-        shiroFilterFactoryBean.setLoginUrl("/api/erp/v1/user/login");
-        //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
-        shiroFilterFactoryBean.setLoginUrl("/unauth");
-        // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/success.html");
-        // 未授权界面; ----这个配置了没卵用，具体原因想深入了解的可以自行百度
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");*/
-        
+        /* 没有登陆的用户只能访问登陆页面
+	        shiroFilterFactoryBean.setLoginUrl("/api/erp/v1/user/login");
+			配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
+	        shiroFilterFactoryBean.setLoginUrl("/unauth");
+	                    登录成功后要跳转的链接
+	        shiroFilterFactoryBean.setSuccessUrl("/success.html");
+	                    未授权界面; ----这个配置了没卵用，具体原因想深入了解的可以自行百度
+	        shiroFilterFactoryBean.setUnauthorizedUrl("/403.html");
+        */
         
         //自定义拦截器
         Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
-        //限制同一帐号同时在线的个数。
+        //限制同一帐号同时在线的个数
         filtersMap.put("kickout", kickoutSessionControlFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
-        // 权限控制map.
+        //权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        //注意过滤器配置顺序 不能颠倒
+	    /**
+	     * anon:所有的url都可以匿名访问，authc需要认证在可以访问，user：记住我或者认证可以访问，logout:退出
+	     * perms:资源必须授权
+	     */
+        //注意过滤器配置顺序,不能颠倒
         //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了，登出后跳转配置的loginUrl
-        //anon:所有的url都可以匿名访问，authc需要认证在可以访问，user：记住我或者认证可以访问，logout:退出
-//        filterChainDefinitionMap.put("/api/erp/v1/user/logout", "logout");
+        
+        //filterChainDefinitionMap.put("/api/erp/v1/user/logout", "logout");
+        filterChainDefinitionMap.put("/api/erp/v1/channel/list", "perms[1]");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");

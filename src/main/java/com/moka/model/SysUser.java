@@ -16,10 +16,14 @@ public class SysUser extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer  id;
-	private String  userName;
-	private String  passWord;
-	private Integer  userEnable;
+	private String  userName;//登录账号名称
+	private String  passWord;//密码
+	private String  name;//员工姓名
+	private String  mobile;//员工手机号
+	private String  picture;//员工头像
+	private String  birthday;//员工出生年月
+	private Integer userEnable;//用户状态0：禁用，1正常
+	private Integer userId;//录入人id
 
 
 

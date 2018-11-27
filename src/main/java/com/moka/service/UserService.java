@@ -1,4 +1,4 @@
-package com.moka.shiro_redis_config;
+package com.moka.service;
 
 import java.util.Set;
 
@@ -7,20 +7,40 @@ import org.springframework.stereotype.Service;
 
 import com.moka.dao.SysUserData;
 import com.moka.model.SysUser;
+import com.moka.result.Result;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
 * @author    created by lbq
-* @date	     2018年9月20日 上午11:25:08
+* @date	     2018年11月27日 上午10:33:38
 **/
 @Service
 @Slf4j
 public class UserService {
-	
 	@Autowired
 	private SysUserData sysUserData;
-
+	
+	/**
+	 * 添加用户
+	 * @param sysUser
+	 * @return
+	 */
+	public Result<?> add(SysUser sysUser){
+		
+		return Result.create(sysUserData.insertSysUser(sysUser));
+	}
+	/**
+	 * 查询用户
+	 * @param sysUser
+	 * @return
+	 */
+	public Result<?> list(SysUser sysUser){
+		
+		return Result.create(sysUserData.selectSysUser(sysUser));
+	}
+	
+	
 	/**
 	 * 得到这个用户
 	 * @param user
@@ -41,5 +61,10 @@ public class UserService {
 		set.add("1");
 		return set;
 	}
-
+	
 }
+
+
+
+
+

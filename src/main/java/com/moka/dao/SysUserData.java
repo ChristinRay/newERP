@@ -1,6 +1,5 @@
 package com.moka.dao;
 
-import java.util.List;
 import java.util.Set;
 
 import org.apache.ibatis.annotations.InsertProvider;
@@ -25,23 +24,6 @@ public interface SysUserData {
 	@InsertProvider(type = SysUserProvider.class, method = "insertSysUser")
 	@SelectKey(before=false,keyProperty="id",resultType=Integer.class,statementType=StatementType.STATEMENT,statement="SELECT LAST_INSERT_ID() AS id")
 	public int insertSysUser(SysUser entity);
-	/**
-	 * 按条件查询总记录数
-	 * @param entity
-	 * @return
-	 */
-	@SelectProvider(type = SysUserProvider.class, method = "selectSysUserByCount")
-	public int selectSysUserByCount(SysUser entity);
-	/**
-	 * 按条件分页查询
-	 * @param entity
-	 * @param orderBy
-	 * @param limit
-	 * @param limitLen
-	 * @return
-	 */
-	@SelectProvider(type = SysUserProvider.class, method = "selectSysUserByLimt")
-	public List<SysUser> selectSysUserByLimt(SysUser entity);
 	/**
 	 * 按条件查询记录
 	 * @param entity

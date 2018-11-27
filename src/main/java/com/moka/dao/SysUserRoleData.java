@@ -1,6 +1,8 @@
 package com.moka.dao;
 
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -9,6 +11,8 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
 import org.apache.ibatis.annotations.Mapper;
 import com.moka.model.SysUserRole;
+
+import io.lettuce.core.dynamic.annotation.Param;
 
 @Mapper
 public interface SysUserRoleData {
@@ -80,4 +84,13 @@ public interface SysUserRoleData {
 	 */
 	@UpdateProvider(type = SysUserRoleProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(int id);
+	
+	
+//	@SelectProvider(type = SysUserRoleProvider.class, method = "findRolesByUserId")
+//	public Set<Integer> findRolesByUserId(@Param("userId") int id);
 }
+
+
+
+
+
