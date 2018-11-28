@@ -5,6 +5,8 @@ import com.google.common.base.Strings;
 import java.util.Objects;
 import com.moka.model.SysRole;
 
+import io.lettuce.core.dynamic.annotation.Param;
+
 /**
  * 角色表
  * provider
@@ -22,65 +24,15 @@ public class SysRoleProvider {
 		return sql.toString();
 	}
 	/**
-	 * 按条件查询总记录数
-	 * @param entity
-	 * @return
-	 */
-	public String selectSysRoleByCount(SysRole entity) {
-		SQL sql = new SQL().SELECT("count(*)").FROM("sys_role");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getRoleDesc())) {sql.WHERE("role_desc = #{roleDesc}");}
-
-		return sql.toString();
-	}
-	/**
-	 * 按条件分页查询
-	 * @param entity
-	 * @param orderBy
-	 * @param limit
-	 * @param limitLen
-	 * @return
-	 */
-	public String selectSysRoleByLimt(SysRole entity) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_role");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getRoleDesc())) {sql.WHERE("role_desc = #{roleDesc}");}
-
-		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
-	}
-	/**
 	 * 按条件查询记录
 	 * @param entity
 	 * @return
 	 */
 	public String selectSysRole(SysRole entity) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_role");
+		SQL sql = new SQL().SELECT("id,role_desc as roleDesc").FROM("sys_role");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getRoleDesc())) {sql.WHERE("role_desc = #{roleDesc}");}
 
-		return sql.toString();
-	}
-	/**
-	 * 根据主键id查询实体
-	 * @param id
-	 * @return
-	 */
-	public String selectOne(long id) {
-		SQL sql = new SQL().SELECT("*").FROM("sys_role");
-		sql.WHERE("id="+id);
-		return sql.toString();
-	}
-	/**
-	 * 更新实体
-	 * @param entity
-	 * @return
-	 */
-	public String updateSysRole(SysRole entity) {
-		SQL sql = new SQL().UPDATE("sys_role");
-				sql.SET("role_desc = #{roleDesc}");
-		sql.SET("updatetime = now()");
-
-		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
 	/**
@@ -97,16 +49,6 @@ public class SysRoleProvider {
 		return sql.toString();
 	}
 	/**
-	 * 物理删除实体
-	 * @param id
-	 * @return
-	 */
-	public String deleteSysRole(long id) {
-		SQL sql = new SQL().DELETE_FROM("sys_role");
-		sql.WHERE("id = #{id}");
-		return sql.toString();
-	}
-	/**
 	 * 逻辑删除实体
 	 * @param entity
 	 * @return
@@ -117,4 +59,16 @@ public class SysRoleProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	
+	/**
+	 * 按条件查询记录
+	 * @param entity
+	 * @return
+	 */
+	public String findNameById(Integer id) {
+		SQL sql = new SQL().SELECT("role_desc as roleDesc").FROM("sys_role");
+		sql.WHERE(" id=#{id}");
+		return sql.toString();
+	}
+	
 }

@@ -47,7 +47,7 @@ public class SysUserProvider {
 	 * @return
 	 */
 	public String selectSysUserList(SysUser entity) {
-		SQL sql = new SQL().SELECT("id as id ,user_name as username,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable").FROM("sys_user");
+		SQL sql = new SQL().SELECT("id as id ,user_name as username,pass_word as passWord,name,mobile,picture,birthday,user_enable as userEnable,createtime").FROM("sys_user");
 					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{username}");}
 			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{password}");}

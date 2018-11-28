@@ -11,7 +11,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class SysUser extends BaseModel {
+	public class SysUser extends BaseModel {
 	/**
 	 * 
 	 */

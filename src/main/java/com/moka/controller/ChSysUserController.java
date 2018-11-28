@@ -1,5 +1,7 @@
 package com.moka.controller;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.model.SysUser;
+import com.moka.req.ChSysUserReq;
 import com.moka.result.Result;
 import com.moka.service.UserService;
 
@@ -25,9 +28,11 @@ public class ChSysUserController {
 	 * 新增用户
 	 * @param sysUser
 	 * @return
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
 	 */
 	@PostMapping("add")
-	public Result<?> add(@RequestBody SysUser sysUser){
+	public Result<?> add(@RequestBody ChSysUserReq sysUser) throws IllegalAccessException, InvocationTargetException{
 		
 		return chSysUserService.add(sysUser);
 	}

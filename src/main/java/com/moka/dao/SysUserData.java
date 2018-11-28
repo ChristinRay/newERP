@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
+import com.moka.dto.SysUserListDto;
 import com.moka.model.SysUser;
 
 
@@ -39,7 +40,7 @@ public interface SysUserData {
 	 * @return
 	 */
 	@SelectProvider(type = SysUserProvider.class, method = "selectSysUserList")
-	public List<SysUser> selectSysUserList(SysUser entity);
+	public List<SysUserListDto> selectSysUserList(SysUser entity);
 	
 	
 	/**
