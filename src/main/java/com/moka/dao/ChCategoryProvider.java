@@ -18,7 +18,7 @@ public class ChCategoryProvider {
 	 */
 	public String insertChCategory(ChCategory entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_category");
-		sql.VALUES("category_name,father_id", "#{categoryName},#{fatherId}");
+		sql.VALUES("id,category_name,father_id", "#{id},#{categoryName},#{fatherId}");
 		return sql.toString();
 	}
 	/**

@@ -13,8 +13,6 @@ import org.apache.ibatis.mapping.StatementType;
 import com.moka.dto.SysUserListDto;
 import com.moka.model.SysUserRole;
 
-import io.lettuce.core.dynamic.annotation.Param;
-
 @Mapper
 public interface SysUserRoleData {
 	
