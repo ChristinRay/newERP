@@ -20,5 +20,5 @@ public class SysUserListDto {
 	private Integer userEnable;//用户状态0：禁用，1正常
 	private Integer userId;//录入人id
 	private String  createtime;//创建时间
-	private Set<String> roleDesc;//角色id
+	private Set<String> roleDesc;//角色名称
 }

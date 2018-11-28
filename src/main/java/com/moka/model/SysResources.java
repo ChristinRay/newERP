@@ -16,8 +16,8 @@ public class SysResources extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		private Integer  id;
-	private String  userName;
+	private Integer  id;
+	private String  name;
 	private String  resUrl;
 	private Integer  userType;
 	private Integer  userSort;

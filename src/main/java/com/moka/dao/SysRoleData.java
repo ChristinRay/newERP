@@ -10,8 +10,6 @@ import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.model.SysRole;
-
-import io.lettuce.core.dynamic.annotation.Param;
 @Mapper
 public interface SysRoleData {
 	

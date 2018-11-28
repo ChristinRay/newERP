@@ -10,6 +10,7 @@ import lombok.Data;
 **/
 @Data
 public class ChSysUserReq {
+	private Integer id;//员工id
 	private String  username;//登录账号名称
 	private String  password;//密码
 	private String  name;//员工姓名

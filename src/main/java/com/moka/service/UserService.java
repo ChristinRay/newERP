@@ -52,8 +52,8 @@ public class UserService {
 		sysUserData.insertSysUser(sysUser);
 		
 		SysUserRole sysUserRole=new SysUserRole();
-		sysUserRole.setUserId(chSysUserReq.getUserId());
-		Set<Integer> roleList= chSysUserReq.getRoles();
+		sysUserRole.setUserId(sysUser.getId());//员工id
+		Set<Integer> roleList= chSysUserReq.getRoles();//授予员工的所有权限
 		for (Integer integer : roleList) {
 			sysUserRole.setRoleId(integer);
 			sysUserRoleData.insertSysUserRole(sysUserRole);
@@ -66,6 +66,7 @@ public class UserService {
 	 * @return
 	 */
 	public Result<?> list(SysUser sysUser){
+		sysUser.setState("1");
 		List<SysUserListDto> sysUserListDto= sysUserData.selectSysUserList(sysUser);
 		for (SysUserListDto sysUserDto : sysUserListDto) {
 			 Set<Integer> rolesList= sysUserRoleData.findRolesByUserId(sysUserDto);

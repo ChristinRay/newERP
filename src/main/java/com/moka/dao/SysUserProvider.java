@@ -52,6 +52,7 @@ public class SysUserProvider {
 			if(!Strings.isNullOrEmpty(entity.getUsername())) {sql.WHERE("user_name = #{username}");}
 			if(!Strings.isNullOrEmpty(entity.getPassword())) {sql.WHERE("pass_word = #{password}");}
 			if(!Objects.isNull(entity.getUserEnable())) {sql.WHERE("user_enable = #{userEnable}");}
+			sql.WHERE(" state=#{state}");
 		return sql.toString();
 	}
 	/**
