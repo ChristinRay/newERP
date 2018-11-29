@@ -31,7 +31,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 	// 如果项目中用到了事物，@Autowired注解会使事物失效，可以自己用get方法获取值
 	@Autowired
-	private SysRoleService roleService;
+	private SysRoleServices roleService;
 	@Autowired
 	private UserService userService;
 

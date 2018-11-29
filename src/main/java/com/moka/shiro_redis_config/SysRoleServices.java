@@ -13,7 +13,7 @@ import com.moka.dao.SysUserRoleData;
 * @date	     2018年9月20日 上午11:25:01
 **/
 @Service
-public class SysRoleService {
+public class SysRoleServices {
 	
 	@Autowired
 	private SysUserRoleData sysUserRoleData;
