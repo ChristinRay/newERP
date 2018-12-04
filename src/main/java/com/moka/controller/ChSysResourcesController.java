@@ -16,7 +16,7 @@ import com.moka.result.Result;
 **/
 @RestController
 @RequestMapping("api/erp/v1/resources")
-public class ChSysResources {
+public class ChSysResourcesController {
 	
 	@Autowired
 	private SysResourcesData sysResourcesData;

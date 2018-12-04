@@ -27,7 +27,7 @@ public class SysResourcesProvider {
 	 * @return
 	 */
 	public String selectSysResources() {
-		SQL sql = new SQL().SELECT("name,res_url as resUrl,user_type as userType,parent_id as parentId").FROM("sys_resources");
+		SQL sql = new SQL().SELECT("id, name,res_url as resUrl,user_type as userType,parent_id as parentId").FROM("sys_resources");
 
 		return sql.toString();
 	}
