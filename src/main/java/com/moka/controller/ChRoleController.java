@@ -46,14 +46,16 @@ public class ChRoleController {
 		return Result.create(sysRoleService.add(roleReq));
 	}
 	
+	
+	
 	/**
 	 * 角色权限关系列表
 	 * @return
 	 */
 	@PostMapping("list/all")
 	public Result<?> listAll(){
-		sysRoleService.listAll();
-		return null;
+		
+		return sysRoleService.listAll();
 	}
 	
 }	

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.mapping.StatementType;
 
+import com.moka.dto.SysListDto;
 import com.moka.model.SysRoleResources;
 @Mapper
 public interface SysRoleResourcesData {
@@ -30,12 +31,12 @@ public interface SysRoleResourcesData {
 	public List<SysRoleResources> selectSysRoleResources(SysRoleResources entity);
 	
 	/**
-	 * 查询所有
+	 * 查询所有角色和权限的关系
 	 * @param entity
 	 * @return
 	 */
 	@SelectProvider(type = SysRoleResourcesProvider.class, method = "selectAll")
-	public List<SysRoleResources> selectAll();
+	public List<SysListDto> selectAll();
 	
 	
 	

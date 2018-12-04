@@ -41,8 +41,9 @@ public class SysRoleResourcesProvider {
 	 * @return
 	 */
 	public String selectAll() {
-		SQL sql = new SQL().SELECT("id,role_id as roleId,resources_id as resourcesId").FROM("sys_role_resources");
-
+		SQL sql = new SQL().SELECT("a.id AS id,b.role_desc AS roleDesc,c.`name`,c.res_url AS resUrl").
+		FROM("sys_role_resources a INNER JOIN sys_role b ON (a.role_id=b.id) INNER JOIN sys_resources c on(a.resources_id=c.id)");
+		
 		return sql.toString();
 	}
 	/**

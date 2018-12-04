@@ -21,10 +21,14 @@ public class ChSysResources {
 	@Autowired
 	private SysResourcesData sysResourcesData;
 	
-	@GetMapping
+	/**
+	 * 获取权限列表接口
+	 * @return
+	 */
+	@GetMapping("list")
 	public Result<?> list (){
 		List<?> list= sysResourcesData.selectSysResources();
-		return Result.create("");
+		return Result.create(list);
 	}
 	
 }

@@ -51,18 +51,17 @@ public class SysRoleService {
 	    }
 	    return Result.create("OK","添加成功");
 	}
-	
-	
+
+	/**
+	 * 查询所有角色和权限对应关系
+	 * @return
+	 */
 	public Result<?> listAll(){
-		Set<Integer> integers= sysRoleResourcesData.selectRoles();
-		for (Integer integer : integers) {
-			
-		}
-		
-		sysRoleResourcesData.selectAll();
-		
-		
-		return null;
+//		Set<Integer> integers= sysRoleResourcesData.selectRoles();
+//		for (Integer integer : integers) {
+//			
+//		}
+		return Result.create(sysRoleResourcesData.selectAll());
 	}
 }
 
