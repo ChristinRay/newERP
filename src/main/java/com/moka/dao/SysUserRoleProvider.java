@@ -2,6 +2,7 @@ package com.moka.dao;
 
 import java.util.Objects;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.moka.dto.SysUserListDto;
@@ -65,4 +66,14 @@ public class SysUserRoleProvider {
 		sql.WHERE(" user_id=#{id}");
 		return sql.toString();
 	} 
+	/**
+	 * 根据登录人角色查询登录人授权的页面
+	 * @return
+	 */
+	public String findResUrlByUserId(Integer userId){
+		SQL sql = new SQL().SELECT("c.res_url AS resUrl").FROM(" sys_resources c");
+		sql.WHERE(" c.id IN (SELECT b.resources_id  FROM sys_role_resources b "
+				+ " WHERE b.role_id = (SELECT role_id from sys_user_role a where a.user_id=#{userId}))");
+		return sql.toString();
+	}
 }

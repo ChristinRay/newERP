@@ -1,6 +1,7 @@
 package com.moka.controller;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +10,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ import com.moka.model.SysUser;
 import com.moka.req.UserReq;
 import com.moka.result.Result;
 import com.moka.result.ResultFul;
+import com.moka.service.SysRoleService;
 
 import lombok.extern.slf4j.Slf4j;
 /**
@@ -30,6 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/erp/v1/user")
 @Slf4j
 public class LoginController {
+	@Autowired
+	private SysRoleService sysRoleService;
 
     @PostMapping("/login")
     public Result<?> submitLogin(@RequestBody UserReq req, HttpServletRequest request) {
@@ -50,6 +55,10 @@ public class LoginController {
         Map<String, Object> map=Maps.newLinkedHashMap();
         map.put("session", subject.getSession().getId());
         map.put("userId",user.getId());
+        Set<String> resUrl= sysRoleService.findRoleNameByUserId(user.getId());
+        map.put("resUrl", resUrl);
+        map.put("username", user.getUsername());//登录
+        
         // 执行到这里说明用户已登录成功
         return Result.create(map);
     }

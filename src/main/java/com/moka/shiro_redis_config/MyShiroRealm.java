@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.moka.model.SysUser;
+import com.moka.service.SysRoleService;
 import com.moka.service.UserService;
 
 /**
@@ -31,7 +32,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 	// 如果项目中用到了事物，@Autowired注解会使事物失效，可以自己用get方法获取值
 	@Autowired
-	private SysRoleServices roleService;
+	private SysRoleService roleService;
 	@Autowired
 	private UserService userService;
 

@@ -42,9 +42,20 @@ public interface SysUserRoleData {
 	public int updateSysUserRoleByNullChk(SysUserRole entity);
 
 	
-	
+	/**
+	 * 根据登录人userid查询所有角色
+	 * @param sysUserListDto
+	 * @return
+	 */
 	@SelectProvider(type = SysUserRoleProvider.class, method = "findRolesByUserId")
 	public Set<Integer> findRolesByUserId(SysUserListDto sysUserListDto);
+	
+	/**
+	 * 更具userid查询授权的url
+	 * @return
+	 */
+	@SelectProvider(type = SysUserRoleProvider.class, method = "findResUrlByUserId")
+	public  Set<String> findResUrlByUserId(Integer userId);
 }
 
 

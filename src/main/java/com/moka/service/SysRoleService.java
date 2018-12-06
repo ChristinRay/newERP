@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Sets;
 import com.moka.Enum.CodeEnum;
 import com.moka.dao.SysRoleData;
 import com.moka.dao.SysRoleResourcesData;
+import com.moka.dao.SysUserRoleData;
 import com.moka.model.SysRole;
 import com.moka.model.SysRoleResources;
 import com.moka.req.SysRoleReq;
@@ -25,6 +27,9 @@ public class SysRoleService {
 	private SysRoleData sysRoleData;
 	@Autowired
 	private SysRoleResourcesData sysRoleResourcesData;
+	@Autowired
+	private  SysUserRoleData  sysUserRoleData;
+	
 	
 	/**
 	 * 添加角色
@@ -62,6 +67,17 @@ public class SysRoleService {
 //			
 //		}
 		return Result.create(sysRoleResourcesData.selectAll());
+	}
+	
+	
+	/**
+	 * 根据登录人id查询他的权限路径
+	 * @param id
+	 * @return
+	 */
+	public Set<String> findRoleNameByUserId(Integer id) {
+		Set<String> resUrl= sysUserRoleData.findResUrlByUserId(id);
+		return resUrl;
 	}
 }
 
