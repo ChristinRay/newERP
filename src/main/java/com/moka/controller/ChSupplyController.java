@@ -28,10 +28,8 @@ import com.moka.utils.ParamPreconditions;
 public class ChSupplyController {
 	@Autowired
 	private ChSupplyService chSupplyService;
-	
 	@Autowired
 	private ChSupplyData chSupplyData;
-	
 	@Autowired
 	private CommonService commonService;
 	@Autowired
@@ -44,6 +42,7 @@ public class ChSupplyController {
 	 */
 	@PostMapping("add")
 	public Result<?> add (@RequestBody ChSupply chSupply){
+		chSupply.check();
 		chSupplyService.add(chSupply);
 		return Result.create("添加成功");
 	}

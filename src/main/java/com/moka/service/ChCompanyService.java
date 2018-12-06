@@ -76,7 +76,7 @@ public class ChCompanyService {
 	        boolean hasKey = redisTemplate.hasKey(key);
 	        if (hasKey) {
 	        	String companyName = vo.get(key, id+"");
-	            log.info("从缓存获取类型名称 >> " + companyName.toString());
+	        	//log.info("从缓存获取类型名称 >> " + companyName.toString());
 	            return companyName;
 	        }
 	        return "类型测试";
@@ -93,7 +93,7 @@ public class ChCompanyService {
 	        boolean hasKey = redisTemplate.hasKey(key);
 	        if (hasKey) {
 	        	Map<String, String> map= vo.entries(key);
-	            log.info("从缓存获取类型名称 >> " + map.toString());
+	        	//log.info("从缓存获取类型名称 >> " + map.toString());
 	            return map;
 	        }
 	        return null;

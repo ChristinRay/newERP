@@ -44,7 +44,7 @@ public class ChBrandService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
         	String list=vo.get(key);
-            log.info("从缓存中读取品牌 >> " + list.toString());
+            //log.info("从缓存中读取品牌 >> " + list.toString());
             return Result.create(list);
         }
         return Result.create("OK","读取成功");
@@ -58,7 +58,7 @@ public class ChBrandService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
         	String brandName = vo.get(key, brandCode);
-            log.info("从缓存获取品牌名称 >> " + brandName.toString());
+        	//log.info("从缓存获取品牌名称 >> " + brandName.toString());
             return brandName;
         }
         return "测试";

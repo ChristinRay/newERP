@@ -63,7 +63,7 @@ public class ChCategoryService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
         	String typeName = vo.get(key, id);
-            log.info("从缓存获取类型名称 >> " + typeName.toString());
+        	//log.info("从缓存获取类型名称 >> " + typeName.toString());
             return typeName;
         }
         return "类型测试";

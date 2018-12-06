@@ -126,7 +126,7 @@ public class ChComplaintInformationService {
         boolean hasKey = redisTemplate.hasKey(key);
         if (hasKey) {
         	Map<String, String> map=vo.entries(key);
-            log.info("诉单 情况说明 >> "+map);
+        	//log.info("诉单 情况说明 >> "+map);
             return Result.create(map);
         }
         return Result.create("OK","读取成功");
