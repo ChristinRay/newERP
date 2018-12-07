@@ -98,4 +98,14 @@ public class ChChannelController {
 		}
 		return Result.create("ERROR","删除失败");
 	}
+	
+	/**
+	 * 获取所有渠道的接口 state='1'
+	 * @return
+	 */
+	@GetMapping("all")
+	public Result<?> list(){
+		List<ChChannel> list= chChannelData.selectChChannel();
+		return Result.create(list);
+	}
 }

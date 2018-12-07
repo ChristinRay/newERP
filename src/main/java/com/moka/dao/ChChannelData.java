@@ -46,7 +46,7 @@ public interface ChChannelData {
 	 * @return
 	 */
 	@SelectProvider(type = ChChannelProvider.class, method = "selectChChannel")
-	public List<ChChannel> selectChChannel(ChChannel entity);
+	public List<ChChannel> selectChChannel();
 	/**
 	 * 根据主键id查询实体
 	 * @param id

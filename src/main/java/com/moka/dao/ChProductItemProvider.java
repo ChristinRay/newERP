@@ -158,4 +158,29 @@ public class ChProductItemProvider {
 		sql.WHERE(" b.state='1'");
 		return sql.toString();
 	}
+	
+	/**
+	 * 根据商品code查商品详情
+	 * @return
+	 */
+	public String findProduct(){
+		SQL sql = new SQL().SELECT();
+		return sql.toString();
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
