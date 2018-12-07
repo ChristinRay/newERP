@@ -105,37 +105,37 @@ public class ShiroConfig {
         return redisCacheManager;
     }
 
-    /**
-     * 配置shiro redisManager
-     * 使用的是shiro-redis开源插件
-     * 本地测试
-     * @return
-     */
-    public RedisManager redisManager() {
-        RedisManager redisManager = new RedisManager();
-        redisManager.setHost("localhost");
-        redisManager.setPort(6379);
-        redisManager.setExpire(2400);// 配置缓存过期时间
-        redisManager.setTimeout(0);
-        return redisManager;
-    }
-//    
 //    /**
 //     * 配置shiro redisManager
 //     * 使用的是shiro-redis开源插件
-//     * 服务器
+//     * 本地测试
 //     * @return
 //     */
 //    public RedisManager redisManager() {
 //        RedisManager redisManager = new RedisManager();
-//        redisManager.setHost("47.101.60.119");
+//        redisManager.setHost("localhost");
 //        redisManager.setPort(6379);
-//        redisManager.setExpire(1800);// 配置缓存过期时间
+//        redisManager.setExpire(2400);// 配置缓存过期时间
 //        redisManager.setTimeout(0);
-//        redisManager.setPassword("123456");
 //        return redisManager;
 //    }
-//    
+    
+    /**
+     * 配置shiro redisManager
+     * 使用的是shiro-redis开源插件
+     * 服务器
+     * @return
+     */
+    public RedisManager redisManager() {
+        RedisManager redisManager = new RedisManager();
+        redisManager.setHost("47.101.60.119");
+        redisManager.setPort(6379);
+        redisManager.setExpire(2400);// 配置缓存过期时间
+        redisManager.setTimeout(0);
+        redisManager.setPassword("123456");
+        return redisManager;
+    }
+    
     
 
     /**
