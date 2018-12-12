@@ -19,7 +19,7 @@ public class ChBrandProvider {
 	 */
 	public String insertChBrand(ChBrand entity) {
 		SQL sql = new SQL().INSERT_INTO("ch_brand");
-		sql.VALUES("brand_name,brand_code,accredit_level,accredit_start_time,accredit_end_time,company_id,user_id,state,createtime,updatetime", "#{brandName},#{brandCode},#{accreditLevel},#{accreditStartTime},#{accreditEndTime},#{companyId},#{userId},'1',now(),now()");
+		sql.VALUES("brand_name,brand_code,accredit_level,accredit_start_time,accredit_end_time,company_id,channel_id,user_id,state,createtime,updatetime", "#{brandName},#{brandCode},#{accreditLevel},#{accreditStartTime},#{accreditEndTime},#{companyId},#{channelId},#{userId},'1',now(),now()");
 		return sql.toString();
 	}
 	/**
@@ -28,20 +28,21 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrandByCount(ChBrand entity) {
-		SQL sql = new SQL().SELECT("count(*)").FROM("ch_brand");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
+		SQL sql = new SQL().SELECT(
+				  "a.id,a.brand_code AS brandCode,"
+				+ "a.brand_name AS brandName,a.accredit_level AS accreditLevel,"
+				+ "a.accredit_start_time AS accreditStartTime,a.accredit_end_time AS accreditEndTime,"
+				+ "a.company_id AS companyId,"
+				+ "b.channel_name as channelName,a.user_id as userId")
+				.FROM("ch_brand a").INNER_JOIN("ch_channel b on(a.channel_id=b.id)");
+			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
-			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
-			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
-			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
-			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-			sql.WHERE("state ='1'");
-		return sql.toString();
+			sql.WHERE("a.state ='1'");
+		return "select count(*) from"+"("+ sql.toString()+")a";
 	}
 	/**
 	 * 按条件分页查询
@@ -52,22 +53,21 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectChBrandByLimt(ChBrand entity) {
-		SQL sql = new SQL().SELECT("id,brand_code AS brandCode,brand_name AS brandName,accredit_level AS accreditLevel,"
-				+ "accredit_start_time AS accreditStartTime,accredit_end_time AS accreditEndTime,company_id AS companyId,"
-				+ "state,user_id as userId,createtime,updatetime").FROM("ch_brand");
-					if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
+		SQL sql = new SQL().SELECT(
+				  "a.id,a.brand_code AS brandCode,"
+				+ "a.brand_name AS brandName,a.accredit_level AS accreditLevel,"
+				+ "a.accredit_start_time AS accreditStartTime,a.accredit_end_time AS accreditEndTime,"
+				+ "a.company_id AS companyId,"
+				+ "b.channel_name as channelName,a.user_id as userId")
+				.FROM("ch_brand a").INNER_JOIN("ch_channel b on(a.channel_id=b.id)");
+			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandName())) {sql.WHERE("brand_name = #{brandName}");}
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("brand_code = #{brandCode}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditLevel())) {sql.WHERE("accredit_level = #{accreditLevel}");}
-			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.WHERE("accredit_start_time = #{accreditStartTime}");}
-			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.WHERE("accredit_end_time = #{accreditEndTime}");}
-			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("company_id = #{companyId}");}
-			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
 			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
 			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-			sql.WHERE("state ='1'");
-		return sql.toString() + " order by " + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
+			sql.WHERE("a.state ='1'");
+		return sql.toString() + " order by a." + entity.getOrderBy() + " desc limit " + entity.getLimit() + "," + entity.getLimitLen();
 	}
 	/**
 	 * 根据主键id查询实体
@@ -75,10 +75,14 @@ public class ChBrandProvider {
 	 * @return
 	 */
 	public String selectOne(@Param("id")int id) {
-		SQL sql = new SQL().SELECT( "id,brand_code AS brandCode,brand_name AS brandName,accredit_level AS accreditLevel,"
-				+ "accredit_start_time AS accreditStartTime,accredit_end_time AS accreditEndTime,company_id AS companyId,"
-				+ "state,user_id as userId,createtime,updatetime").FROM("ch_brand");
-		sql.WHERE("id=#{id}");
+		SQL sql = new SQL().SELECT(
+				  "a.id,a.brand_code AS brandCode,"
+				+ "a.brand_name AS brandName,a.accredit_level AS accreditLevel,"
+				+ "a.accredit_start_time AS accreditStartTime,a.accredit_end_time AS accreditEndTime,"
+				+ "a.company_id AS companyId,"
+				+ "b.channel_name as channelName,a.user_id as userId")
+				.FROM("ch_brand a").INNER_JOIN("ch_channel b on(a.channel_id=b.id)");
+		sql.WHERE("a.id=#{id}");
 		return sql.toString();
 	}
 	/**
@@ -94,6 +98,7 @@ public class ChBrandProvider {
 			if(!Strings.isNullOrEmpty(entity.getAccreditStartTime())) {sql.SET("accredit_start_time = #{accreditStartTime}");}
 			if(!Strings.isNullOrEmpty(entity.getAccreditEndTime())) {sql.SET("accredit_end_time = #{accreditEndTime}");}
 			if(!Objects.isNull(entity.getCompanyId())) {sql.SET("company_id = #{companyId}");}
+			if(!Objects.isNull(entity.getChannelId())) {sql.SET("channel_id = #{channelId}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.SET("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.SET("state = #{state}");}
 		sql.SET("updatetime = now()");

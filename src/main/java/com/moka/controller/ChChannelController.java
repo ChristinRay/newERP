@@ -108,4 +108,6 @@ public class ChChannelController {
 		List<ChChannel> list= chChannelData.selectChChannel();
 		return Result.create(list);
 	}
-}
+	
+	
+} 

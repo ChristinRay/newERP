@@ -44,8 +44,6 @@ public class ChProductItemProvider {
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("b.brand_code = #{brandCode}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
-			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
-			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			
 		return "select count(*) from"+"("+ sql.toString()+")a";
 	}
