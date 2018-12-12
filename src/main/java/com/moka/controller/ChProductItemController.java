@@ -91,7 +91,7 @@ public class ChProductItemController {
 	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
 		ParamPreconditions.checkNotNull(id, CodeEnum.FAIL.getCode(), "id不能为空");
 		
-		return Result.create(chproductItemService.getOne(id));
+		return chproductItemService.getOne(id);
 	}
 	
 	

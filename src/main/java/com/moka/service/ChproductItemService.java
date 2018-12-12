@@ -8,6 +8,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChProductItemData;
 import com.moka.dto.ChProductItemDto;
 import com.moka.dto.ChProductItemSupplyDto;
@@ -16,11 +17,14 @@ import com.moka.req.ChProductItemAddReq;
 import com.moka.req.ChProductItemSupplyReq;
 import com.moka.result.Result;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
 * @author    created by lbq
 * @date	     2018年10月17日 下午7:37:40
 **/
 @Service
+@Slf4j
 public class ChproductItemService {
 	@Autowired
 	private ChProductItemData  chProductItemData;
@@ -98,12 +102,20 @@ public class ChproductItemService {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	public ChProductItemDto getOne(Integer id) throws UnsupportedEncodingException{
+	public Result<?> getOne(Integer id) throws UnsupportedEncodingException{
 		ChProductItemDto chProductItemDto= chProductItemData.selectOne(id);
-		String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
-		String typeName=  chCategoryService.findNameByCode(chProductItemDto.getProductType());
-		chProductItemDto.setBrandName(brandName);
-		chProductItemDto.setTypeName(typeName);
-		return chProductItemDto;
+		try {
+			String brandName= chBrandService.findNameByCode(chProductItemDto.getBrandCode());
+			String typeName=  chCategoryService.findNameByCode(chProductItemDto.getProductType());
+			chProductItemDto.setBrandName(brandName);
+			chProductItemDto.setTypeName(typeName);
+		} catch (NullPointerException e) {
+			log.info("Service错误"+e.getMessage());
+			return Result.create(CodeEnum.FAIL.getCode(), "数据错误");
+		} catch (Exception e){
+			log.info("其他业务异常"+e.getLocalizedMessage());
+			return Result.create(CodeEnum.FAIL.getCode(), "未知错误");
+		}
+		return Result.create(chProductItemDto);
 	}
 }

@@ -143,4 +143,13 @@ public class ChCompanyProvider {
 		return sql.toString();
 	}
 	
+	/**
+	 * 根据公司id查询公司名称
+	 * @return
+	 */
+	public String findNameById(Integer id){
+		SQL sql = new SQL().SELECT("company_name as companyName").FROM("ch_company");
+		sql.WHERE("id=#{id}");
+		return sql.toString();
+	}
 }

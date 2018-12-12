@@ -8,6 +8,11 @@ import lombok.Data;
 **/
 @Data
 public class ChannelProductReq {
-	private String productCode;
+	private Integer productItemId;
+	private Integer channelId;
+	private String  channelProductName;//渠道上架名称
+	private String  commission;//全额佣金
+	private String  integral;//全佣金积分
+	private String  staging;//分期佣金
 	
 }

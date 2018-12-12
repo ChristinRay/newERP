@@ -1,14 +1,18 @@
 package com.moka.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.DeleteProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.mapping.StatementType;
-import org.apache.ibatis.annotations.Mapper;
+
+import com.moka.dto.ChannelItemDto;
 import com.moka.model.ChChannelItem;
+import com.moka.req.ChannelItemReq;
 
 @Mapper
 public interface ChChannelItemData {
@@ -27,7 +31,7 @@ public interface ChChannelItemData {
 	 * @return
 	 */
 	@SelectProvider(type = ChChannelItemProvider.class, method = "selectChChannelItemByCount")
-	public int selectChChannelItemByCount(ChChannelItem entity);
+	public int selectChChannelItemByCount(ChannelItemReq entity);
 	/**
 	 * 按条件分页查询
 	 * @param entity
@@ -37,7 +41,7 @@ public interface ChChannelItemData {
 	 * @return
 	 */
 	@SelectProvider(type = ChChannelItemProvider.class, method = "selectChChannelItemByLimt")
-	public List<ChChannelItem> selectChChannelItemByLimt(ChChannelItem entity);
+	public List<ChannelItemDto> selectChChannelItemByLimt(ChannelItemReq entity);
 	/**
 	 * 按条件查询记录
 	 * @param entity

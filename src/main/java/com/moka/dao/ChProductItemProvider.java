@@ -109,7 +109,8 @@ public class ChProductItemProvider {
 				+ " a.purchase_price AS purchasePrice,b.product_code AS productCode,a.createtime,a.updatetime,a.state ").FROM("ch_product_item a "
 				+ " INNER JOIN ch_product b ON ( a.product_id = b.id ) "
 				+ " INNER JOIN ch_supply c ON ( a.supply_id = c.id )");
-		sql.WHERE("id=#{id}");
+		sql.WHERE("a.id=#{id}");
+		sql.WHERE("a.state='1'");
 		return sql.toString();
 	}
 	/**
