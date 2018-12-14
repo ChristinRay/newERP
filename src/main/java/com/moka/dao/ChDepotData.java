@@ -82,4 +82,11 @@ public interface ChDepotData {
 	 */
 	@UpdateProvider(type = ChDepotProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id")int id);
+	/**
+	 * 根据code查仓库
+	 * @param code
+	 * @return
+	 */
+	@SelectProvider(type = ChDepotProvider.class, method = "findCodeByDepot")
+	public ChDepot findCodeByDepot(String code);
 }

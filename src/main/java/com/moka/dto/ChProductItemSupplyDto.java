@@ -22,5 +22,6 @@ public class ChProductItemSupplyDto {
 	private String brandName;//品牌名称
 	private String typeName;//种类名称
 	private String productType;//种类
+	private String productUnitName;//单位名称
 	
 }

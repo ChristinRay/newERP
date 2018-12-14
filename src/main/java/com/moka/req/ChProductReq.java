@@ -19,7 +19,7 @@ public class ChProductReq extends BaseModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String  productCode;//商品编码
+	private String  productCode;//商品编码	
 	private String  brandCode;//品牌编码
 	private String  productName;//商品名称
 	private String  productEnglishName;//商品英文名

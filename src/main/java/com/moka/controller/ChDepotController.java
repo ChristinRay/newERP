@@ -41,8 +41,7 @@ public class ChDepotController {
 	@PostMapping("add")
 	public Result<?> add(@RequestBody ChDepot chDepot){
 		chDepot.check();
-		chDepotService.add(chDepot);
-		return Result.create(chDepot.getId());
+		return chDepotService.add(chDepot);
 	}
 	/**
 	 * 仓库列表查询接口

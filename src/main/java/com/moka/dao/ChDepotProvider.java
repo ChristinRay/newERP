@@ -175,4 +175,14 @@ public class ChDepotProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
+	/**
+	 * 根据code找仓库是否有已添加过的
+	 * @param code
+	 * @return
+	 */
+	public String findCodeByDepot(String code){
+		SQL sql = new SQL().SELECT("*").FROM("ch_depot");
+		sql.WHERE(" depot_code=#{code} and state=1");
+		return sql.toString();
+	}
 }

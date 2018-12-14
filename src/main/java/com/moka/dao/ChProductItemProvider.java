@@ -144,7 +144,7 @@ public class ChProductItemProvider {
 		return sql.toString();
 	}
 	/**
-	 * 查询品牌信息和商品基本信息SQL
+	 * 根据品牌查询商品信息SQL
 	 * @return
 	 */
 	public String findProductByBrand(ChProductItemSupplyReq req){

@@ -74,7 +74,7 @@ public interface ChProductItemData {
 	@UpdateProvider(type = ChProductItemProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id")int id);
 	/**
-	 * 查询品牌的商品信息
+	 * 根据品牌查询商品信息
 	 * @return
 	 */
 	@SelectProvider(type = ChProductItemProvider.class, method = "findProductByBrand")

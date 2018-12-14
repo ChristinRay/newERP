@@ -151,10 +151,14 @@ public class ChSupplyProvider {
 		sql.WHERE("id = #{id}");
 		return sql.toString();
 	}
-	
-	public String getSupply(){
+	/**
+	 * 供应商列表
+	 * @param accreditBrand
+	 * @return
+	 */
+	public String getSupply(String accreditBrand){
 		SQL sql=new SQL().SELECT(" id,supply_name as supplyName ").FROM(" ch_supply");
-		
+		if(!Strings.isNullOrEmpty(accreditBrand)){sql.WHERE("accredit_brand = #{accreditBrand}");}
 		sql.WHERE(" state='1'");
 		return sql.toString();
 	}
