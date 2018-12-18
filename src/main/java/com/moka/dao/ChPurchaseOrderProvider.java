@@ -72,8 +72,11 @@ public class ChPurchaseOrderProvider {
 				+ "a.supply_id AS supplyId,b.supply_name AS supplyName,a.memo,a.picture,a.user_id AS userId,"
 				+ "a.approver_id AS approverId,a.price,a.pur_bills_type as purBillsType,a.pur_bills_date as purBillsDate,"
 				+ "a.depot_id as depotId,b.supply_address as  supplyAddress,b.supply_contact AS supplyContact,"
-				+ "b.supply_account AS supplyAccount,b.supply_account_name AS supplyAccountName ")
-				.FROM("ch_purchase_order a").INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)");
+				+ "b.supply_account AS supplyAccount,b.supply_account_name AS supplyAccountName,c.depot_name AS depotName,d.name as name ")
+				.FROM("ch_purchase_order a")
+				.INNER_JOIN(" ch_supply b ON (a.supply_id=b.id)")
+				.INNER_JOIN(" ch_depot c ON (a.depot_id=c.id)")
+				.INNER_JOIN(" sys_user d ON (a.user_id=d.id)");
 			if(!Objects.isNull(entity.getCompanyId())) {sql.WHERE("a.company_id = #{companyId}");}
 			if(!Objects.isNull(entity.getSupplyId())) {sql.WHERE("a.supply_id = #{supplyId}");}
 			if(!Objects.isNull(entity.getId())) {sql.WHERE("a.id = #{id}");}
@@ -215,7 +218,7 @@ public class ChPurchaseOrderProvider {
 				FROM("ch_product a").
 				INNER_JOIN(" ch_product_item b ON ( a.id = b.product_id )").
 				INNER_JOIN(" ch_supply c ON ( b.supply_id = c.id )").
-				INNER_JOIN(" ch_brand d ON ( d.brand_code = a.brand_code )").
+				INNER_JOIN(" ch_brand d ON ( d.brand_name= a.brand_code )").
 				INNER_JOIN(" ch_company e ON ( d.company_id = e.id )");
 		sql.WHERE(" a.state='1'");
 		sql.WHERE(" b.state='1'");
@@ -235,9 +238,10 @@ public class ChPurchaseOrderProvider {
 		SQL sql=new SQL();
 		sql.SELECT(" a.supply_name AS supplyName,a.id AS supplyId,a.supply_code AS supplyCode ").
 		FROM("ch_supply a").
-		INNER_JOIN("ch_brand b ON (a.accredit_brand=b.brand_code)");
+		INNER_JOIN("ch_brand b ON (a.accredit_brand=b.brand_name)");
 		sql.WHERE(" a.state='1' AND b.state='1'");
 		if(!Objects.isNull(req.getCompanyId())) {sql.WHERE("b.company_id = #{companyId}");}
+		log.info("根据公司查供应商接口"+req);
 		return sql.toString();
 	}
 	

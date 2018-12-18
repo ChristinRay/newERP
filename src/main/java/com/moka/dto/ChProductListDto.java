@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 public class ChProductListDto {
 	private Integer id;
-	private Integer  companyId;
-	private String companyName;
+	private Integer companyId;
+	private String  companyName;
 	private Integer supplyId;
-	private String supplyName;
+	private String  supplyName;
 	private Integer  depotId;
 	private String  picture;
 	private String  predictTime;
@@ -32,9 +32,11 @@ public class ChProductListDto {
 	private String  memo;
 	private String  createtime;
 	private String  updatetime;
-	private String supplyAddress;
-	private String supplyContact;
-	private String supplyAccount;
-	private String supplyAccountName;
+	private String  supplyAddress;
+	private String  supplyContact;
+	private String  supplyAccount;
+	private String  supplyAccountName;
+	private String  name;
+	private String  depotName;
 	
 }

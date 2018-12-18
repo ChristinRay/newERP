@@ -29,6 +29,8 @@ public class ChCompany extends BaseModel {
 	private Integer  userId;
 	private String  createtime;
 	private String  updatetime;
+	private String companyMobile;
+	private String artificialMobile;
 
 	public void check(){
 		ParamPreconditions.checkNotEmpty(CodeEnum.FAIL.getCode(), "必要字段不能为空", "必要字段不能为空",tax,companyCode,companyName);

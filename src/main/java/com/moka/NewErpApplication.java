@@ -28,20 +28,20 @@ public class NewErpApplication {
 		dataSource.setMinEvictableIdleTimeMillis(3600000);
 		return dataSource;
 	}
-/*	@Bean
-	public DataSource getDataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://47.101.60.119:3306/erp?useAffectedRows=true");
-		dataSource.setUsername("root");
-		dataSource.setPassword("Ch@123456");
-		dataSource.setValidationQuery("SELECT 1");
-		dataSource.setTestWhileIdle(true);
-		dataSource.setTimeBetweenEvictionRunsMillis(300000);
-		dataSource.setNumTestsPerEvictionRun(50);
-		dataSource.setMinEvictableIdleTimeMillis(3600000);
-		return dataSource;
-	}*/
+//	@Bean
+//	public DataSource getDataSource() {
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//		dataSource.setUrl("jdbc:mysql://47.101.60.119:3306/erp?useAffectedRows=true");
+//		dataSource.setUsername("root");
+//		dataSource.setPassword("Ch@123456");
+//		dataSource.setValidationQuery("SELECT 1");
+//		dataSource.setTestWhileIdle(true);
+//		dataSource.setTimeBetweenEvictionRunsMillis(300000);
+//		dataSource.setNumTestsPerEvictionRun(50);
+//		dataSource.setMinEvictableIdleTimeMillis(3600000);
+//		return dataSource;
+//	}
 	
 	@Bean
 	public DataSourceTransactionManager transactionManager() {
