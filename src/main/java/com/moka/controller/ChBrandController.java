@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moka.Enum.CodeEnum;
+import com.moka.Enum.CompanyStatic;
 import com.moka.dao.ChBrandData;
 import com.moka.model.ChBrand;
 import com.moka.result.Result;
@@ -118,6 +119,16 @@ public class ChBrandController {
 			return Result.create("OK","删除成功");
 		}
 		return Result.create("ERROR","删除失败");
+	}
+	
+	/**
+	 * 得到品牌信息
+	 * @return
+	 */
+	@GetMapping("info")
+	public Result<?> info(){
+		
+		return Result.create(CompanyStatic.company());
 	}
 }
 

@@ -70,16 +70,7 @@ public class ChChannelProvider {
 	 */
 	public String selectChChannel(ChChannel entity) {
 		SQL sql = new SQL().SELECT("id,channel_address as channelAddress,channel_contact as channelContact,channel_mobile as channelMobile,channel_name as channelName,createtime,state,updatetime,user_id as userId").FROM("ch_channel");
-					if(!Strings.isNullOrEmpty(entity.getChannelAddress())) {sql.WHERE("channel_address = #{channelAddress}");}
-			if(!Strings.isNullOrEmpty(entity.getChannelContact())) {sql.WHERE("channel_contact = #{channelContact}");}
-			if(!Strings.isNullOrEmpty(entity.getChannelMobile())) {sql.WHERE("channel_mobile = #{channelMobile}");}
-			if(!Strings.isNullOrEmpty(entity.getChannelName())) {sql.WHERE("channel_name = #{channelName}");}
-			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
-			if(!Objects.isNull(entity.getId())) {sql.WHERE("id = #{id}");}
-			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("state = #{state}");}
-			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
-			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
-
+		sql.WHERE(" state='1'");
 		return sql.toString();
 	}
 	/**

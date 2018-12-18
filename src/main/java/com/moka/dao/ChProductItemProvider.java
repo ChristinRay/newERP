@@ -44,8 +44,6 @@ public class ChProductItemProvider {
 			if(!Strings.isNullOrEmpty(entity.getBrandCode())) {sql.WHERE("b.brand_code = #{brandCode}");}
 			if(!Objects.isNull(entity.getUserId())) {sql.WHERE("user_id = #{userId}");}
 			if(!Strings.isNullOrEmpty(entity.getState())) {sql.WHERE("a.state = #{state}");}
-			if(!Strings.isNullOrEmpty(entity.getCreatetime())) {sql.WHERE("createtime = #{createtime}");}
-			if(!Strings.isNullOrEmpty(entity.getUpdatetime())) {sql.WHERE("updatetime = #{updatetime}");}
 			
 		return "select count(*) from"+"("+ sql.toString()+")a";
 	}
@@ -109,7 +107,8 @@ public class ChProductItemProvider {
 				+ " a.purchase_price AS purchasePrice,b.product_code AS productCode,a.createtime,a.updatetime,a.state ").FROM("ch_product_item a "
 				+ " INNER JOIN ch_product b ON ( a.product_id = b.id ) "
 				+ " INNER JOIN ch_supply c ON ( a.supply_id = c.id )");
-		sql.WHERE("id=#{id}");
+		sql.WHERE("a.id=#{id}");
+		sql.WHERE("a.state='1'");
 		return sql.toString();
 	}
 	/**
@@ -145,7 +144,7 @@ public class ChProductItemProvider {
 		return sql.toString();
 	}
 	/**
-	 * 查询品牌信息和商品基本信息SQL
+	 * 根据品牌查询商品信息SQL
 	 * @return
 	 */
 	public String findProductByBrand(ChProductItemSupplyReq req){
@@ -158,4 +157,29 @@ public class ChProductItemProvider {
 		sql.WHERE(" b.state='1'");
 		return sql.toString();
 	}
+	
+	/**
+	 * 根据商品code查商品详情
+	 * @return
+	 */
+	public String findProduct(){
+		SQL sql = new SQL().SELECT();
+		return sql.toString();
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

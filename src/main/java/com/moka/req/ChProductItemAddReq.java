@@ -35,6 +35,7 @@ public class ChProductItemAddReq {
 		ParamPreconditions.checkNotEmpty(brandCode, CodeEnum.FAIL.getCode(), "品牌编码不能为空");
 		ParamPreconditions.checkNotEmpty(supplyProductNo,CodeEnum.FAIL.getCode(), "供应商商品编码不能为空");
 		ParamPreconditions.checkNumberByDecimals(purchasePrice, 2, CodeEnum.FAIL.getCode(), "进货价金额必须大于0");
+		ParamPreconditions.checkNotNull(userId, CodeEnum.USERID.getCode(), CodeEnum.USERID.getMsg());
 //		ParamPreconditions.checkNumberByDecimals(packPrice, 2, CodeEnum.FAIL.getCode(), "包装费金额必须大于0");
 //		ParamPreconditions.checkNumberByDecimals(freightPrice, 2, CodeEnum.FAIL.getCode(), "运费金额必须大于0");
 	}

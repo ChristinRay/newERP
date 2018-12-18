@@ -70,6 +70,13 @@ public interface ChCompanyData {
 	 */
 	@SelectProvider(type = ChCompanyProvider.class, method = "selectChCompanyAll")
 	public List<ChCompany> selectChCompanyAll();
+	/**
+	 * 根据公司id查询公司名称
+	 * @param id
+	 * @return
+	 */
+	@SelectProvider(type = ChCompanyProvider.class,method = "findNameById")
+ 	public String findNameById(Integer id);
 }
 
 

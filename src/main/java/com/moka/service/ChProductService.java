@@ -49,11 +49,11 @@ public class ChProductService {
 		String productSize= JSON.toJSONString(entity.getProductSize());
 		ProductSize size=entity.getProductSize();
 		String  sku="";
-		//商品sku名称组合（空格分隔）：品牌+系列英文名+系列中文名+风格+材质+男士/女士+名称+容积+尺寸+厚度+颜色+型号
+		//商品sku名称组合（空格分隔）：品牌+系列英文名+系列中文名+风格+材质+名称+容积+尺寸+厚度+颜色+型号+男士/女士
 		
 		sku=entity.getBrandCode()+size.getEnglish()+size.getChinese()+size.getStyle()
-		+size.getMaterial()+size.getSex()+entity.getProductName()+size.getVolume()
-		+size.getSize()+size.getThickness()+size.getColor()+size.getModel();
+		+size.getMaterial()+entity.getProductName()+size.getVolume()
+		+size.getSize()+size.getThickness()+size.getColor()+size.getModel()+size.getSex();
 		
 		
 		ChProduct chProduct=new ChProduct();
@@ -89,7 +89,8 @@ public class ChProductService {
 	public List<ChProductDto> selectChProductByLimt(ChProduct product) throws UnsupportedEncodingException{
 		List<ChProductDto> list= chProductData.selectChProductByLimt(product);
 		for (ChProductDto chProductDto : list) {
-			String brandName= chBrandService.findNameByCode(chProductDto.getBrandCode());
+			//String brandName= chBrandService.findNameByCode(chProductDto.getBrandCode());
+			String brandName= chProductDto.getBrandCode();
 			String typeName=  chCategoryService.findNameByCode(chProductDto.getProductType());
 			chProductDto.setBrandName(brandName);
 			chProductDto.setProductTypeName(typeName);
@@ -108,7 +109,8 @@ public class ChProductService {
 	 */
 	public ChProductDto selectOne(Integer id) throws UnsupportedEncodingException{
 		ChProductDto dto=chProductData.selectOne(id);
-		String brandName= chBrandService.findNameByCode(dto.getBrandCode());
+		//String brandName= chBrandService.findNameByCode(dto.getBrandCode());
+		String brandName= dto.getBrandCode();
 		String typeName=  chCategoryService.findNameByCode(dto.getProductType());
 		TDataDict dict= dictionaryService.getValueById(Integer.parseInt(dto.getProductUnit()));
 		dto.setBrandName(brandName);

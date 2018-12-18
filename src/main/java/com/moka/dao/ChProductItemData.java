@@ -12,8 +12,10 @@ import org.apache.ibatis.mapping.StatementType;
 
 import com.moka.dto.ChProductItemDto;
 import com.moka.dto.ChProductItemSupplyDto;
+import com.moka.dto.ChannelProductDto;
 import com.moka.model.ChProductItem;
 import com.moka.req.ChProductItemSupplyReq;
+import com.moka.req.ChannelProductReq;
 
 @Mapper
 public interface ChProductItemData {
@@ -72,9 +74,19 @@ public interface ChProductItemData {
 	@UpdateProvider(type = ChProductItemProvider.class, method = "deleteByLogic")
 	public int deleteByLogic(@Param("id")int id);
 	/**
-	 * 查询品牌的商品信息
+	 * 根据品牌查询商品信息
 	 * @return
 	 */
 	@SelectProvider(type = ChProductItemProvider.class, method = "findProductByBrand")
 	public List<ChProductItemSupplyDto> findProductByBrand(ChProductItemSupplyReq req);
+	
+	/**
+	 * 根据商品code查商品详情
+	 * @return
+	 */
+	@SelectProvider(type = ChProductItemProvider.class, method = "findProduct")
+	public ChannelProductDto findProduct(ChannelProductReq req);
 }
+
+
+

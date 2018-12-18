@@ -10,6 +10,7 @@ public enum CodeEnum {
 	SESSION_INVLID("SESSION_INVALID","session失效"),
 	SESSION_EXPIRED("SESSION_EXPIRED","session过期"),
 	SESSION_USER_TYPE_ERR("USER_TYPE_INVALID","无效的用户类型"),
+	USERID("ERROR","userId is null"),
 	SESSION_USER_OBTAIN_ERROR("USER_OBTAIN_ERROR", "获取登录用户信息异常");
 	
 	private String code;

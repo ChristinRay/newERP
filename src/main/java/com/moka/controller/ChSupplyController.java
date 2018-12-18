@@ -14,7 +14,6 @@ import com.moka.Enum.CodeEnum;
 import com.moka.dao.ChSupplyData;
 import com.moka.model.ChSupply;
 import com.moka.result.Result;
-import com.moka.service.ChBrandService;
 import com.moka.service.ChSupplyService;
 import com.moka.service.CommonService;
 import com.moka.utils.ParamPreconditions;
@@ -32,8 +31,6 @@ public class ChSupplyController {
 	private ChSupplyData chSupplyData;
 	@Autowired
 	private CommonService commonService;
-	@Autowired
-	private ChBrandService chBrandService;
 	
 	/**
 	 * 供应商添加
@@ -62,7 +59,7 @@ public class ChSupplyController {
 			chSupply.setOrderBy("updatetime");
 			List<ChSupply> result = chSupplyData.selectChSupplyByLimt(chSupply);
 			for (ChSupply chSupply2 : result) {
-				String brandName= chBrandService.findNameByCode(chSupply2.getAccreditBrand());
+				String brandName= chSupply2.getAccreditBrand();
 				chSupply2.setAccreditBrandName(brandName);
 			}
 			return Result.createPage(result,(long)count);
@@ -125,10 +122,10 @@ public class ChSupplyController {
 	 * 供应商下拉框接口
 	 */
 	@GetMapping("get/supply")
-	public Result<?> getSupply(){
+	public Result<?> getSupply(String accreditBrand){
 		
 		
-		return Result.create(chSupplyData.getSupply());
+		return Result.create(chSupplyData.getSupply(accreditBrand));
 	}
 }
 

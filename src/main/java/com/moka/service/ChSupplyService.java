@@ -17,8 +17,6 @@ import com.moka.model.ChSupply;
 public class ChSupplyService {
 	@Autowired
 	private ChSupplyData chSupplyData;
-	@Autowired
-	private ChBrandService chBrandService;
 	
 	@Transactional
 	public int add(ChSupply chSupply){
@@ -27,17 +25,24 @@ public class ChSupplyService {
 		int a = chSupplyData.insertChSupply(chSupply);
 		return a ;
 	}
-	
+	/**
+	 * 修改供应商Service
+	 * @param chSupply
+	 * @return
+	 */
 	public int update(ChSupply chSupply){
 		return chSupplyData.updateChSupplyByNullChk(chSupply);
 	}
-	
+	/**
+	 * 得到一个供应商Service
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public ChSupply getOne(Integer id) throws UnsupportedEncodingException{
 		ChSupply chSupply = chSupplyData.selectOne(id);
-		String accreditBrandName= chBrandService.findNameByCode(chSupply.getAccreditBrand());
+		String accreditBrandName= chSupply.getAccreditBrand();
 		chSupply.setAccreditBrandName(accreditBrandName);
 		return chSupply;
 	}
-	
-		
 }

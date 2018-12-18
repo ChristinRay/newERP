@@ -96,14 +96,14 @@ public class ChCompanyController {
 		return Result.create(a);
 	}
 	
+
 	
-	
-	@GetMapping("ceshi")
+/*	@GetMapping("ceshi")
 	public Result<?> ceshi()
 	{
 		
 		return Result.create(chCompanyService.getAll());
-	}
+	}*/
 }
 
 
